@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Maturity Model — Ashdown AI Strategy Consulting</title>
+<meta name="description" content="Assess your organization's AI maturity level with our interactive 5-stage model. Discover characteristics, KPIs, and next steps for each stage.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f1a;color:#e0e0e0;line-height:1.7}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.nav{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e1e2e}
+.nav a{color:#7c3aed;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:60px 20px 40px}
+.hero h1{font-size:2.2em;font-weight:800;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,#7c3aed,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1em;color:#a0a0b0;max-width:700px;margin:0 auto}
+.framework-mention{text-align:center;margin:30px 0;padding:20px;background:rgba(124,58,237,0.05);border-radius:12px}
+.framework-mention h3{color:#7c3aed;margin-bottom:8px}
+.framework-mention p{color:#a0a0b0;font-size:0.9em}
+.maturity-journey{padding:40px 20px}
+.journey-header{text-align:center;margin-bottom:40px}
+.journey-header h2{font-size:1.8em;margin-bottom:16px}
+.journey-progress{display:flex;justify-content:center;align-items:center;margin-bottom:40px;padding:0 20px;overflow-x:auto}
+.stage-indicator{display:flex;align-items:center;min-width:fit-content}
+.stage-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;cursor:pointer;transition:all .3s;position:relative}
+.stage-dot.completed{background:#10b981;color:#fff}
+.stage-dot.current{background:#7c3aed;color:#fff;transform:scale(1.2)}
+.stage-dot.future{background:#333;color:#a0a0b0;border:2px solid #444}
+.stage-connector{width:60px;height:3px;background:#333;margin:0 8px;position:relative}
+.stage-connector.completed{background:#10b981}
+.stage-connector.partial{background:linear-gradient(90deg, #10b981 50%, #333 50%)}
+.stage-label{position:absolute;top:50px;left:50%;transform:translateX(-50%);font-size:0.8em;color:#a0a0b0;white-space:nowrap}
+.stage-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-bottom:40px}
+.stage-card{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;cursor:pointer;transition:all .3s;position:relative;opacity:0.7}
+.stage-card:hover{transform:translateY(-4px);border-color:#7c3aed}
+.stage-card.active{opacity:1;border-color:#7c3aed;background:#151527}
+.stage-number{position:absolute;top:20px;right:20px;width:30px;height:30px;border-radius:50%;background:#7c3aed;color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.8em;font-weight:700}
+.stage-title{font-size:1.3em;font-weight:700;margin-bottom:8px;color:#e0e0e0}
+.stage-subtitle{color:#7c3aed;font-size:0.9em;margin-bottom:16px}
+.stage-description{color:#a0a0b0;margin-bottom:20px;line-height:1.6}
+.stage-details{display:none}
+.stage-details.active{display:block}
+.detail-section{margin-bottom:24px}
+.detail-section h4{color:#e0e0e0;margin-bottom:12px;font-size:1em}
+.detail-list{list-style:none;padding:0}
+.detail-list li{color:#a0a0b0;padding:6px 0;padding-left:16px;position:relative;font-size:0.9em}
+.detail-list li:before{content:'•';color:#7c3aed;position:absolute;left:0}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.kpi-item{background:#0f0f1a;padding:12px;border-radius:8px;text-align:center}
+.kpi-value{font-size:1.2em;font-weight:700;color:#10b981;margin-bottom:4px}
+.kpi-label{color:#a0a0b0;font-size:0.8em}
+.assessment-section{background:rgba(124,58,237,0.05);border-radius:16px;padding:40px;margin:40px 20px}
+.assessment-title{text-align:center;font-size:1.5em;margin-bottom:24px}
+.assessment-questions{max-width:600px;margin:0 auto}
+.question{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:12px;padding:20px;margin-bottom:16px}
+.question h4{color:#e0e0e0;margin-bottom:12px}
+.question-options{display:flex;gap:12px;flex-wrap:wrap}
+.option{padding:8px 16px;background:#0f0f1a;border:1px solid #333;border-radius:8px;cursor:pointer;transition:all .2s;font-size:0.9em}
+.option:hover,.option.selected{background:rgba(124,58,237,0.1);border-color:#7c3aed;color:#7c3aed}
+.assessment-result{text-align:center;margin-top:30px;padding:20px;background:#1a1a2e;border-radius:12px}
+.result-stage{font-size:1.5em;font-weight:800;color:#7c3aed;margin-bottom:8px}
+.result-description{color:#a0a0b0;margin-bottom:20px}
+.cta-section{background:rgba(124,58,237,0.05);border-radius:16px;padding:40px;margin-top:40px;text-align:center}
+.cta{display:inline-block;padding:16px 32px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:1.1em;transition:transform .2s;margin-top:16px}
+.cta:hover{transform:scale(1.05)}
+@media(max-width:768px){.stage-cards{grid-template-columns:1fr}.journey-progress{padding:0 10px}.stage-connector{width:40px}}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="index.html"><strong>🤖 AI Strategy Consulting</strong></a>
+  <div><a href="index.html#services">Services</a><a href="ai-readiness.html">Assessment</a><a href="roi-calculator.html">ROI Calculator</a><a href="maturity-model.html">Maturity Model</a></div>
+</div>
+
+<div class="hero">
+  <h1>AI Maturity <span>Model</span></h1>
+  <p>Navigate your AI transformation journey with our comprehensive 5-stage maturity model. Understand where you are and what comes next.</p>
+</div>
+
+<div class="framework-mention">
+  <h3>AI Acceleration Framework™</h3>
+  <p>Our proprietary methodology for systematic AI transformation, proven across industries</p>
+</div>
+
+<div class="container">
+  <div class="maturity-journey">
+    <div class="journey-header">
+      <h2>The AI Transformation Journey</h2>
+      <p style="color:#a0a0b0">Click on any stage to explore characteristics, KPIs, and next steps</p>
+    </div>
+    
+    <div class="journey-progress">
+      <div class="stage-indicator">
+        <div class="stage-dot current" onclick="showStage(0)" data-stage="0">1</div>
+        <div class="stage-label">Aware</div>
+      </div>
+      <div class="stage-connector"></div>
+      <div class="stage-indicator">
+        <div class="stage-dot future" onclick="showStage(1)" data-stage="1">2</div>
+        <div class="stage-label">Exploring</div>
+      </div>
+      <div class="stage-connector"></div>
+      <div class="stage-indicator">
+        <div class="stage-dot future" onclick="showStage(2)" data-stage="2">3</div>
+        <div class="stage-label">Implementing</div>
+      </div>
+      <div class="stage-connector"></div>
+      <div class="stage-indicator">
+        <div class="stage-dot future" onclick="showStage(3)" data-stage="3">4</div>
+        <div class="stage-label">Scaling</div>
+      </div>
+      <div class="stage-connector"></div>
+      <div class="stage-indicator">
+        <div class="stage-dot future" onclick="showStage(4)" data-stage="4">5</div>
+        <div class="stage-label">Transforming</div>
+      </div>
+    </div>
+    
+    <div class="stage-cards">
+      <div class="stage-card active" onclick="showStage(0)">
+        <div class="stage-number">1</div>
+        <div class="stage-title">Aware</div>
+        <div class="stage-subtitle">Recognizing AI Potential</div>
+        <div class="stage-description">Organizations beginning to understand AI's potential impact on their business but haven't yet taken concrete action.</div>
+      </div>
+      
+      <div class="stage-card" onclick="showStage(1)">
+        <div class="stage-number">2</div>
+        <div class="stage-title">Exploring</div>
+        <div class="stage-subtitle">Initial Experiments</div>
+        <div class="stage-description">Starting first AI pilots and proof-of-concepts while building foundational knowledge and capabilities.</div>
+      </div>
+      
+      <div class="stage-card" onclick="showStage(2)">
+        <div class="stage-number">3</div>
+        <div class="stage-title">Implementing</div>
+        <div class="stage-subtitle">Production Deployments</div>
+        <div class="stage-description">Successfully deploying AI solutions to production and beginning to see measurable business value.</div>
+      </div>
+      
+      <div class="stage-card" onclick="showStage(3)">
+        <div class="stage-number">4</div>
+        <div class="stage-title">Scaling</div>
+        <div class="stage-subtitle">Enterprise-wide Adoption</div>
+        <div class="stage-description">Expanding AI across multiple business units with established processes and governance.</div>
+      </div>
+      
+      <div class="stage-card" onclick="showStage(4)">
+        <div class="stage-number">5</div>
+        <div class="stage-title">Transforming</div>
+        <div class="stage-subtitle">AI-Native Organization</div>
+        <div class="stage-description">AI is integral to business strategy, operations, and competitive advantage. Continuous innovation.</div>
+      </div>
+    </div>
+    
+    <!-- Stage Details -->
+    <div class="stage-details active" id="stage-0">
+      <h3 style="color:#e0e0e0;margin-bottom:20px">Stage 1: Aware - Recognizing AI Potential</h3>
+      
+      <div class="detail-section">
+        <h4>Key Characteristics</h4>
+        <ul class="detail-list">
+          <li>Leadership recognizes AI as important for future competitiveness</li>
+          <li>Limited understanding of specific AI applications for the business</li>
+          <li>No formal AI strategy or dedicated resources</li>
+          <li>Relying on vendor presentations and industry reports</li>
+          <li>Concerns about cost, complexity, and disruption</li>
+        </ul>
+      </div>
+      
+      <div class="kpi-grid">
+        <div class="kpi-item">
+          <div class="kpi-value">0-5%</div>
+          <div class="kpi-label">AI Budget Allocation</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">0-2</div>
+          <div class="kpi-label">AI Initiatives</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">0-10%</div>
+          <div class="kpi-label">Staff AI Literacy</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">Ad-hoc</div>
+          <div class="kpi-label">AI Governance</div>
+        </div>
+      </div>
+      
+      <div class="detail-section">
+        <h4>Common Challenges</h4>
+        <ul class="detail-list">
+          <li>Overwhelming number of AI vendor options and claims</li>
+          <li>Difficulty separating hype from reality</li>
+          <li>Lack of internal AI expertise to evaluate opportunities</li>
+          <li>Fear of making wrong investment decisions</li>
+          <li>Uncertainty about where to start</li>
+        </ul>
+      </div>
+      
+      <div class="detail-section">
+        <h4>Next Steps to Stage 2</h4>
+        <ul class="detail-list">
+          <li>Conduct AI readiness assessment</li>
+          <li>Identify 2-3 high-impact, low-risk use cases</li>
+          <li>Assign AI champion or small team</li>
+          <li>Allocate budget for initial exploration</li>
+          <li>Begin team education and training</li>
+          <li>Establish partnership with AI consultant or vendor</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="stage-details" id="stage-1">
+      <h3 style="color:#e0e0e0;margin-bottom:20px">Stage 2: Exploring - Initial Experiments</h3>
+      
+      <div class="detail-section">
+        <h4>Key Characteristics</h4>
+        <ul class="detail-list">
+          <li>Running first AI pilot projects or proof-of-concepts</li>
+          <li>Dedicated AI team or champion identified</li>
+          <li>Initial AI strategy document created</li>
+          <li>Partnerships with AI vendors or consultants established</li>
+          <li>Basic data infrastructure assessment completed</li>
+        </ul>
+      </div>
+      
+      <div class="kpi-grid">
+        <div class="kpi-item">
+          <div class="kpi-value">5-15%</div>
+          <div class="kpi-label">AI Budget Allocation</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">1-3</div>
+          <div class="kpi-label">Active Pilots</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">10-25%</div>
+          <div class="kpi-label">Staff AI Literacy</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">Basic</div>
+          <div class="kpi-label">AI Governance</div>
+        </div>
+      </div>
+      
+      <div class="detail-section">
+        <h4>Common Challenges</h4>
+        <ul class="detail-list">
+          <li>Data quality and accessibility issues</li>
+          <li>Longer pilot timelines than expected</li>
+          <li>Difficulty measuring pilot success</li>
+          <li>Integration with existing systems</li>
+          <li>Change management and user adoption</li>
+        </ul>
+      </div>
+      
+      <div class="detail-section">
+        <h4>Next Steps to Stage 3</h4>
+        <ul class="detail-list">
+          <li>Complete at least one successful pilot with measurable ROI</li>
+          <li>Develop comprehensive AI strategy and roadmap</li>
+          <li>Invest in data infrastructure and quality</li>
+          <li>Build internal AI capabilities</li>
+          <li>Establish AI governance and ethics framework</li>
+          <li>Secure funding for production deployments</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="stage-details" id="stage-2">
+      <h3 style="color:#e0e0e0;margin-bottom:20px">Stage 3: Implementing - Production Deployments</h3>
+      
+      <div class="detail-section">
+        <h4>Key Characteristics</h4>
+        <ul class="detail-list">
+          <li>Successfully deployed AI solutions in production</li>
+          <li>Measurable business value from AI initiatives</li>
+          <li>Established AI development and deployment processes</li>
+          <li>Growing internal AI expertise and capabilities</li>
+          <li>Integration with core business systems</li>
+        </ul>
+      </div>
+      
+      <div class="kpi-grid">
+        <div class="kpi-item">
+          <div class="kpi-value">15-25%</div>
+          <div class="kpi-label">AI Budget Allocation</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">3-7</div>
+          <div class="kpi-label">Production Systems</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">25-50%</div>
+          <div class="kpi-label">Staff AI Literacy</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">Formal</div>
+          <div class="kpi-label">AI Governance</div>
+        </div>
+      </div>
+      
+      <div class="detail-section">
+        <h4>Common Challenges</h4>
+        <ul class="detail-list">
+          <li>Model performance monitoring and maintenance</li>
+          <li>Scaling infrastructure for growing AI workloads</li>
+          <li>Managing technical debt from early implementations</li>
+          <li>Ensuring AI system reliability and availability</li>
+          <li>Balancing innovation with operational stability</li>
+        </ul>
+      </div>
+      
+      <div class="detail-section">
+        <h4>Next Steps to Stage 4</h4>
+        <ul class="detail-list">
+          <li>Develop AI center of excellence</li>
+          <li>Standardize AI development lifecycle</li>
+          <li>Create cross-functional AI teams</li>
+          <li>Implement MLOps and AI governance at scale</li>
+          <li>Build AI skills across multiple business units</li>
+          <li>Develop AI-specific KPIs and metrics</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="stage-details" id="stage-3">
+      <h3 style="color:#e0e0e0;margin-bottom:20px">Stage 4: Scaling - Enterprise-wide Adoption</h3>
+      
+      <div class="detail-section">
+        <h4>Key Characteristics</h4>
+        <ul class="detail-list">
+          <li>AI deployed across multiple business units</li>
+          <li>Established AI center of excellence</li>
+          <li>Standardized AI development and governance processes</li>
+          <li>Strong internal AI talent and capabilities</li>
+          <li>AI integrated into strategic planning</li>
+        </ul>
+      </div>
+      
+      <div class="kpi-grid">
+        <div class="kpi-item">
+          <div class="kpi-value">25-40%</div>
+          <div class="kpi-label">AI Budget Allocation</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">10+</div>
+          <div class="kpi-label">Production Systems</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">50-75%</div>
+          <div class="kpi-label">Staff AI Literacy</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">Enterprise</div>
+          <div class="kpi-label">AI Governance</div>
+        </div>
+      </div>
+      
+      <div class="detail-section">
+        <h4>Common Challenges</h4>
+        <ul class="detail-list">
+          <li>Managing complexity of multiple AI systems</li>
+          <li>Ensuring consistent AI quality across business units</li>
+          <li>Balancing centralized vs. decentralized AI development</li>
+          <li>Maintaining competitive advantage as AI becomes commoditized</li>
+          <li>Continuous upskilling of workforce</li>
+        </ul>
+      </div>
+      
+      <div class="detail-section">
+        <h4>Next Steps to Stage 5</h4>
+        <ul class="detail-list">
+          <li>Embed AI into core business processes</li>
+          <li>Develop proprietary AI capabilities</li>
+          <li>Create AI-driven new products and services</li>
+          <li>Build ecosystem partnerships for AI innovation</li>
+          <li>Establish AI research and development function</li>
+          <li>Become an AI-first organization</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="stage-details" id="stage-4">
+      <h3 style="color:#e0e0e0;margin-bottom:20px">Stage 5: Transforming - AI-Native Organization</h3>
+      
+      <div class="detail-section">
+        <h4>Key Characteristics</h4>
+        <ul class="detail-list">
+          <li>AI is integral to business strategy and operations</li>
+          <li>Continuous AI innovation and experimentation</li>
+          <li>AI-powered new products and business models</li>
+          <li>Industry leadership in AI applications</li>
+          <li>AI talent becomes core competitive advantage</li>
+        </ul>
+      </div>
+      
+      <div class="kpi-grid">
+        <div class="kpi-item">
+          <div class="kpi-value">30%+</div>
+          <div class="kpi-label">AI Budget Allocation</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">50+</div>
+          <div class="kpi-label">AI Applications</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">75%+</div>
+          <div class="kpi-label">Staff AI Literacy</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">Strategic</div>
+          <div class="kpi-label">AI Governance</div>
+        </div>
+      </div>
+      
+      <div class="detail-section">
+        <h4>Key Focus Areas</h4>
+        <ul class="detail-list">
+          <li>Developing next-generation AI capabilities</li>
+          <li>Creating new AI-powered business models</li>
+          <li>Building AI ecosystem and partnerships</li>
+          <li>Contributing to AI research and standards</li>
+          <li>Continuous organizational learning and adaptation</li>
+        </ul>
+      </div>
+      
+      <div class="detail-section">
+        <h4>Competitive Advantages</h4>
+        <ul class="detail-list">
+          <li>Faster time-to-market for AI innovations</li>
+          <li>Superior customer experiences through AI</li>
+          <li>Operational efficiency at scale</li>
+          <li>Data-driven decision making at all levels</li>
+          <li>Ability to attract top AI talent</li>
+          <li>Platform for ecosystem partnerships</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="assessment-section">
+    <h2 class="assessment-title">Where Are You on the Journey?</h2>
+    <div class="assessment-questions">
+      <div class="question">
+        <h4>How many AI systems do you have in production?</h4>
+        <div class="question-options">
+          <div class="option" onclick="selectOption(this, 0)" data-stage="0">None</div>
+          <div class="option" onclick="selectOption(this, 1)" data-stage="1">Pilots only</div>
+          <div class="option" onclick="selectOption(this, 2)" data-stage="2">1-3 systems</div>
+          <div class="option" onclick="selectOption(this, 3)" data-stage="3">5-10 systems</div>
+          <div class="option" onclick="selectOption(this, 4)" data-stage="4">10+ systems</div>
+        </div>
+      </div>
+      
+      <div class="question">
+        <h4>What's your AI budget as % of IT spend?</h4>
+        <div class="question-options">
+          <div class="option" onclick="selectOption(this, 0)" data-stage="0">0-5%</div>
+          <div class="option" onclick="selectOption(this, 1)" data-stage="1">5-15%</div>
+          <div class="option" onclick="selectOption(this, 2)" data-stage="2">15-25%</div>
+          <div class="option" onclick="selectOption(this, 3)" data-stage="3">25-35%</div>
+          <div class="option" onclick="selectOption(this, 4)" data-stage="4">35%+</div>
+        </div>
+      </div>
+      
+      <div class="question">
+        <h4>How mature is your AI governance?</h4>
+        <div class="question-options">
+          <div class="option" onclick="selectOption(this, 0)" data-stage="0">None</div>
+          <div class="option" onclick="selectOption(this, 1)" data-stage="1">Basic policies</div>
+          <div class="option" onclick="selectOption(this, 2)" data-stage="2">Formal framework</div>
+          <div class="option" onclick="selectOption(this, 3)" data-stage="3">Enterprise-wide</div>
+          <div class="option" onclick="selectOption(this, 4)" data-stage="4">Strategic level</div>
+        </div>
+      </div>
+      
+      <div class="question">
+        <h4>What % of your workforce has AI literacy?</h4>
+        <div class="question-options">
+          <div class="option" onclick="selectOption(this, 0)" data-stage="0">0-10%</div>
+          <div class="option" onclick="selectOption(this, 1)" data-stage="1">10-25%</div>
+          <div class="option" onclick="selectOption(this, 2)" data-stage="2">25-50%</div>
+          <div class="option" onclick="selectOption(this, 3)" data-stage="3">50-75%</div>
+          <div class="option" onclick="selectOption(this, 4)" data-stage="4">75%+</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="assessment-result" id="assessmentResult" style="display:none">
+      <div class="result-stage" id="resultStage"></div>
+      <div class="result-description" id="resultDescription"></div>
+    </div>
+  </div>
+  
+  <div class="cta-section">
+    <h3>Accelerate Your AI Transformation</h3>
+    <p>Get expert guidance to advance to the next stage of AI maturity with our proven framework.</p>
+    <a href="https://buy.stripe.com/3cI4gse2i1qqe0O1xK0Ny01" class="cta" target="_blank">Book Strategy Session — $2,000</a>
+  </div>
+</div>
+
+<script>
+let currentStage = 0;
+let assessmentAnswers = [];
+
+const stageNames = ['Aware', 'Exploring', 'Implementing', 'Scaling', 'Transforming'];
+const stageDescriptions = [
+  'You are in the awareness phase, recognizing AI potential but need to start with concrete actions.',
+  'You are actively exploring AI through pilots and building foundational capabilities.',
+  'You have successful AI implementations and are seeing measurable business value.',
+  'You are scaling AI across multiple business units with established processes.',
+  'You are an AI-native organization with AI integral to your business strategy.'
+];
+
+function showStage(stageIndex) {
+  currentStage = stageIndex;
+  
+  // Update stage cards
+  document.querySelectorAll('.stage-card').forEach((card, index) => {
+    card.classList.toggle('active', index === stageIndex);
+  });
+  
+  // Update stage details
+  document.querySelectorAll('.stage-details').forEach((detail, index) => {
+    detail.classList.toggle('active', index === stageIndex);
+  });
+  
+  // Update progress indicators
+  updateProgressIndicators();
+}
+
+function updateProgressIndicators() {
+  document.querySelectorAll('.stage-dot').forEach((dot, index) => {
+    dot.classList.remove('completed', 'current', 'future');
+    if (index < currentStage) {
+      dot.classList.add('completed');
+    } else if (index === currentStage) {
+      dot.classList.add('current');
+    } else {
+      dot.classList.add('future');
+    }
+  });
+  
+  document.querySelectorAll('.stage-connector').forEach((connector, index) => {
+    connector.classList.remove('completed', 'partial');
+    if (index < currentStage) {
+      connector.classList.add('completed');
+    } else if (index === currentStage) {
+      connector.classList.add('partial');
+    }
+  });
+}
+
+function selectOption(element, questionIndex) {
+  // Remove previous selection in this question
+  element.parentNode.querySelectorAll('.option').forEach(opt => {
+    opt.classList.remove('selected');
+  });
+  
+  // Add selection to clicked option
+  element.classList.add('selected');
+  
+  // Store answer
+  assessmentAnswers[questionIndex] = parseInt(element.dataset.stage);
+  
+  // Check if all questions answered
+  if (assessmentAnswers.length === 4 && assessmentAnswers.every(answer => answer !== undefined)) {
+    calculateAssessmentResult();
+  }
+}
+
+function calculateAssessmentResult() {
+  const averageStage = Math.round(assessmentAnswers.reduce((a, b) => a + b, 0) / assessmentAnswers.length);
+  const stageName = stageNames[averageStage];
+  const stageDescription = stageDescriptions[averageStage];
+  
+  document.getElementById('resultStage').textContent = `Stage ${averageStage + 1}: ${stageName}`;
+  document.getElementById('resultDescription').textContent = stageDescription;
+  document.getElementById('assessmentResult').style.display = 'block';
+  
+  // Update the main view to show this stage
+  showStage(averageStage);
+}
+
+// Initialize with stage 0
+window.onload = function() {
+  showStage(0);
+};
+</script>
+</body>
+</html>

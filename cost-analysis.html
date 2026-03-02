@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Cost-Benefit Analysis — Ashdown AI Strategy Consulting</title>
+<meta name="description" content="Comprehensive cost-benefit analysis tool for AI projects. Calculate NPV, IRR, and risk-adjusted scenarios with exportable reports.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f1a;color:#e0e0e0;line-height:1.7}
+.container{max-width:1400px;margin:0 auto;padding:0 20px}
+.nav{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e1e2e}
+.nav a{color:#7c3aed;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:60px 20px 40px}
+.hero h1{font-size:2.2em;font-weight:800;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,#7c3aed,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1em;color:#a0a0b0;max-width:700px;margin:0 auto}
+.analysis-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:40px 20px}
+@media(max-width:1200px){.analysis-layout{grid-template-columns:1fr;gap:20px}}
+.input-panel,.results-panel{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px}
+.panel-title{font-size:1.5em;font-weight:700;margin-bottom:24px;color:#e0e0e0}
+.form-section{margin-bottom:30px}
+.section-header{font-size:1.1em;font-weight:600;margin-bottom:16px;color:#7c3aed;border-bottom:1px solid #333;padding-bottom:8px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;margin-bottom:6px;font-weight:600;color:#e0e0e0;font-size:0.9em}
+.form-control{width:100%;padding:12px 16px;background:#0f0f1a;border:1px solid #333;border-radius:8px;color:#e0e0e0;font-size:1em}
+.form-control:focus{outline:none;border-color:#7c3aed}
+.input-group{display:flex;align-items:center;gap:8px}
+.input-prefix{color:#a0a0b0;font-weight:600;min-width:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+.scenario-selector{display:flex;gap:8px;margin-bottom:20px}
+.scenario-btn{flex:1;padding:10px;background:#0f0f1a;border:1px solid #333;border-radius:8px;text-align:center;cursor:pointer;transition:all .2s;font-size:0.9em}
+.scenario-btn.active{background:rgba(124,58,237,0.1);border-color:#7c3aed;color:#7c3aed}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.metric{background:#0f0f1a;padding:20px;border-radius:12px;text-align:center;border-left:4px solid #7c3aed}
+.metric-value{font-size:1.8em;font-weight:800;margin-bottom:4px}
+.metric-value.positive{color:#10b981}
+.metric-value.negative{color:#ef4444}
+.metric-value.neutral{color:#f59e0b}
+.metric-label{color:#a0a0b0;font-size:0.9em}
+.breakdown-section{margin-bottom:24px}
+.breakdown-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #333}
+.breakdown-item:last-child{border-bottom:none}
+.breakdown-label{color:#a0a0b0}
+.breakdown-value{font-weight:600;color:#e0e0e0}
+.chart-container{background:#0f0f1a;border-radius:12px;padding:20px;margin-bottom:24px;height:400px}
+.risk-analysis{background:#0f0f1a;border-radius:12px;padding:20px;margin-bottom:24px}
+.risk-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.risk-label{color:#a0a0b0;flex:1}
+.risk-level{padding:4px 8px;border-radius:6px;font-size:0.8em;font-weight:600}
+.risk-low{background:rgba(16,185,129,0.1);color:#10b981}
+.risk-medium{background:rgba(245,158,11,0.1);color:#f59e0b}
+.risk-high{background:rgba(239,68,68,0.1);color:#ef4444}
+.export-section{margin-top:24px;padding-top:24px;border-top:1px solid #333}
+.export-btn{display:inline-block;padding:12px 24px;background:#333;color:#e0e0e0;text-decoration:none;border-radius:8px;font-weight:600;margin-right:12px;transition:all .2s;cursor:pointer;border:none}
+.export-btn:hover{background:#444;transform:translateY(-2px)}
+.export-btn.primary{background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff}
+.cta-section{background:rgba(124,58,237,0.05);border-radius:16px;padding:40px;margin:40px 20px;text-align:center}
+.cta{display:inline-block;padding:16px 32px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:1.1em;transition:transform .2s;margin-top:16px}
+.cta:hover{transform:scale(1.05)}
+.assumptions{background:#0f0f1a;border-radius:12px;padding:20px;margin-top:20px}
+.assumptions h4{color:#e0e0e0;margin-bottom:12px}
+.assumptions ul{color:#a0a0b0;font-size:0.9em;padding-left:20px}
+.assumptions li{margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="index.html"><strong>🤖 AI Strategy Consulting</strong></a>
+  <div><a href="index.html#services">Services</a><a href="ai-readiness.html">Assessment</a><a href="roi-calculator.html">ROI Calculator</a><a href="cost-analysis.html">Cost Analysis</a></div>
+</div>
+
+<div class="hero">
+  <h1>AI Cost-Benefit <span>Analysis</span></h1>
+  <p>Comprehensive financial analysis for your AI projects. Calculate NPV, IRR, and risk-adjusted scenarios with detailed cost breakdowns.</p>
+</div>
+
+<div class="container">
+  <div class="analysis-layout">
+    <div class="input-panel">
+      <h2 class="panel-title">Project Details</h2>
+      
+      <div class="form-section">
+        <div class="section-header">Project Information</div>
+        <div class="form-group">
+          <label for="projectName">Project Name</label>
+          <input type="text" id="projectName" class="form-control" value="AI Customer Service Automation" onchange="updateAnalysis()">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="projectDuration">Duration (months)</label>
+            <input type="number" id="projectDuration" class="form-control" value="24" min="3" max="60" onchange="updateAnalysis()">
+          </div>
+          <div class="form-group">
+            <label for="discountRate">Discount Rate (%)</label>
+            <input type="number" id="discountRate" class="form-control" value="10" min="0" max="20" step="0.5" onchange="updateAnalysis()">
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <div class="section-header">Team & Resources</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="teamSize">Team Size (FTE)</label>
+            <input type="number" id="teamSize" class="form-control" value="5" min="1" max="50" onchange="updateAnalysis()">
+          </div>
+          <div class="form-group">
+            <label for="avgSalary">Avg Annual Salary</label>
+            <div class="input-group">
+              <span class="input-prefix">$</span>
+              <input type="number" id="avgSalary" class="form-control" value="120000" min="0" step="5000" onchange="updateAnalysis()">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="consultingBudget">External Consulting</label>
+          <div class="input-group">
+            <span class="input-prefix">$</span>
+            <input type="number" id="consultingBudget" class="form-control" value="200000" min="0" step="10000" onchange="updateAnalysis()">
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <div class="section-header">Technology Costs</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="softwareLicenses">Software & Licenses</label>
+            <div class="input-group">
+              <span class="input-prefix">$</span>
+              <input type="number" id="softwareLicenses" class="form-control" value="150000" min="0" step="5000" onchange="updateAnalysis()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="infrastructure">Infrastructure</label>
+            <div class="input-group">
+              <span class="input-prefix">$</span>
+              <input type="number" id="infrastructure" class="form-control" value="100000" min="0" step="5000" onchange="updateAnalysis()">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dataPrep">Data Preparation</label>
+          <div class="input-group">
+            <span class="input-prefix">$</span>
+            <input type="number" id="dataPrep" class="form-control" value="75000" min="0" step="5000" onchange="updateAnalysis()">
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <div class="section-header">Expected Benefits</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="costSavings">Annual Cost Savings</label>
+            <div class="input-group">
+              <span class="input-prefix">$</span>
+              <input type="number" id="costSavings" class="form-control" value="500000" min="0" step="10000" onchange="updateAnalysis()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="revenueIncrease">Annual Revenue Increase</label>
+            <div class="input-group">
+              <span class="input-prefix">$</span>
+              <input type="number" id="revenueIncrease" class="form-control" value="200000" min="0" step="10000" onchange="updateAnalysis()">
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="productivityGains">Productivity Gains (%)</label>
+            <input type="number" id="productivityGains" class="form-control" value="25" min="0" max="100" onchange="updateAnalysis()">
+          </div>
+          <div class="form-group">
+            <label for="rampUpPeriod">Ramp-up Period (months)</label>
+            <input type="number" id="rampUpPeriod" class="form-control" value="6" min="1" max="24" onchange="updateAnalysis()">
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <div class="section-header">Ongoing Costs</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="maintenanceCost">Annual Maintenance</label>
+            <div class="input-group">
+              <span class="input-prefix">$</span>
+              <input type="number" id="maintenanceCost" class="form-control" value="80000" min="0" step="5000" onchange="updateAnalysis()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="operationalCost">Annual Operations</label>
+            <div class="input-group">
+              <span class="input-prefix">$</span>
+              <input type="number" id="operationalCost" class="form-control" value="50000" min="0" step="5000" onchange="updateAnalysis()">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="results-panel">
+      <h2 class="panel-title">Financial Analysis</h2>
+      
+      <div class="scenario-selector">
+        <div class="scenario-btn active" onclick="switchScenario('conservative')">Conservative</div>
+        <div class="scenario-btn" onclick="switchScenario('moderate')">Moderate</div>
+        <div class="scenario-btn" onclick="switchScenario('optimistic')">Optimistic</div>
+      </div>
+      
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-value positive" id="npvValue">$1.2M</div>
+          <div class="metric-label">Net Present Value (NPV)</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value positive" id="irrValue">28%</div>
+          <div class="metric-label">Internal Rate of Return (IRR)</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value neutral" id="paybackValue">18</div>
+          <div class="metric-label">Payback Period (months)</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value positive" id="roiValue">180%</div>
+          <div class="metric-label">Return on Investment</div>
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <canvas id="cashFlowChart" style="width:100%;height:350px"></canvas>
+      </div>
+      
+      <div class="breakdown-section">
+        <h4 style="color:#e0e0e0;margin-bottom:16px">Cost Breakdown</h4>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Personnel Costs</span>
+          <span class="breakdown-value" id="personnelCosts">$200K</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Technology & Infrastructure</span>
+          <span class="breakdown-value" id="technologyCosts">$325K</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">External Consulting</span>
+          <span class="breakdown-value" id="consultingCosts">$200K</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Data Preparation</span>
+          <span class="breakdown-value" id="dataCosts">$75K</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Total Initial Investment</span>
+          <span class="breakdown-value" id="totalInvestment">$800K</span>
+        </div>
+      </div>
+      
+      <div class="risk-analysis">
+        <h4 style="color:#e0e0e0;margin-bottom:16px">Risk Assessment</h4>
+        <div class="risk-item">
+          <span class="risk-label">Implementation Complexity</span>
+          <span class="risk-level risk-medium" id="complexityRisk">Medium</span>
+        </div>
+        <div class="risk-item">
+          <span class="risk-label">Technology Risk</span>
+          <span class="risk-level risk-low" id="technologyRisk">Low</span>
+        </div>
+        <div class="risk-item">
+          <span class="risk-label">Adoption Risk</span>
+          <span class="risk-level risk-medium" id="adoptionRisk">Medium</span>
+        </div>
+        <div class="risk-item">
+          <span class="risk-label">Regulatory Risk</span>
+          <span class="risk-level risk-low" id="regulatoryRisk">Low</span>
+        </div>
+        <div class="risk-item">
+          <span class="risk-label">Overall Project Risk</span>
+          <span class="risk-level risk-medium" id="overallRisk">Medium</span>
+        </div>
+      </div>
+      
+      <div class="export-section">
+        <button class="export-btn primary" onclick="generateReport()">📄 Generate Report</button>
+        <button class="export-btn" onclick="exportToCSV()">📊 Export Data</button>
+        <button class="export-btn" onclick="printSummary()">🖨️ Print Summary</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="assumptions">
+    <h4>Key Assumptions</h4>
+    <ul id="assumptionsList">
+      <li>Benefits are realized gradually over the ramp-up period</li>
+      <li>Conservative scenario: 70% of expected benefits</li>
+      <li>Moderate scenario: 100% of expected benefits</li>
+      <li>Optimistic scenario: 130% of expected benefits</li>
+      <li>Ongoing costs escalate at 3% annually</li>
+      <li>Tax rate and depreciation not included in this analysis</li>
+    </ul>
+  </div>
+  
+  <div class="cta-section">
+    <h3>Ready to Move Forward with Your AI Project?</h3>
+    <p>Get expert guidance to validate your analysis and ensure successful implementation.</p>
+    <a href="https://buy.stripe.com/3cI4gse2i1qqe0O1xK0Ny01" class="cta" target="_blank">Book Implementation Consultation — $2,000</a>
+  </div>
+</div>
+
+<script>
+let currentScenario = 'moderate';
+let chart;
+
+const scenarioMultipliers = {
+  conservative: { benefits: 0.7, costs: 1.1, timeline: 1.2 },
+  moderate: { benefits: 1.0, costs: 1.0, timeline: 1.0 },
+  optimistic: { benefits: 1.3, costs: 0.9, timeline: 0.8 }
+};
+
+function updateAnalysis() {
+  const analysis = calculateAnalysis();
+  updateDisplay(analysis);
+  updateChart(analysis);
+}
+
+function calculateAnalysis() {
+  // Get input values
+  const teamSize = parseInt(document.getElementById('teamSize').value) || 0;
+  const avgSalary = parseFloat(document.getElementById('avgSalary').value) || 0;
+  const consultingBudget = parseFloat(document.getElementById('consultingBudget').value) || 0;
+  const softwareLicenses = parseFloat(document.getElementById('softwareLicenses').value) || 0;
+  const infrastructure = parseFloat(document.getElementById('infrastructure').value) || 0;
+  const dataPrep = parseFloat(document.getElementById('dataPrep').value) || 0;
+  const costSavings = parseFloat(document.getElementById('costSavings').value) || 0;
+  const revenueIncrease = parseFloat(document.getElementById('revenueIncrease').value) || 0;
+  const productivityGains = parseFloat(document.getElementById('productivityGains').value) || 0;
+  const maintenanceCost = parseFloat(document.getElementById('maintenanceCost').value) || 0;
+  const operationalCost = parseFloat(document.getElementById('operationalCost').value) || 0;
+  const projectDuration = parseInt(document.getElementById('projectDuration').value) || 24;
+  const rampUpPeriod = parseInt(document.getElementById('rampUpPeriod').value) || 6;
+  const discountRate = parseFloat(document.getElementById('discountRate').value) / 100 || 0.1;
+  
+  const scenario = scenarioMultipliers[currentScenario];
+  
+  // Calculate costs
+  const personnelCosts = (teamSize * avgSalary * projectDuration / 12) * scenario.costs;
+  const technologyCosts = (softwareLicenses + infrastructure) * scenario.costs;
+  const totalInitialCost = personnelCosts + technologyCosts + consultingBudget + dataPrep;
+  
+  // Calculate annual benefits
+  const productivityValue = (teamSize * avgSalary * productivityGains / 100);
+  const totalAnnualBenefits = (costSavings + revenueIncrease + productivityValue) * scenario.benefits;
+  const annualCosts = (maintenanceCost + operationalCost) * scenario.costs;
+  const netAnnualBenefit = totalAnnualBenefits - annualCosts;
+  
+  // Calculate cash flows
+  const cashFlows = [];
+  cashFlows.push(-totalInitialCost); // Year 0
+  
+  for (let month = 1; month <= projectDuration; month++) {
+    let monthlyBenefit = 0;
+    if (month > rampUpPeriod) {
+      monthlyBenefit = netAnnualBenefit / 12;
+    } else {
+      // Ramp up benefits gradually
+      const rampFactor = month / rampUpPeriod;
+      monthlyBenefit = (netAnnualBenefit / 12) * rampFactor;
+    }
+    
+    if (month % 12 === 0 || month === projectDuration) {
+      // Annual cash flow
+      const yearIndex = Math.ceil(month / 12);
+      if (!cashFlows[yearIndex]) cashFlows[yearIndex] = 0;
+      cashFlows[yearIndex] += monthlyBenefit * (month % 12 === 0 ? 12 : month % 12);
+    }
+  }
+  
+  // Calculate NPV
+  let npv = cashFlows[0]; // Initial investment
+  for (let i = 1; i < cashFlows.length; i++) {
+    npv += cashFlows[i] / Math.pow(1 + discountRate, i);
+  }
+  
+  // Calculate IRR (simplified Newton-Raphson method)
+  let irr = 0.1; // Initial guess
+  for (let iteration = 0; iteration < 100; iteration++) {
+    let f = cashFlows[0];
+    let df = 0;
+    
+    for (let i = 1; i < cashFlows.length; i++) {
+      f += cashFlows[i] / Math.pow(1 + irr, i);
+      df -= i * cashFlows[i] / Math.pow(1 + irr, i + 1);
+    }
+    
+    if (Math.abs(f) < 0.01) break;
+    if (df === 0) break;
+    
+    irr = irr - f / df;
+  }
+  
+  // Calculate payback period
+  let cumulativeCashFlow = cashFlows[0];
+  let paybackPeriod = 0;
+  for (let i = 1; i < cashFlows.length; i++) {
+    cumulativeCashFlow += cashFlows[i];
+    if (cumulativeCashFlow >= 0) {
+      paybackPeriod = i * 12 - (cumulativeCashFlow - cashFlows[i]) / (cashFlows[i] / 12);
+      break;
+    }
+    if (i === cashFlows.length - 1) {
+      paybackPeriod = projectDuration;
+    }
+  }
+  
+  // Calculate ROI
+  const totalBenefits = cashFlows.slice(1).reduce((a, b) => a + b, 0);
+  const roi = (totalBenefits / totalInitialCost) * 100;
+  
+  return {
+    npv,
+    irr,
+    roi,
+    paybackPeriod,
+    personnelCosts,
+    technologyCosts,
+    consultingCosts: consultingBudget,
+    dataCosts: dataPrep,
+    totalInitialCost,
+    cashFlows,
+    netAnnualBenefit
+  };
+}
+
+function updateDisplay(analysis) {
+  document.getElementById('npvValue').textContent = formatCurrency(analysis.npv);
+  document.getElementById('npvValue').className = 'metric-value ' + (analysis.npv > 0 ? 'positive' : 'negative');
+  
+  document.getElementById('irrValue').textContent = (analysis.irr * 100).toFixed(1) + '%';
+  document.getElementById('irrValue').className = 'metric-value ' + (analysis.irr > 0.1 ? 'positive' : 'neutral');
+  
+  document.getElementById('paybackValue').textContent = Math.round(analysis.paybackPeriod);
+  document.getElementById('paybackValue').className = 'metric-value ' + (analysis.paybackPeriod <= 24 ? 'positive' : 'neutral');
+  
+  document.getElementById('roiValue').textContent = Math.round(analysis.roi) + '%';
+  document.getElementById('roiValue').className = 'metric-value ' + (analysis.roi > 100 ? 'positive' : 'neutral');
+  
+  document.getElementById('personnelCosts').textContent = formatCurrency(analysis.personnelCosts);
+  document.getElementById('technologyCosts').textContent = formatCurrency(analysis.technologyCosts);
+  document.getElementById('consultingCosts').textContent = formatCurrency(analysis.consultingCosts);
+  document.getElementById('dataCosts').textContent = formatCurrency(analysis.dataCosts);
+  document.getElementById('totalInvestment').textContent = formatCurrency(analysis.totalInitialCost);
+}
+
+function updateChart(analysis) {
+  const ctx = document.getElementById('cashFlowChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  const labels = ['Initial', ...Array.from({length: analysis.cashFlows.length - 1}, (_, i) => `Year ${i + 1}`)];
+  const cumulativeFlow = [];
+  let cumulative = 0;
+  
+  analysis.cashFlows.forEach(flow => {
+    cumulative += flow;
+    cumulativeFlow.push(cumulative);
+  });
+  
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Annual Cash Flow',
+          data: analysis.cashFlows,
+          backgroundColor: analysis.cashFlows.map(flow => flow < 0 ? '#ef4444' : '#10b981'),
+          borderColor: analysis.cashFlows.map(flow => flow < 0 ? '#ef4444' : '#10b981'),
+          borderWidth: 1
+        },
+        {
+          label: 'Cumulative Cash Flow',
+          data: cumulativeFlow,
+          type: 'line',
+          borderColor: '#7c3aed',
+          backgroundColor: 'transparent',
+          borderWidth: 3,
+          fill: false,
+          tension: 0.1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          ticks: {
+            color: '#a0a0b0',
+            callback: function(value) {
+              return formatCurrency(value);
+            }
+          },
+          grid: { color: '#333' }
+        },
+        x: {
+          ticks: { color: '#a0a0b0' },
+          grid: { color: '#333' }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: { color: '#e0e0e0' }
+        },
+        tooltip: {
+          backgroundColor: '#1a1a2e',
+          titleColor: '#e0e0e0',
+          bodyColor: '#e0e0e0',
+          callbacks: {
+            label: function(context) {
+              return context.dataset.label + ': ' + formatCurrency(context.parsed.y);
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function switchScenario(scenario) {
+  currentScenario = scenario;
+  
+  // Update button styling
+  document.querySelectorAll('.scenario-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  
+  updateAnalysis();
+}
+
+function formatCurrency(value) {
+  if (Math.abs(value) >= 1000000) {
+    return '$' + (value / 1000000).toFixed(1) + 'M';
+  } else if (Math.abs(value) >= 1000) {
+    return '$' + (value / 1000).toFixed(0) + 'K';
+  } else {
+    return '$' + value.toFixed(0);
+  }
+}
+
+function generateReport() {
+  const analysis = calculateAnalysis();
+  const projectName = document.getElementById('projectName').value;
+  
+  const reportContent = `
+    <html>
+    <head>
+      <title>AI Cost-Benefit Analysis Report - ${projectName}</title>
+      <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 20px; }
+        .metric { display: inline-block; margin: 10px 20px; text-align: center; }
+        .metric-value { font-size: 24px; font-weight: bold; color: #10b981; }
+        .metric-label { color: #666; font-size: 14px; }
+        .section { margin: 20px 0; }
+        .breakdown { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        @media print { body { margin: 0; } }
+      </style>
+    </head>
+    <body>
+      <div class="header">
+        <h1>AI Cost-Benefit Analysis</h1>
+        <h2>${projectName}</h2>
+        <p>Scenario: ${currentScenario.charAt(0).toUpperCase() + currentScenario.slice(1)}</p>
+      </div>
+      
+      <div class="section">
+        <h3>Key Financial Metrics</h3>
+        <div class="metric">
+          <div class="metric-value">${formatCurrency(analysis.npv)}</div>
+          <div class="metric-label">Net Present Value</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">${(analysis.irr * 100).toFixed(1)}%</div>
+          <div class="metric-label">Internal Rate of Return</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">${Math.round(analysis.paybackPeriod)} months</div>
+          <div class="metric-label">Payback Period</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">${Math.round(analysis.roi)}%</div>
+          <div class="metric-label">Return on Investment</div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>Cost Breakdown</h3>
+        <div class="breakdown">
+          <span>Personnel Costs</span>
+          <span>${formatCurrency(analysis.personnelCosts)}</span>
+        </div>
+        <div class="breakdown">
+          <span>Technology & Infrastructure</span>
+          <span>${formatCurrency(analysis.technologyCosts)}</span>
+        </div>
+        <div class="breakdown">
+          <span>External Consulting</span>
+          <span>${formatCurrency(analysis.consultingCosts)}</span>
+        </div>
+        <div class="breakdown">
+          <span>Data Preparation</span>
+          <span>${formatCurrency(analysis.dataCosts)}</span>
+        </div>
+        <div class="breakdown" style="font-weight: bold;">
+          <span>Total Initial Investment</span>
+          <span>${formatCurrency(analysis.totalInitialCost)}</span>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>Recommendation</h3>
+        <p>${analysis.npv > 0 ? 'This project shows positive NPV and is recommended for implementation.' : 'This project shows negative NPV and requires review of assumptions or scope.'}</p>
+        <p>Generated on: ${new Date().toLocaleDateString()}</p>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  const newWindow = window.open();
+  newWindow.document.write(reportContent);
+  newWindow.document.close();
+}
+
+function exportToCSV() {
+  const analysis = calculateAnalysis();
+  const csv = [
+    ['Metric', 'Value'],
+    ['NPV', analysis.npv],
+    ['IRR', analysis.irr],
+    ['ROI', analysis.roi],
+    ['Payback Period (months)', analysis.paybackPeriod],
+    ['Total Initial Cost', analysis.totalInitialCost],
+    ['Personnel Costs', analysis.personnelCosts],
+    ['Technology Costs', analysis.technologyCosts],
+    ['Consulting Costs', analysis.consultingCosts],
+    ['Data Costs', analysis.dataCosts]
+  ].map(row => row.join(',')).join('\n');
+  
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'ai-cost-benefit-analysis.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
+}
+
+function printSummary() {
+  window.print();
+}
+
+// Initialize analysis on page load
+window.onload = function() {
+  updateAnalysis();
+};
+</script>
+</body>
+</html>

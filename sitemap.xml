@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://majh777.github.io/ai-strategy-consulting/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/ai-readiness.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/roi-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/use-case-explorer.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/maturity-model.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/cost-analysis.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/privacy.html</loc><priority>0.3</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/terms.html</loc><priority>0.3</priority></url>
 </urlset>

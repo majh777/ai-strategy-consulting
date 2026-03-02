@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Readiness Assessment — Ashdown AI Strategy Consulting</title>
+<meta name="description" content="Assess your organization's AI readiness with our comprehensive 15-question tool. Get personalized recommendations and improvement roadmap.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f1a;color:#e0e0e0;line-height:1.7}
+.container{max-width:1000px;margin:0 auto;padding:0 20px}
+.nav{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e1e2e}
+.nav a{color:#7c3aed;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:60px 20px 40px}
+.hero h1{font-size:2.2em;font-weight:800;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,#7c3aed,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1em;color:#a0a0b0;max-width:600px;margin:0 auto}
+.assessment-container{max-width:800px;margin:0 auto;padding:40px 20px}
+.question-card{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin-bottom:24px;display:none}
+.question-card.active{display:block}
+.question-card h3{font-size:1.3em;margin-bottom:16px;color:#e0e0e0}
+.category{color:#7c3aed;font-size:0.9em;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.question{margin-bottom:20px}
+.options{display:flex;flex-direction:column;gap:12px}
+.option{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:16px 20px;cursor:pointer;transition:all .2s}
+.option:hover{border-color:#7c3aed;background:#151527}
+.option.selected{border-color:#7c3aed;background:rgba(124,58,237,0.1)}
+.option .label{font-weight:600}
+.option .desc{color:#a0a0b0;font-size:0.9em;margin-top:4px}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:30px}
+.btn{padding:14px 28px;border:none;border-radius:12px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-primary{background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff}
+.btn-secondary{background:#333;color:#e0e0e0;border:1px solid #444}
+.btn:hover{transform:scale(1.05)}
+.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.progress-bar{background:#1a1a2e;border-radius:10px;height:8px;margin-bottom:30px}
+.progress{background:linear-gradient(135deg,#7c3aed,#3b82f6);height:100%;border-radius:10px;transition:width .3s}
+.results{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:40px;margin-top:40px;display:none}
+.score-header{text-align:center;margin-bottom:40px}
+.total-score{font-size:3em;font-weight:800;color:#10b981;margin-bottom:8px}
+.score-label{color:#a0a0b0;font-size:1.1em}
+.chart-container{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:40px}
+@media(max-width:768px){.chart-container{grid-template-columns:1fr}}
+.chart-wrapper{background:#0f0f1a;border-radius:12px;padding:20px}
+.chart-title{text-align:center;font-weight:600;margin-bottom:20px;color:#e0e0e0}
+.category-scores{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:30px}
+.score-item{background:#0f0f1a;padding:16px;border-radius:12px;border:1px solid #333}
+.score-item .category-name{font-weight:600;color:#7c3aed}
+.score-item .score{font-size:1.5em;font-weight:800;color:#10b981}
+.recommendations{margin-top:30px}
+.rec-item{background:#0f0f1a;padding:20px;border-radius:12px;margin-bottom:16px;border-left:4px solid #7c3aed}
+.rec-item h4{color:#e0e0e0;margin-bottom:8px}
+.rec-item p{color:#a0a0b0;font-size:0.9em}
+.cta-section{text-align:center;margin-top:40px;padding:30px;background:rgba(124,58,237,0.05);border-radius:16px}
+.cta{display:inline-block;padding:16px 32px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:1.1em;transition:transform .2s;margin-top:16px}
+.cta:hover{transform:scale(1.05)}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="index.html"><strong>🤖 AI Strategy Consulting</strong></a>
+  <div><a href="index.html#services">Services</a><a href="ai-readiness.html">Assessment</a><a href="roi-calculator.html">ROI Calculator</a><a href="index.html#about">About</a></div>
+</div>
+
+<div class="hero">
+  <h1>AI Readiness <span>Assessment</span></h1>
+  <p>Discover your organization's AI readiness level across 5 critical dimensions. Get personalized recommendations to accelerate your AI journey.</p>
+</div>
+
+<div class="assessment-container">
+  <div class="progress-bar">
+    <div class="progress" id="progressBar"></div>
+  </div>
+  
+  <div id="questionContainer">
+    <!-- Questions will be dynamically inserted here -->
+  </div>
+  
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">Previous</button>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+  </div>
+  
+  <div class="results" id="results">
+    <div class="score-header">
+      <div class="total-score" id="totalScore">0</div>
+      <div class="score-label">AI Readiness Score (out of 100)</div>
+    </div>
+    
+    <div class="chart-container">
+      <div class="chart-wrapper">
+        <div class="chart-title">Readiness Radar</div>
+        <canvas id="radarChart" width="300" height="300"></canvas>
+      </div>
+      <div class="chart-wrapper">
+        <div class="chart-title">Category Breakdown</div>
+        <div class="category-scores" id="categoryScores"></div>
+      </div>
+    </div>
+    
+    <div class="recommendations">
+      <h3>Personalized Recommendations</h3>
+      <div id="recommendationsContainer"></div>
+    </div>
+    
+    <div class="cta-section">
+      <h3>Ready to Improve Your AI Readiness?</h3>
+      <p>Get expert guidance to close your AI gaps and accelerate implementation.</p>
+      <a href="https://buy.stripe.com/eVq8wI8HY4CCg8Wekw0Ny00" class="cta" target="_blank">Book AI Strategy Session — $500</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    category: "Data Maturity",
+    question: "How would you describe your organization's data quality and accessibility?",
+    options: [
+      {label: "Excellent", desc: "High-quality, integrated data across systems", score: 20},
+      {label: "Good", desc: "Mostly clean data with some integration challenges", score: 15},
+      {label: "Fair", desc: "Data exists but requires significant cleaning", score: 10},
+      {label: "Poor", desc: "Fragmented, low-quality data", score: 5},
+      {label: "No Data Strategy", desc: "No formal data management approach", score: 0}
+    ]
+  },
+  {
+    category: "Data Maturity",
+    question: "What percentage of your business processes generate usable digital data?",
+    options: [
+      {label: "80-100%", desc: "Almost all processes are digitized", score: 20},
+      {label: "60-79%", desc: "Most processes capture digital data", score: 15},
+      {label: "40-59%", desc: "Roughly half of processes are digital", score: 10},
+      {label: "20-39%", desc: "Limited digital data capture", score: 5},
+      {label: "<20%", desc: "Primarily manual processes", score: 0}
+    ]
+  },
+  {
+    category: "Data Maturity",
+    question: "How easily can you access and analyze your data?",
+    options: [
+      {label: "Real-time dashboards", desc: "Live analytics and reporting", score: 20},
+      {label: "Regular reports", desc: "Weekly/monthly automated reports", score: 15},
+      {label: "Manual extraction", desc: "Data requires manual work to analyze", score: 10},
+      {label: "Very difficult", desc: "Data is scattered and hard to access", score: 5},
+      {label: "No access", desc: "Cannot effectively analyze current data", score: 0}
+    ]
+  },
+  {
+    category: "Team Skills",
+    question: "What is your team's current AI/ML expertise level?",
+    options: [
+      {label: "Expert", desc: "In-house AI specialists and data scientists", score: 20},
+      {label: "Intermediate", desc: "Some team members have AI experience", score: 15},
+      {label: "Beginner", desc: "Basic understanding of AI concepts", score: 10},
+      {label: "Curious", desc: "Interested but limited practical knowledge", score: 5},
+      {label: "No experience", desc: "Team lacks AI knowledge", score: 0}
+    ]
+  },
+  {
+    category: "Team Skills",
+    question: "How comfortable is your team with new technology adoption?",
+    options: [
+      {label: "Very comfortable", desc: "Early adopters who embrace change", score: 20},
+      {label: "Comfortable", desc: "Generally open to new tools", score: 15},
+      {label: "Neutral", desc: "Mixed reactions to technology changes", score: 10},
+      {label: "Resistant", desc: "Prefer familiar tools and processes", score: 5},
+      {label: "Very resistant", desc: "Strong preference for status quo", score: 0}
+    ]
+  },
+  {
+    category: "Team Skills",
+    question: "What training budget exists for AI upskilling?",
+    options: [
+      {label: "$10k+ per person", desc: "Significant investment in development", score: 20},
+      {label: "$5k-10k per person", desc: "Moderate training budget", score: 15},
+      {label: "$1k-5k per person", desc: "Limited but available budget", score: 10},
+      {label: "<$1k per person", desc: "Minimal training resources", score: 5},
+      {label: "No budget", desc: "No formal training budget", score: 0}
+    ]
+  },
+  {
+    category: "Infrastructure",
+    question: "How would you rate your current IT infrastructure?",
+    options: [
+      {label: "Cloud-native", desc: "Modern, scalable cloud infrastructure", score: 20},
+      {label: "Hybrid cloud", desc: "Mix of cloud and on-premise systems", score: 15},
+      {label: "Traditional IT", desc: "Mostly on-premise with some cloud", score: 10},
+      {label: "Legacy systems", desc: "Older systems with limited integration", score: 5},
+      {label: "Outdated", desc: "Infrastructure needs major updates", score: 0}
+    ]
+  },
+  {
+    category: "Infrastructure",
+    question: "What is your data integration capability?",
+    options: [
+      {label: "API-first", desc: "Modern APIs connect all systems", score: 20},
+      {label: "Good integration", desc: "Most systems can share data", score: 15},
+      {label: "Some integration", desc: "Basic connections between key systems", score: 10},
+      {label: "Siloed systems", desc: "Limited data sharing between systems", score: 5},
+      {label: "No integration", desc: "Systems operate independently", score: 0}
+    ]
+  },
+  {
+    category: "Infrastructure",
+    question: "How quickly can you deploy new software solutions?",
+    options: [
+      {label: "Same day", desc: "Rapid deployment capabilities", score: 20},
+      {label: "Within a week", desc: "Fast deployment process", score: 15},
+      {label: "2-4 weeks", desc: "Standard deployment timeline", score: 10},
+      {label: "1-3 months", desc: "Slower deployment process", score: 5},
+      {label: "3+ months", desc: "Very slow deployment", score: 0}
+    ]
+  },
+  {
+    category: "Strategy Alignment",
+    question: "How well does AI align with your business strategy?",
+    options: [
+      {label: "Core to strategy", desc: "AI is central to business objectives", score: 20},
+      {label: "Important priority", desc: "AI is a key strategic initiative", score: 15},
+      {label: "Under consideration", desc: "Exploring AI opportunities", score: 10},
+      {label: "Nice to have", desc: "AI seen as potential benefit", score: 5},
+      {label: "Not considered", desc: "AI not part of current strategy", score: 0}
+    ]
+  },
+  {
+    category: "Strategy Alignment",
+    question: "What is leadership support for AI initiatives?",
+    options: [
+      {label: "Champion", desc: "Leadership actively promotes AI", score: 20},
+      {label: "Supportive", desc: "Leadership backs AI projects", score: 15},
+      {label: "Neutral", desc: "Neither supports nor opposes", score: 10},
+      {label: "Skeptical", desc: "Leadership questions AI value", score: 5},
+      {label: "Opposed", desc: "Leadership resists AI adoption", score: 0}
+    ]
+  },
+  {
+    category: "Strategy Alignment",
+    question: "How clear are your AI use cases and objectives?",
+    options: [
+      {label: "Very clear", desc: "Specific use cases with defined ROI", score: 20},
+      {label: "Mostly clear", desc: "General direction with some specifics", score: 15},
+      {label: "Somewhat clear", desc: "Basic ideas but need refinement", score: 10},
+      {label: "Unclear", desc: "Vague understanding of AI potential", score: 5},
+      {label: "No clarity", desc: "No defined AI objectives", score: 0}
+    ]
+  },
+  {
+    category: "Budget",
+    question: "What budget is allocated for AI initiatives?",
+    options: [
+      {label: "$100k+", desc: "Significant AI investment budget", score: 20},
+      {label: "$50k-100k", desc: "Substantial AI budget", score: 15},
+      {label: "$25k-50k", desc: "Moderate AI investment", score: 10},
+      {label: "$10k-25k", desc: "Limited AI budget", score: 5},
+      {label: "<$10k", desc: "Minimal or no AI budget", score: 0}
+    ]
+  },
+  {
+    category: "Budget",
+    question: "How do you view AI investment timeline?",
+    options: [
+      {label: "Immediate", desc: "Ready to invest now", score: 20},
+      {label: "This quarter", desc: "Planning investment in 3 months", score: 15},
+      {label: "This year", desc: "Considering investment within 12 months", score: 10},
+      {label: "Next year", desc: "Future investment possibility", score: 5},
+      {label: "No timeline", desc: "No specific investment plans", score: 0}
+    ]
+  },
+  {
+    category: "Budget",
+    question: "What ROI expectations do you have for AI?",
+    options: [
+      {label: "3x+ return", desc: "Expecting significant ROI", score: 20},
+      {label: "2x return", desc: "Looking for solid returns", score: 15},
+      {label: "Break even", desc: "Acceptable if it pays for itself", score: 10},
+      {label: "Cost justified", desc: "Value beyond pure ROI", score: 5},
+      {label: "Unclear ROI", desc: "No defined ROI expectations", score: 0}
+    ]
+  }
+];
+
+let currentQuestion = 0;
+let answers = [];
+
+function initializeAssessment() {
+  renderQuestion();
+  updateProgress();
+}
+
+function renderQuestion() {
+  const container = document.getElementById('questionContainer');
+  const q = questions[currentQuestion];
+  
+  container.innerHTML = `
+    <div class="question-card active">
+      <div class="category">${q.category}</div>
+      <h3>${q.question}</h3>
+      <div class="options">
+        ${q.options.map((option, index) => `
+          <div class="option" onclick="selectOption(${index})">
+            <div class="label">${option.label}</div>
+            <div class="desc">${option.desc}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function selectOption(optionIndex) {
+  // Remove previous selection
+  document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+  // Add selection to clicked option
+  document.querySelectorAll('.option')[optionIndex].classList.add('selected');
+  
+  // Store answer
+  answers[currentQuestion] = questions[currentQuestion].options[optionIndex].score;
+  
+  // Enable next button
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    renderQuestion();
+    updateProgress();
+    updateButtons();
+  } else {
+    showResults();
+  }
+}
+
+function previousQuestion() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
+    updateProgress();
+    updateButtons();
+    
+    // If there's a previous answer, show it
+    if (answers[currentQuestion] !== undefined) {
+      const selectedScore = answers[currentQuestion];
+      const options = questions[currentQuestion].options;
+      const selectedIndex = options.findIndex(opt => opt.score === selectedScore);
+      if (selectedIndex !== -1) {
+        document.querySelectorAll('.option')[selectedIndex].classList.add('selected');
+        document.getElementById('nextBtn').disabled = false;
+      }
+    }
+  }
+}
+
+function updateProgress() {
+  const progress = ((currentQuestion + 1) / questions.length) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+}
+
+function updateButtons() {
+  document.getElementById('prevBtn').style.display = currentQuestion === 0 ? 'none' : 'block';
+  document.getElementById('nextBtn').textContent = currentQuestion === questions.length - 1 ? 'Get Results' : 'Next';
+  document.getElementById('nextBtn').disabled = answers[currentQuestion] === undefined;
+}
+
+function showResults() {
+  document.getElementById('questionContainer').style.display = 'none';
+  document.querySelector('.nav-buttons').style.display = 'none';
+  document.querySelector('.progress-bar').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+  
+  calculateScores();
+}
+
+function calculateScores() {
+  const categoryScores = {
+    'Data Maturity': 0,
+    'Team Skills': 0,
+    'Infrastructure': 0,
+    'Strategy Alignment': 0,
+    'Budget': 0
+  };
+  
+  const categoryCounts = {
+    'Data Maturity': 0,
+    'Team Skills': 0,
+    'Infrastructure': 0,
+    'Strategy Alignment': 0,
+    'Budget': 0
+  };
+  
+  // Calculate category scores
+  questions.forEach((q, index) => {
+    if (answers[index] !== undefined) {
+      categoryScores[q.category] += answers[index];
+      categoryCounts[q.category]++;
+    }
+  });
+  
+  // Normalize scores to percentage
+  Object.keys(categoryScores).forEach(category => {
+    if (categoryCounts[category] > 0) {
+      categoryScores[category] = Math.round((categoryScores[category] / categoryCounts[category]));
+    }
+  });
+  
+  const totalScore = Math.round(Object.values(categoryScores).reduce((a, b) => a + b, 0) / 5);
+  
+  // Display total score
+  document.getElementById('totalScore').textContent = totalScore;
+  
+  // Display category scores
+  const categoryContainer = document.getElementById('categoryScores');
+  categoryContainer.innerHTML = Object.entries(categoryScores).map(([category, score]) => `
+    <div class="score-item">
+      <div class="category-name">${category}</div>
+      <div class="score">${score}</div>
+    </div>
+  `).join('');
+  
+  // Create radar chart
+  createRadarChart(categoryScores);
+  
+  // Generate recommendations
+  generateRecommendations(categoryScores, totalScore);
+}
+
+function createRadarChart(scores) {
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: Object.keys(scores),
+      datasets: [{
+        label: 'Your Score',
+        data: Object.values(scores),
+        borderColor: '#7c3aed',
+        backgroundColor: 'rgba(124, 58, 237, 0.1)',
+        pointBackgroundColor: '#7c3aed',
+        pointBorderColor: '#fff',
+        pointRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 20,
+          ticks: { color: '#a0a0b0' },
+          grid: { color: '#333' },
+          angleLines: { color: '#333' },
+          pointLabels: { color: '#e0e0e0' }
+        }
+      },
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
+}
+
+function generateRecommendations(scores, totalScore) {
+  const recommendations = [];
+  
+  if (scores['Data Maturity'] < 15) {
+    recommendations.push({
+      title: "Prioritize Data Foundation",
+      desc: "Invest in data quality, integration, and accessibility before advanced AI implementations."
+    });
+  }
+  
+  if (scores['Team Skills'] < 15) {
+    recommendations.push({
+      title: "Upskill Your Team",
+      desc: "Provide AI literacy training and consider hiring AI specialists or partnering with consultants."
+    });
+  }
+  
+  if (scores['Infrastructure'] < 15) {
+    recommendations.push({
+      title: "Modernize Infrastructure",
+      desc: "Upgrade to cloud-based systems and improve API connectivity for AI tool integration."
+    });
+  }
+  
+  if (scores['Strategy Alignment'] < 15) {
+    recommendations.push({
+      title: "Define AI Strategy",
+      desc: "Develop clear AI objectives aligned with business goals and secure leadership buy-in."
+    });
+  }
+  
+  if (scores['Budget'] < 15) {
+    recommendations.push({
+      title: "Plan AI Investment",
+      desc: "Establish dedicated AI budget and develop ROI frameworks for investment decisions."
+    });
+  }
+  
+  if (totalScore >= 80) {
+    recommendations.push({
+      title: "Advanced AI Implementation",
+      desc: "You're ready for sophisticated AI solutions. Focus on high-impact use cases and scaling."
+    });
+  } else if (totalScore >= 60) {
+    recommendations.push({
+      title: "Pilot AI Projects",
+      desc: "Start with low-risk AI pilots in your strongest areas while addressing identified gaps."
+    });
+  } else {
+    recommendations.push({
+      title: "Build AI Foundation",
+      desc: "Focus on foundational elements: data quality, team readiness, and strategic clarity."
+    });
+  }
+  
+  const container = document.getElementById('recommendationsContainer');
+  container.innerHTML = recommendations.map(rec => `
+    <div class="rec-item">
+      <h4>${rec.title}</h4>
+      <p>${rec.desc}</p>
+    </div>
+  `).join('');
+}
+
+// Initialize the assessment when page loads
+window.onload = initializeAssessment;
+</script>
+</body>
+</html>

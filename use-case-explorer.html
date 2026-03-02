@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Use Case Explorer — Ashdown AI Strategy Consulting</title>
+<meta name="description" content="Explore AI use cases by industry with ROI potential, implementation complexity, and timeline estimates. Find your best AI opportunities.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f1a;color:#e0e0e0;line-height:1.7}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.nav{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e1e2e}
+.nav a{color:#7c3aed;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:60px 20px 40px}
+.hero h1{font-size:2.2em;font-weight:800;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,#7c3aed,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1em;color:#a0a0b0;max-width:700px;margin:0 auto}
+.industry-selector{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:40px 0;padding:0 20px}
+.industry-btn{padding:12px 24px;background:#1a1a2e;border:1px solid #2a2a3e;border-radius:12px;color:#e0e0e0;cursor:pointer;transition:all .2s;text-decoration:none}
+.industry-btn:hover,.industry-btn.active{background:#7c3aed;color:#fff;transform:translateY(-2px)}
+.filters{display:flex;justify-content:center;gap:16px;margin-bottom:40px;padding:0 20px;flex-wrap:wrap}
+.filter-btn{padding:8px 16px;background:#0f0f1a;border:1px solid #333;border-radius:8px;color:#a0a0b0;cursor:pointer;transition:all .2s;font-size:0.9em}
+.filter-btn:hover,.filter-btn.active{background:rgba(124,58,237,0.1);border-color:#7c3aed;color:#7c3aed}
+.use-cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:24px;padding:0 20px}
+.use-case-card{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:24px;cursor:pointer;transition:all .3s;overflow:hidden}
+.use-case-card:hover{transform:translateY(-4px);border-color:#7c3aed;box-shadow:0 8px 32px rgba(124,58,237,0.1)}
+.use-case-card.expanded{background:#151527}
+.card-header{margin-bottom:16px}
+.card-title{font-size:1.2em;font-weight:700;margin-bottom:8px;color:#e0e0e0}
+.card-subtitle{color:#a0a0b0;font-size:0.9em}
+.metrics{display:flex;gap:16px;margin-bottom:16px}
+.metric{text-align:center}
+.metric-value{font-size:1.1em;font-weight:700;margin-bottom:2px}
+.roi-high{color:#10b981}
+.roi-medium{color:#f59e0b}
+.roi-low{color:#ef4444}
+.complexity-low{color:#10b981}
+.complexity-medium{color:#f59e0b}
+.complexity-high{color:#ef4444}
+.metric-label{color:#a0a0b0;font-size:0.8em;text-transform:uppercase;letter-spacing:1px}
+.timeline{display:inline-block;background:rgba(124,58,237,0.1);color:#7c3aed;padding:4px 8px;border-radius:6px;font-size:0.8em;font-weight:600}
+.card-description{color:#a0a0b0;margin-bottom:16px;line-height:1.6}
+.card-details{max-height:0;overflow:hidden;transition:max-height .3s ease-out}
+.card-details.expanded{max-height:600px}
+.detail-section{margin-bottom:20px}
+.detail-section h4{color:#e0e0e0;margin-bottom:8px;font-size:1em}
+.detail-list{list-style:none;padding:0}
+.detail-list li{color:#a0a0b0;padding:4px 0;padding-left:16px;position:relative;font-size:0.9em}
+.detail-list li:before{content:'•';color:#7c3aed;position:absolute;left:0}
+.expand-btn{width:100%;text-align:center;color:#7c3aed;font-size:0.9em;margin-top:12px;cursor:pointer}
+.no-results{text-align:center;color:#a0a0b0;font-style:italic;grid-column:1/-1;margin:40px 0}
+.cta-section{background:rgba(124,58,237,0.05);border-radius:16px;padding:40px;margin:60px 20px 40px;text-align:center}
+.cta{display:inline-block;padding:16px 32px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:1.1em;transition:transform .2s;margin-top:16px}
+.cta:hover{transform:scale(1.05)}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="index.html"><strong>🤖 AI Strategy Consulting</strong></a>
+  <div><a href="index.html#services">Services</a><a href="ai-readiness.html">Assessment</a><a href="roi-calculator.html">ROI Calculator</a><a href="use-case-explorer.html">Use Cases</a></div>
+</div>
+
+<div class="hero">
+  <h1>AI Use Case <span>Explorer</span></h1>
+  <p>Discover the most impactful AI use cases for your industry. Ranked by ROI potential with implementation guidance.</p>
+</div>
+
+<div class="container">
+  <div class="industry-selector">
+    <div class="industry-btn active" onclick="selectIndustry('manufacturing')">🏭 Manufacturing</div>
+    <div class="industry-btn" onclick="selectIndustry('logistics')">📦 Logistics</div>
+    <div class="industry-btn" onclick="selectIndustry('finance')">💰 Finance</div>
+    <div class="industry-btn" onclick="selectIndustry('healthcare')">🏥 Healthcare</div>
+    <div class="industry-btn" onclick="selectIndustry('retail')">🛍️ Retail</div>
+    <div class="industry-btn" onclick="selectIndustry('mining')">⛏️ Mining</div>
+  </div>
+  
+  <div class="filters">
+    <div class="filter-btn active" onclick="filterBy('all')">All Use Cases</div>
+    <div class="filter-btn" onclick="filterBy('quick-wins')">Quick Wins</div>
+    <div class="filter-btn" onclick="filterBy('strategic')">Strategic Bets</div>
+    <div class="filter-btn" onclick="filterBy('moonshots')">Moonshots</div>
+  </div>
+  
+  <div class="use-cases" id="useCasesContainer">
+    <!-- Use cases will be dynamically populated -->
+  </div>
+  
+  <div class="cta-section">
+    <h3>Ready to Implement Your AI Use Case?</h3>
+    <p>Get expert implementation guidance and turn these opportunities into reality.</p>
+    <a href="https://buy.stripe.com/3cI4gse2i1qqe0O1xK0Ny01" class="cta" target="_blank">Book Strategy Session — $2,000</a>
+  </div>
+</div>
+
+<script>
+let currentIndustry = 'manufacturing';
+let currentFilter = 'all';
+
+const useCases = {
+  manufacturing: [
+    {
+      title: "Predictive Maintenance",
+      subtitle: "Prevent equipment failures before they happen",
+      description: "Use IoT sensors and AI to predict when machines need maintenance, reducing downtime and extending equipment life.",
+      roi: "high", roiValue: "250-400%",
+      complexity: "medium",
+      timeline: "6-12 months",
+      category: "strategic",
+      benefits: ["Reduce unplanned downtime by 70%", "Extend equipment life by 20%", "Cut maintenance costs by 30%"],
+      challenges: ["Requires sensor infrastructure", "Data integration complexity", "Change management"],
+      implementation: ["Install IoT sensors on critical equipment", "Set up data collection pipeline", "Train predictive models", "Integrate with maintenance systems"]
+    },
+    {
+      title: "Quality Control Automation",
+      subtitle: "AI-powered defect detection",
+      description: "Computer vision systems that detect defects faster and more accurately than human inspectors.",
+      roi: "high", roiValue: "300-500%",
+      complexity: "medium",
+      timeline: "4-8 months",
+      category: "quick-wins",
+      benefits: ["99.5% defect detection accuracy", "50% faster inspection", "Reduce waste by 25%"],
+      challenges: ["Camera setup and lighting", "Training data collection", "Integration with production line"],
+      implementation: ["Install high-res cameras", "Collect defect image dataset", "Train vision models", "Deploy real-time system"]
+    },
+    {
+      title: "Supply Chain Optimization",
+      subtitle: "AI-driven demand forecasting and inventory",
+      description: "Optimize inventory levels and supply chain decisions using predictive analytics.",
+      roi: "high", roiValue: "200-350%",
+      complexity: "high",
+      timeline: "8-16 months",
+      category: "strategic",
+      benefits: ["Reduce inventory costs by 20%", "Improve fill rates by 15%", "Better demand accuracy"],
+      challenges: ["Data silos across suppliers", "Complex integration", "Stakeholder alignment"],
+      implementation: ["Integrate supplier data", "Build demand models", "Optimize inventory rules", "Deploy planning system"]
+    },
+    {
+      title: "Production Planning AI",
+      subtitle: "Optimize production schedules",
+      description: "AI algorithms that optimize production schedules considering constraints, demand, and resources.",
+      roi: "medium", roiValue: "150-250%",
+      complexity: "high",
+      timeline: "10-18 months",
+      category: "strategic",
+      benefits: ["15% increase in throughput", "Reduce scheduling time by 80%", "Better resource utilization"],
+      challenges: ["Complex constraint modeling", "Real-time data requirements", "Production disruption during deployment"],
+      implementation: ["Model production constraints", "Develop optimization algorithms", "Integrate with ERP", "Gradual rollout"]
+    },
+    {
+      title: "Energy Optimization",
+      subtitle: "Reduce energy consumption with AI",
+      description: "Smart systems that optimize energy usage across manufacturing operations.",
+      roi: "medium", roiValue: "120-200%",
+      complexity: "low",
+      timeline: "3-6 months",
+      category: "quick-wins",
+      benefits: ["20% energy cost reduction", "Lower carbon footprint", "Real-time monitoring"],
+      challenges: ["Meter installation", "Baseline establishment", "Behavioral change"],
+      implementation: ["Install smart meters", "Set up monitoring dashboard", "Implement control algorithms", "Train operators"]
+    },
+    {
+      title: "Autonomous Manufacturing",
+      subtitle: "Fully autonomous production lines",
+      description: "Self-operating manufacturing systems with minimal human intervention.",
+      roi: "high", roiValue: "400-800%",
+      complexity: "high",
+      timeline: "2-5 years",
+      category: "moonshots",
+      benefits: ["24/7 production capability", "Consistent quality", "Dramatic labor cost reduction"],
+      challenges: ["Massive capital investment", "Safety considerations", "Regulatory compliance"],
+      implementation: ["Phased automation rollout", "Safety system design", "Workforce transition", "Continuous optimization"]
+    }
+  ],
+  
+  logistics: [
+    {
+      title: "Route Optimization",
+      subtitle: "AI-powered delivery optimization",
+      description: "Dynamic routing that considers traffic, weather, and delivery priorities for optimal efficiency.",
+      roi: "high", roiValue: "200-400%",
+      complexity: "medium",
+      timeline: "4-8 months",
+      category: "quick-wins",
+      benefits: ["30% reduction in fuel costs", "25% more deliveries per day", "Improved customer satisfaction"],
+      challenges: ["Real-time data integration", "Driver adoption", "System integration"],
+      implementation: ["Integrate GPS and traffic data", "Develop routing algorithms", "Mobile app for drivers", "Performance monitoring"]
+    },
+    {
+      title: "Warehouse Automation",
+      subtitle: "Robotic picking and sorting",
+      description: "Automated systems for inventory management, picking, and sorting operations.",
+      roi: "high", roiValue: "250-500%",
+      complexity: "high",
+      timeline: "12-24 months",
+      category: "strategic",
+      benefits: ["50% faster picking", "99.9% accuracy", "Reduced labor dependency"],
+      challenges: ["High capital investment", "Warehouse redesign", "Integration complexity"],
+      implementation: ["Design automated layout", "Install robotic systems", "Integrate WMS", "Staff retraining"]
+    },
+    {
+      title: "Demand Forecasting",
+      subtitle: "Predict shipping volumes and capacity needs",
+      description: "AI models that forecast demand patterns to optimize capacity and resource allocation.",
+      roi: "medium", roiValue: "150-300%",
+      complexity: "medium",
+      timeline: "6-12 months",
+      category: "strategic",
+      benefits: ["Better capacity utilization", "Reduced overtime costs", "Improved service levels"],
+      challenges: ["Historical data quality", "Seasonal variations", "External factors"],
+      implementation: ["Clean historical data", "Build forecasting models", "Integrate with planning", "Continuous refinement"]
+    },
+    {
+      title: "Predictive Fleet Maintenance",
+      subtitle: "Prevent vehicle breakdowns",
+      description: "Monitor vehicle health and predict maintenance needs to minimize downtime.",
+      roi: "high", roiValue: "200-350%",
+      complexity: "medium",
+      timeline: "6-10 months",
+      category: "strategic",
+      benefits: ["Reduce breakdowns by 60%", "Lower maintenance costs", "Better fleet availability"],
+      challenges: ["Telematics installation", "Data standardization", "Mechanic training"],
+      implementation: ["Install vehicle sensors", "Set up monitoring platform", "Train predictive models", "Integrate with maintenance"]
+    },
+    {
+      title: "Load Optimization",
+      subtitle: "Maximize cargo efficiency",
+      description: "AI algorithms that optimize how cargo is loaded for maximum space utilization.",
+      roi: "medium", roiValue: "120-220%",
+      complexity: "low",
+      timeline: "3-6 months",
+      category: "quick-wins",
+      benefits: ["15% more cargo per trip", "Reduced shipping costs", "Better weight distribution"],
+      challenges: ["Item dimension data", "Loading constraint modeling", "Loader training"],
+      implementation: ["Capture item dimensions", "Develop optimization algorithms", "Create loading guides", "Train warehouse staff"]
+    },
+    {
+      title: "Autonomous Delivery",
+      subtitle: "Self-driving delivery vehicles",
+      description: "Fully autonomous vehicles for last-mile delivery operations.",
+      roi: "high", roiValue: "300-600%",
+      complexity: "high",
+      timeline: "3-7 years",
+      category: "moonshots",
+      benefits: ["Eliminate driver costs", "24/7 delivery capability", "Consistent service"],
+      challenges: ["Regulatory approval", "Technology maturity", "Public acceptance"],
+      implementation: ["Pilot autonomous vehicles", "Regulatory engagement", "Route mapping", "Gradual deployment"]
+    }
+  ],
+  
+  finance: [
+    {
+      title: "Fraud Detection",
+      subtitle: "Real-time transaction monitoring",
+      description: "AI systems that detect fraudulent transactions in real-time with high accuracy.",
+      roi: "high", roiValue: "300-600%",
+      complexity: "medium",
+      timeline: "6-12 months",
+      category: "strategic",
+      benefits: ["99% fraud detection accuracy", "Reduce false positives by 50%", "Real-time blocking"],
+      challenges: ["Model explainability", "Regulatory compliance", "Customer experience"],
+      implementation: ["Collect transaction data", "Build ML models", "Deploy real-time system", "Continuous monitoring"]
+    },
+    {
+      title: "Credit Risk Assessment",
+      subtitle: "AI-powered loan underwriting",
+      description: "Advanced models that assess credit risk using alternative data sources.",
+      roi: "high", roiValue: "200-400%",
+      complexity: "medium",
+      timeline: "8-15 months",
+      category: "strategic",
+      benefits: ["Improve approval rates by 20%", "Reduce default risk", "Faster loan processing"],
+      challenges: ["Alternative data sources", "Model validation", "Regulatory approval"],
+      implementation: ["Integrate data sources", "Develop risk models", "Validate performance", "Regulatory review"]
+    },
+    {
+      title: "Algorithmic Trading",
+      subtitle: "AI-driven investment strategies",
+      description: "Automated trading systems that execute strategies based on market analysis.",
+      roi: "high", roiValue: "250-500%",
+      complexity: "high",
+      timeline: "12-24 months",
+      category: "strategic",
+      benefits: ["Consistent returns", "24/7 market monitoring", "Emotion-free trading"],
+      challenges: ["Market volatility", "Model risk", "Regulatory compliance"],
+      implementation: ["Develop trading algorithms", "Backtesting framework", "Risk management", "Live deployment"]
+    },
+    {
+      title: "Customer Service AI",
+      subtitle: "Intelligent chatbots and support",
+      description: "AI-powered customer service that handles routine inquiries and escalates complex issues.",
+      roi: "medium", roiValue: "150-300%",
+      complexity: "low",
+      timeline: "3-8 months",
+      category: "quick-wins",
+      benefits: ["Handle 80% of inquiries", "24/7 availability", "Reduced wait times"],
+      challenges: ["Natural language processing", "Integration complexity", "Customer acceptance"],
+      implementation: ["Design conversation flows", "Train NLP models", "Integrate with systems", "Launch and optimize"]
+    },
+    {
+      title: "Regulatory Compliance",
+      subtitle: "Automated compliance monitoring",
+      description: "AI systems that monitor transactions and activities for regulatory compliance.",
+      roi: "medium", roiValue: "120-250%",
+      complexity: "high",
+      timeline: "10-18 months",
+      category: "strategic",
+      benefits: ["Reduce compliance costs", "Real-time monitoring", "Audit trail automation"],
+      challenges: ["Complex regulations", "Data quality", "Integration challenges"],
+      implementation: ["Map regulatory requirements", "Build monitoring rules", "Integrate data sources", "Reporting systems"]
+    },
+    {
+      title: "Central Bank Digital Currency",
+      subtitle: "Blockchain-based digital currency",
+      description: "Implementation of government-backed digital currency infrastructure.",
+      roi: "medium", roiValue: "100-300%",
+      complexity: "high",
+      timeline: "3-10 years",
+      category: "moonshots",
+      benefits: ["Reduced transaction costs", "Financial inclusion", "Monetary policy tools"],
+      challenges: ["Regulatory framework", "Technology scalability", "Public adoption"],
+      implementation: ["Pilot programs", "Infrastructure development", "Regulatory framework", "National rollout"]
+    }
+  ],
+  
+  healthcare: [
+    {
+      title: "Medical Image Analysis",
+      subtitle: "AI-powered diagnostic imaging",
+      description: "Computer vision systems that assist radiologists in detecting abnormalities.",
+      roi: "high", roiValue: "200-400%",
+      complexity: "high",
+      timeline: "12-24 months",
+      category: "strategic",
+      benefits: ["Faster diagnosis", "Higher accuracy", "Reduced radiologist workload"],
+      challenges: ["FDA approval", "Data privacy", "Clinical integration"],
+      implementation: ["Collect training data", "Develop AI models", "Clinical validation", "Regulatory approval"]
+    },
+    {
+      title: "Drug Discovery AI",
+      subtitle: "Accelerate pharmaceutical research",
+      description: "AI models that predict drug efficacy and identify promising compounds.",
+      roi: "high", roiValue: "300-800%",
+      complexity: "high",
+      timeline: "2-5 years",
+      category: "moonshots",
+      benefits: ["Reduce R&D costs", "Faster time to market", "Better success rates"],
+      challenges: ["Complex biology", "Regulatory requirements", "Validation challenges"],
+      implementation: ["Build molecular databases", "Train prediction models", "Laboratory validation", "Clinical trials"]
+    },
+    {
+      title: "Patient Monitoring",
+      subtitle: "Continuous health monitoring",
+      description: "IoT devices and AI that monitor patient vitals and predict health events.",
+      roi: "high", roiValue: "250-450%",
+      complexity: "medium",
+      timeline: "8-16 months",
+      category: "strategic",
+      benefits: ["Early intervention", "Reduced readmissions", "Better outcomes"],
+      challenges: ["Device integration", "Data security", "Clinical workflows"],
+      implementation: ["Deploy monitoring devices", "Set up data pipeline", "Train prediction models", "Clinical integration"]
+    },
+    {
+      title: "Personalized Treatment",
+      subtitle: "AI-driven treatment recommendations",
+      description: "Systems that recommend personalized treatments based on patient data and genetics.",
+      roi: "medium", roiValue: "150-350%",
+      complexity: "high",
+      timeline: "18-36 months",
+      category: "strategic",
+      benefits: ["Better treatment outcomes", "Reduced adverse effects", "Precision medicine"],
+      challenges: ["Genomic data integration", "Clinical evidence", "Physician adoption"],
+      implementation: ["Integrate patient data", "Build recommendation engine", "Clinical validation", "Provider training"]
+    },
+    {
+      title: "Administrative Automation",
+      subtitle: "Automate healthcare paperwork",
+      description: "AI systems that handle insurance claims, scheduling, and administrative tasks.",
+      roi: "medium", roiValue: "120-250%",
+      complexity: "low",
+      timeline: "4-8 months",
+      category: "quick-wins",
+      benefits: ["Reduce admin costs", "Faster processing", "Fewer errors"],
+      challenges: ["System integration", "Data standardization", "Staff training"],
+      implementation: ["Automate claim processing", "Intelligent scheduling", "Document processing", "Staff retraining"]
+    },
+    {
+      title: "Digital Therapeutics",
+      subtitle: "AI-powered treatment apps",
+      description: "Mobile applications that provide therapeutic interventions through AI.",
+      roi: "medium", roiValue: "100-300%",
+      complexity: "high",
+      timeline: "12-30 months",
+      category: "moonshots",
+      benefits: ["Accessible treatment", "Lower costs", "Continuous monitoring"],
+      challenges: ["Clinical validation", "Regulatory approval", "User engagement"],
+      implementation: ["Develop therapeutic algorithms", "Mobile app development", "Clinical trials", "FDA approval"]
+    }
+  ],
+  
+  retail: [
+    {
+      title: "Personalization Engine",
+      subtitle: "AI-driven customer recommendations",
+      description: "Machine learning systems that personalize product recommendations and content.",
+      roi: "high", roiValue: "200-400%",
+      complexity: "medium",
+      timeline: "6-12 months",
+      category: "quick-wins",
+      benefits: ["30% increase in conversion", "Higher average order value", "Better customer retention"],
+      challenges: ["Data integration", "Real-time processing", "Privacy compliance"],
+      implementation: ["Collect customer data", "Build recommendation models", "A/B testing", "Deployment and optimization"]
+    },
+    {
+      title: "Inventory Optimization",
+      subtitle: "Demand forecasting and stock management",
+      description: "AI systems that optimize inventory levels across all locations and channels.",
+      roi: "high", roiValue: "150-300%",
+      complexity: "medium",
+      timeline: "8-16 months",
+      category: "strategic",
+      benefits: ["Reduce stockouts by 40%", "Lower inventory costs", "Better cash flow"],
+      challenges: ["Multi-location complexity", "Seasonal variations", "Supplier integration"],
+      implementation: ["Integrate sales data", "Build forecasting models", "Optimize replenishment", "Supplier collaboration"]
+    },
+    {
+      title: "Dynamic Pricing",
+      subtitle: "AI-powered price optimization",
+      description: "Real-time pricing that considers demand, competition, and inventory levels.",
+      roi: "high", roiValue: "180-350%",
+      complexity: "medium",
+      timeline: "6-12 months",
+      category: "strategic",
+      benefits: ["Increase margins by 20%", "Competitive positioning", "Inventory management"],
+      challenges: ["Competitor monitoring", "Customer perception", "Price elasticity"],
+      implementation: ["Competitor price tracking", "Develop pricing algorithms", "A/B testing", "Gradual rollout"]
+    },
+    {
+      title: "Visual Search",
+      subtitle: "Find products using images",
+      description: "Computer vision that lets customers search for products using photos.",
+      roi: "medium", roiValue: "120-250%",
+      complexity: "high",
+      timeline: "8-15 months",
+      category: "strategic",
+      benefits: ["Improved search experience", "Higher engagement", "New customer acquisition"],
+      challenges: ["Image quality", "Product matching", "Mobile optimization"],
+      implementation: ["Build image database", "Train vision models", "Mobile integration", "Search optimization"]
+    },
+    {
+      title: "Chatbot Customer Service",
+      subtitle: "AI-powered customer support",
+      description: "Intelligent chatbots that handle customer inquiries and support requests.",
+      roi: "medium", roiValue: "100-200%",
+      complexity: "low",
+      timeline: "3-6 months",
+      category: "quick-wins",
+      benefits: ["Handle 70% of inquiries", "24/7 availability", "Reduced support costs"],
+      challenges: ["Natural language processing", "Integration complexity", "Escalation handling"],
+      implementation: ["Design conversation flows", "Train language models", "System integration", "Continuous improvement"]
+    },
+    {
+      title: "Autonomous Stores",
+      subtitle: "Cashier-less shopping experience",
+      description: "Fully automated stores with AI-powered checkout and inventory tracking.",
+      roi: "medium", roiValue: "150-400%",
+      complexity: "high",
+      timeline: "18-36 months",
+      category: "moonshots",
+      benefits: ["Reduced labor costs", "Enhanced experience", "Real-time inventory"],
+      challenges: ["Technology complexity", "Customer adoption", "Theft prevention"],
+      implementation: ["Sensor infrastructure", "Computer vision systems", "Payment integration", "Pilot stores"]
+    }
+  ],
+  
+  mining: [
+    {
+      title: "Predictive Equipment Maintenance",
+      subtitle: "Prevent costly mining equipment failures",
+      description: "AI systems that predict when heavy mining equipment needs maintenance.",
+      roi: "high", roiValue: "300-600%",
+      complexity: "medium",
+      timeline: "8-16 months",
+      category: "strategic",
+      benefits: ["Reduce downtime by 80%", "Extend equipment life", "Lower maintenance costs"],
+      challenges: ["Harsh environment sensors", "Data transmission", "Integration complexity"],
+      implementation: ["Install IoT sensors", "Set up communication infrastructure", "Train ML models", "Maintenance integration"]
+    },
+    {
+      title: "Ore Grade Optimization",
+      subtitle: "AI-powered geological analysis",
+      description: "Machine learning models that predict ore quality and optimize extraction.",
+      roi: "high", roiValue: "250-500%",
+      complexity: "high",
+      timeline: "12-24 months",
+      category: "strategic",
+      benefits: ["Increase yield by 25%", "Reduce processing costs", "Better resource allocation"],
+      challenges: ["Geological data complexity", "Model validation", "Operational integration"],
+      implementation: ["Geological data collection", "Build prediction models", "Drilling optimization", "Continuous refinement"]
+    },
+    {
+      title: "Safety Monitoring",
+      subtitle: "Real-time hazard detection",
+      description: "AI systems that monitor for safety hazards and predict dangerous conditions.",
+      roi: "high", roiValue: "200-400%",
+      complexity: "medium",
+      timeline: "6-12 months",
+      category: "strategic",
+      benefits: ["Reduce accidents by 70%", "Compliance assurance", "Insurance savings"],
+      challenges: ["Sensor deployment", "False alarm management", "Emergency response"],
+      implementation: ["Deploy safety sensors", "Develop alert systems", "Train response teams", "Continuous monitoring"]
+    },
+    {
+      title: "Autonomous Vehicles",
+      subtitle: "Self-driving mining trucks",
+      description: "Autonomous haul trucks that operate without human drivers in mining sites.",
+      roi: "high", roiValue: "300-700%",
+      complexity: "high",
+      timeline: "18-36 months",
+      category: "strategic",
+      benefits: ["24/7 operations", "Reduced labor costs", "Consistent productivity"],
+      challenges: ["Technology maturity", "Safety certification", "Infrastructure requirements"],
+      implementation: ["Pilot autonomous vehicles", "Infrastructure upgrades", "Safety validation", "Fleet conversion"]
+    },
+    {
+      title: "Environmental Monitoring",
+      subtitle: "AI-powered environmental compliance",
+      description: "Systems that monitor environmental impact and ensure regulatory compliance.",
+      roi: "medium", roiValue: "120-250%",
+      complexity: "low",
+      timeline: "4-8 months",
+      category: "quick-wins",
+      benefits: ["Ensure compliance", "Reduce penalties", "Environmental protection"],
+      challenges: ["Sensor calibration", "Data accuracy", "Regulatory requirements"],
+      implementation: ["Deploy environmental sensors", "Build monitoring dashboard", "Alert systems", "Regulatory reporting"]
+    },
+    {
+      title: "Fully Automated Mine",
+      subtitle: "Complete mining automation",
+      description: "Fully autonomous mining operations with minimal human intervention.",
+      roi: "high", roiValue: "400-1000%",
+      complexity: "high",
+      timeline: "5-15 years",
+      category: "moonshots",
+      benefits: ["Massive cost reduction", "Consistent operations", "Safety improvement"],
+      challenges: ["Technology integration", "Regulatory approval", "Workforce transition"],
+      implementation: ["Phased automation", "Technology integration", "Safety systems", "Workforce retraining"]
+    }
+  ]
+};
+
+function selectIndustry(industry) {
+  currentIndustry = industry;
+  
+  // Update button styling
+  document.querySelectorAll('.industry-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  
+  renderUseCases();
+}
+
+function filterBy(filter) {
+  currentFilter = filter;
+  
+  // Update filter styling
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  
+  renderUseCases();
+}
+
+function renderUseCases() {
+  const container = document.getElementById('useCasesContainer');
+  const cases = useCases[currentIndustry];
+  
+  let filteredCases = cases;
+  if (currentFilter !== 'all') {
+    filteredCases = cases.filter(useCase => useCase.category === currentFilter);
+  }
+  
+  if (filteredCases.length === 0) {
+    container.innerHTML = '<div class="no-results">No use cases found for the selected filters.</div>';
+    return;
+  }
+  
+  container.innerHTML = filteredCases.map((useCase, index) => `
+    <div class="use-case-card" onclick="toggleExpand(${index})">
+      <div class="card-header">
+        <div class="card-title">${useCase.title}</div>
+        <div class="card-subtitle">${useCase.subtitle}</div>
+      </div>
+      
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-value roi-${useCase.roi}">${useCase.roiValue}</div>
+          <div class="metric-label">ROI</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value complexity-${useCase.complexity}">${capitalizeFirst(useCase.complexity)}</div>
+          <div class="metric-label">Complexity</div>
+        </div>
+        <div class="metric">
+          <div class="timeline">${useCase.timeline}</div>
+        </div>
+      </div>
+      
+      <div class="card-description">${useCase.description}</div>
+      
+      <div class="card-details" id="details-${index}">
+        <div class="detail-section">
+          <h4>Key Benefits</h4>
+          <ul class="detail-list">
+            ${useCase.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
+          </ul>
+        </div>
+        
+        <div class="detail-section">
+          <h4>Implementation Challenges</h4>
+          <ul class="detail-list">
+            ${useCase.challenges.map(challenge => `<li>${challenge}</li>`).join('')}
+          </ul>
+        </div>
+        
+        <div class="detail-section">
+          <h4>Implementation Steps</h4>
+          <ul class="detail-list">
+            ${useCase.implementation.map(step => `<li>${step}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+      
+      <div class="expand-btn">Click to expand details ↓</div>
+    </div>
+  `).join('');
+}
+
+function toggleExpand(index) {
+  const card = event.currentTarget;
+  const details = document.getElementById(`details-${index}`);
+  const expandBtn = card.querySelector('.expand-btn');
+  
+  if (details.classList.contains('expanded')) {
+    details.classList.remove('expanded');
+    card.classList.remove('expanded');
+    expandBtn.textContent = 'Click to expand details ↓';
+  } else {
+    // Close all other expanded cards
+    document.querySelectorAll('.card-details').forEach(detail => {
+      detail.classList.remove('expanded');
+    });
+    document.querySelectorAll('.use-case-card').forEach(c => {
+      c.classList.remove('expanded');
+    });
+    document.querySelectorAll('.expand-btn').forEach(btn => {
+      btn.textContent = 'Click to expand details ↓';
+    });
+    
+    // Open this card
+    details.classList.add('expanded');
+    card.classList.add('expanded');
+    expandBtn.textContent = 'Click to collapse ↑';
+  }
+}
+
+function capitalizeFirst(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// Initialize page
+window.onload = function() {
+  renderUseCases();
+};
+</script>
+</body>
+</html>
