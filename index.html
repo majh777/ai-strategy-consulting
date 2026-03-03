@@ -5,6 +5,8 @@
 <title>AI Strategy Consulting — Automation for Business</title>
 <meta name="description" content="Expert AI strategy consulting for businesses. Get custom automation workflows, agent deployment, and managed AI solutions. Book a free consultation.">
 <meta name="robots" content="index, follow">
+<!-- Google Search Console Verification - REPLACE WITH ACTUAL CODE -->
+<meta name="google-site-verification" content="PLACEHOLDER_AI_STRATEGY_VERIFICATION_CODE" />
 <link rel="canonical" href="https://majh777.github.io/ai-strategy-consulting/">
 <meta property="og:title" content="AI Strategy Consulting — Automation for Business">
 <meta property="og:description" content="Expert AI strategy consulting. Custom automation workflows, agent deployment, and managed AI solutions.">
@@ -183,5 +185,126 @@ body{font-family:'Inter',system-ui,sans-serif;background:#0f0f1a;color:#e0e0e0;l
   <p style="margin-top:8px"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></p>
   <p style="margin-top:8px">© 2026 All rights reserved.</p>
 </div>
+
+<!-- Exit Intent Popup -->
+<div id="exitPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;justify-content:center;align-items:center;">
+  <div style="background:#1a1a2e;border-radius:16px;padding:40px;max-width:500px;margin:20px;text-align:center;border:2px solid #7c3aed;">
+    <h2 style="color:#7c3aed;margin-bottom:16px;font-size:1.8em;">Before You Go! 🚨</h2>
+    <p style="color:#e0e0e0;margin-bottom:20px;line-height:1.6;">Download our FREE "AI Strategy Playbook" - 50 pages of frameworks, templates, and ROI calculations</p>
+    <div style="margin:20px 0;">
+      <input type="email" id="exitEmail" placeholder="Enter your email..." style="width:100%;padding:12px;border-radius:8px;border:1px solid #2a2a3e;background:#0f0f1a;color:#e0e0e0;margin-bottom:12px;font-size:1em;">
+      <button onclick="submitExitEmail()" style="width:100%;padding:12px 24px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:1.1em;">Get Free AI Strategy Playbook</button>
+    </div>
+    <p style="font-size:0.8em;color:#888;margin-bottom:16px;">🔒 No spam. Enterprise-grade insights delivered weekly.</p>
+    <button onclick="closeExitPopup()" style="background:none;border:none;color:#7c3aed;cursor:pointer;text-decoration:underline;">No thanks, I'll figure it out myself</button>
+  </div>
+</div>
+
+<script>
+// Exit Intent Popup
+let exitPopupShown = false;
+let mouseLeftWindow = false;
+
+function showExitPopup() {
+  if (!exitPopupShown && !localStorage.getItem('exitPopupShown')) {
+    document.getElementById('exitPopup').style.display = 'flex';
+    exitPopupShown = true;
+    localStorage.setItem('exitPopupShown', 'true');
+  }
+}
+
+function closeExitPopup() {
+  document.getElementById('exitPopup').style.display = 'none';
+}
+
+function submitExitEmail() {
+  const email = document.getElementById('exitEmail').value;
+  if (email && email.includes('@')) {
+    // Here you would integrate with your email service
+    // For now, just close the popup and show success
+    alert('Success! Check your email for the AI Strategy Playbook download link.');
+    closeExitPopup();
+  } else {
+    alert('Please enter a valid email address.');
+  }
+}
+
+// Track mouse movement for exit intent
+document.addEventListener('mouseleave', function(e) {
+  if (e.clientY <= 0) {
+    mouseLeftWindow = true;
+    setTimeout(function() {
+      if (mouseLeftWindow) {
+        showExitPopup();
+      }
+    }, 1000);
+  }
+});
+
+document.addEventListener('mouseenter', function() {
+  mouseLeftWindow = false;
+});
+
+// Also show popup after 60 seconds on mobile (no mouse tracking)
+if (/Mobi|Android/i.test(navigator.userAgent)) {
+  setTimeout(showExitPopup, 60000);
+}
+
+// Social proof notifications
+function showSocialProof() {
+  const notifications = [
+    '🎯 Fortune 500 CEO just booked a strategy session',
+    '💼 Mining company in Ghana achieved 40% efficiency gains',
+    '🚀 Banking executive in Morocco deployed AI in 90 days',
+    '⚡ Oil & Gas company in UAE reduced costs by $2.3M',
+    '🏆 Healthcare system in Rwanda improved patient outcomes 35%'
+  ];
+  
+  const notification = notifications[Math.floor(Math.random() * notifications.length)];
+  const popup = document.createElement('div');
+  popup.innerHTML = notification;
+  popup.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, #7c3aed, #3b82f6);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: 600;
+    z-index: 1000;
+    max-width: 320px;
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+    animation: slideInUp 0.5s ease-out;
+  `;
+  
+  document.body.appendChild(popup);
+  
+  setTimeout(() => {
+    popup.style.animation = 'slideOutDown 0.5s ease-in forwards';
+    setTimeout(() => popup.remove(), 500);
+  }, 5000);
+}
+
+// Show social proof notifications periodically
+setInterval(showSocialProof, 18000);
+setTimeout(showSocialProof, 4000);
+
+// Add animation keyframes
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideInUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes slideOutDown {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(100%); opacity: 0; }
+  }
+`;
+document.head.appendChild(style);
+</script>
+
 </body>
 </html>

@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/about.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/ai-readiness.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/contact.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/cost-analysis.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/faq.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/frameworks.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/glossary.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <!-- Main Pages -->
   <url><loc>https://majh777.github.io/ai-strategy-consulting/index.html</loc><lastmod>2026-03-03</lastmod><priority>1.0</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/maturity-model.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/privacy.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/resources.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/roi-calculator.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/team.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/terms.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/use-case-explorer.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/whitepapers.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/partnerships.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/careers.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/events.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/about.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/contact.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/team.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/careers.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/events.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/newsletter.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/partnerships.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/press.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/testimonials.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/privacy.html</loc><lastmod>2026-03-03</lastmod><priority>0.4</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/terms.html</loc><lastmod>2026-03-03</lastmod><priority>0.4</priority></url>
   
-  <!-- Solutions Pages -->
+  <!-- Core Services & Tools -->
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/ai-readiness.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/cost-analysis.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/maturity-model.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/methodology.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/roi-calculator.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/use-case-explorer.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/frameworks.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/faq.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/glossary.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/resources.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  
+  <!-- Special Landing Pages -->
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/ai-agents-revolution.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/autonomous-systems-transformation.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/edge-ai-revolution.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/quantum-ml-future.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/responsible-ai-governance.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  
+  <!-- Solutions -->
   <url><loc>https://majh777.github.io/ai-strategy-consulting/solutions/index.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/solutions/ai-strategy-assessment.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/solutions/ai-implementation.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
@@ -28,65 +41,149 @@
   <url><loc>https://majh777.github.io/ai-strategy-consulting/solutions/data-strategy.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/solutions/ai-governance.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
   
-  <!-- Industry Pages -->
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/index.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/energy-utilities.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/government.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/education.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/real-estate.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/telecommunications.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/agriculture.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
+  <!-- Industries -->
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/index.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/agriculture.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/ai-strategy-law-firms.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/ai-supply-chain-optimization.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/education.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/energy-utilities.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/financial-services.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/government.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/healthcare.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/logistics-supply-chain.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/manufacturing.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/real-estate.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/retail-ecommerce.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/telecommunications.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
   
-  <!-- Research Pages -->
+  <!-- Guides -->
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/index.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/ai-budget-planning.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/ai-data-readiness.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/ai-measurement-framework.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/ai-pilot-program.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/ai-scaling-guide.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/ai-strategy-playbook.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/ai-team-building.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/ai-vendor-selection.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/banking-executive-ai.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/board-ai-governance.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/ceo-ai-playbook.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/cfo-ai-roi.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/coo-ai-operations.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/cto-ai-implementation.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/hr-ai-workforce.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/logistics-executive-ai.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/guides/mining-executive-ai.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  
+  <!-- Regions -->
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/index.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/angola.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/botswana.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/cameroon.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/central-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/cote-divoire.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/drc.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/east-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/egypt.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/ethiopia.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/francophone-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/gabon.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/ghana.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/gulf-states.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/kenya.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/middle-east.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/morocco.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/mozambique.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/nigeria.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/north-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/rwanda.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/saudi-arabia.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/senegal.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/south-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/southern-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/tanzania.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/tunisia.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/uae.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/regions/west-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  
+  <!-- Research -->
   <url><loc>https://majh777.github.io/ai-strategy-consulting/research/index.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/research/ai-trends-2026.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/research/africa-ai-index.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/research/ai-investment-guide.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
   
-  <!-- Original Industry Pages -->
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/financial-services.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/healthcare.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/logistics-supply-chain.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/manufacturing.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/industries/retail-ecommerce.html</loc><lastmod>2026-03-03</lastmod><priority>0.9</priority></url>
-  
   <!-- Whitepapers -->
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/whitepapers/ai-logistics-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/whitepapers/ai-mining-opportunity.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/whitepapers/enterprise-ai-playbook.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/whitepapers.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/whitepapers/index.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/whitepapers/ai-logistics-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/whitepapers/ai-mining-opportunity.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/whitepapers/enterprise-ai-playbook.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
   
-  <!-- Blog Posts -->
+  <!-- Blog -->
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/index.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-africa-opportunity.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-agriculture-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-change-management.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-customer-experience.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-cybersecurity-defense.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-decision-intelligence.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-energy-sector-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-governance-framework.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-healthcare-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-knowledge-management.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-manufacturing-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-port-logistics.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-process-mining.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-risk-management.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-roi-measuring-what-matters.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-strategy-consulting-what-to-expect-roi.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-supply-chain-resilience.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ai-talent-acquisition-retention.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/autonomous-systems-enterprise.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ceo-guide-ai-strategy-2026.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/cloud-vs-edge-ai-deployment.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/computer-vision-industrial.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/data-strategy-enterprise-ai.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/digital-twin-technology.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/ethical-ai-implementation.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/fintech-ai-emerging-markets.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/francophone-africa-ai.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/generative-ai-enterprise.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/mining-ai-transformation.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/mlops-best-practices.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/natural-language-processing-business.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/pilot-to-production-scaling-ai.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/regulatory-compliance-ai.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/smart-cities-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.6</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/blog/why-ai-projects-fail.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
   
   <!-- Case Studies -->
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/agriculture-cote-ivoire.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/aquaculture-ghana.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/aviation-maintenance-uae.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/banking-kenya.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/cement-cameroon.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/copper-mining-tanzania.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/diamond-mining-botswana.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/financial-services-morocco.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/fintech-nigeria.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/gold-mining-ghana.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/healthcare-radiology-saudi.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/healthcare-rwanda.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
   <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/index.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/insurance-uae.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/logistics-nigeria.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/oil-gas-angola.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/pharma-manufacturing-egypt.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/port-operations-morocco.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/railway-kenya.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/renewable-energy-morocco.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/solar-energy-morocco.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/steel-manufacturing-south-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/steel-production-egypt.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/telecom-south-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/textiles-egypt.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/warehouse-automation-uae.html</loc><lastmod>2026-03-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/agriculture-cote-ivoire.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/aquaculture-ghana.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/aviation-maintenance-uae.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/banking-kenya.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/cement-cameroon.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/copper-mining-tanzania.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/diamond-mining-botswana.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/financial-services-morocco.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/fintech-nigeria.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/gold-mining-ghana.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/healthcare-radiology-saudi.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/healthcare-rwanda.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/insurance-uae.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/logistics-nigeria.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/oil-gas-angola.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/pharma-manufacturing-egypt.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/port-operations-morocco.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/railway-kenya.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/renewable-energy-morocco.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/solar-energy-morocco.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/steel-manufacturing-south-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/steel-production-egypt.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/telecom-south-africa.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/textiles-egypt.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://majh777.github.io/ai-strategy-consulting/case-studies/warehouse-automation-uae.html</loc><lastmod>2026-03-03</lastmod><priority>0.7</priority></url>
 </urlset>
