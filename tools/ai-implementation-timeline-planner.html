@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Implementation Timeline Planner — Phase-by-Phase Project Planning Tool | Ashdown AI Strategy Consulting</title>
+<meta name="description" content="Interactive AI implementation timeline planner with Gantt charts, milestone tracking, and phase-by-phase project planning. Build realistic AI project schedules with dependencies and resource allocation.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://majh777.github.io/ai-strategy-consulting/tools/ai-implementation-timeline-planner.html">
+<meta property="og:title" content="AI Implementation Timeline Planner — Phase-by-Phase Project Planning Tool">
+<meta property="og:description" content="Interactive timeline planner for AI implementations with Gantt charts and milestone tracking.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://majh777.github.io/ai-strategy-consulting/tools/ai-implementation-timeline-planner.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Implementation Timeline Planner — Phase-by-Phase Planning Tool">
+<meta name="twitter:description" content="Interactive AI implementation timeline with Gantt charts and milestone tracking.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI Implementation Timeline Planner",
+  "description": "Interactive tool for planning AI implementation timelines with phase-by-phase project planning and milestone tracking",
+  "applicationCategory": "Project Planning Tool",
+  "operatingSystem": "Web Browser",
+  "url": "https://majh777.github.io/ai-strategy-consulting/tools/ai-implementation-timeline-planner.html",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Ashdown AI Strategy Consulting",
+    "url": "https://majh777.github.io/ai-strategy-consulting/"
+  }
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f1a;color:#e0e0e0;line-height:1.7}
+.container{max-width:1400px;margin:0 auto;padding:0 20px}
+.nav{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e1e2e}
+.nav a{color:#7c3aed;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:60px 20px 40px}
+.hero h1{font-size:2.4em;font-weight:800;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,#7c3aed,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1em;color:#a0a0b0;max-width:700px;margin:0 auto}
+.planner-intro{max-width:800px;margin:0 auto;padding:40px 20px;background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;margin-bottom:40px}
+.planner-intro h2{color:#7c3aed;margin-bottom:16px}
+.planning-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:24px 0}
+.feature{background:#0f0f1a;padding:16px;border-radius:8px;border:1px solid #333}
+.feature h4{color:#3b82f6;font-size:0.9em;margin-bottom:4px}
+.feature p{font-size:0.8em;color:#a0a0b0}
+.main-layout{display:grid;grid-template-columns:320px 1fr;gap:30px;margin:40px 0}
+@media(max-width:1200px){.main-layout{grid-template-columns:1fr;gap:20px}}
+.control-panel{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:20px;height:fit-content;position:sticky;top:20px}
+@media(max-width:1200px){.control-panel{position:static}}
+.panel-section{margin-bottom:24px}
+.panel-title{color:#7c3aed;font-weight:600;margin-bottom:12px;font-size:1em}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;color:#a0a0b0;font-size:0.9em;margin-bottom:6px}
+.form-group input, .form-group select{width:100%;background:#0f0f1a;border:1px solid #444;border-radius:6px;padding:8px 10px;color:#e0e0e0;font-size:0.9em}
+.form-group input:focus, .form-group select:focus{outline:none;border-color:#7c3aed}
+.date-range{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.complexity-selector{background:#0f0f1a;border:1px solid #333;border-radius:8px;padding:12px;margin:12px 0}
+.complexity-option{display:flex;align-items:center;margin:8px 0;cursor:pointer}
+.complexity-option input[type="radio"]{margin-right:8px}
+.complexity-option label{color:#e0e0e0;font-size:0.9em;cursor:pointer}
+.complexity-desc{color:#a0a0b0;font-size:0.8em;margin-left:20px}
+.phase-templates{background:#0f0f1a;border:1px solid #333;border-radius:8px;padding:12px;margin:12px 0}
+.template-option{background:#1a1a2e;border:1px solid #444;border-radius:6px;padding:8px 12px;margin:6px 0;cursor:pointer;transition:all 0.2s;font-size:0.85em}
+.template-option:hover{border-color:#7c3aed;background:#151527}
+.template-option.selected{border-color:#7c3aed;background:rgba(124,58,237,0.1)}
+.action-buttons{display:flex;flex-direction:column;gap:8px}
+.btn{padding:10px 16px;border:none;border-radius:6px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;font-size:0.9em;text-align:center}
+.btn-primary{background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff}
+.btn-secondary{background:#333;color:#e0e0e0;border:1px solid #444}
+.btn-success{background:#10b981;color:#fff}
+.btn:hover{transform:scale(1.02)}
+.timeline-container{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px}
+.timeline-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap}
+.timeline-title{color:#7c3aed;font-size:1.3em;margin:0}
+.timeline-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.view-selector{display:flex;background:#0f0f1a;border-radius:6px;overflow:hidden}
+.view-btn{padding:8px 16px;background:transparent;border:none;color:#a0a0b0;cursor:pointer;font-size:0.85em;transition:all .2s}
+.view-btn.active{background:#7c3aed;color:#fff}
+.timeline-filter{background:#0f0f1a;border:1px solid #444;border-radius:6px;padding:6px 10px;color:#e0e0e0;font-size:0.85em}
+.gantt-chart{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0;overflow-x:auto}
+.gantt-header{display:grid;grid-template-columns:200px 1fr;gap:20px;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #333}
+.gantt-labels{font-weight:600;color:#7c3aed;font-size:0.9em}
+.gantt-timeline{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;font-size:0.8em;color:#a0a0b0}
+.gantt-body{display:grid;gap:8px}
+.gantt-row{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center}
+.phase-label{font-weight:600;color:#e0e0e0;font-size:0.9em;padding:8px 0}
+.phase-bar-container{position:relative;height:32px;background:#1a1a2e;border-radius:4px;overflow:hidden}
+.phase-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:0.8em;font-weight:600;color:#fff;position:relative}
+.phase-foundation{background:linear-gradient(90deg,#ef4444,#f97316)}
+.phase-development{background:linear-gradient(90deg,#f59e0b,#eab308)}
+.phase-testing{background:linear-gradient(90deg,#3b82f6,#06b6d4)}
+.phase-deployment{background:linear-gradient(90deg,#10b981,#059669)}
+.phase-optimization{background:linear-gradient(90deg,#7c3aed,#8b5cf6)}
+.milestone{position:absolute;top:50%;transform:translateY(-50%);width:12px;height:12px;background:#fff;border:2px solid #7c3aed;border-radius:50%;z-index:10}
+.milestone-tooltip{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#333;color:#e0e0e0;padding:4px 8px;border-radius:4px;font-size:0.7em;white-space:nowrap;margin-bottom:4px;opacity:0;transition:opacity 0.2s}
+.milestone:hover .milestone-tooltip{opacity:1}
+.phase-details{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.phase-details h4{color:#3b82f6;margin-bottom:16px}
+.phases-grid{display:grid;gap:20px}
+.phase-card{background:#1a1a2e;border:1px solid #444;border-radius:8px;padding:16px;cursor:pointer;transition:all 0.2s}
+.phase-card:hover{border-color:#7c3aed;transform:scale(1.01)}
+.phase-card.active{border-color:#7c3aed;background:rgba(124,58,237,0.05)}
+.phase-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.phase-name{color:#e0e0e0;font-weight:600;font-size:1em}
+.phase-duration{background:#333;color:#e0e0e0;padding:2px 8px;border-radius:12px;font-size:0.8em}
+.phase-description{color:#a0a0b0;font-size:0.9em;margin-bottom:12px}
+.phase-tasks{list-style:none}
+.phase-tasks li{padding:3px 0;color:#a0a0b0;font-size:0.85em;position:relative;padding-left:16px}
+.phase-tasks li:before{content:"•";color:#7c3aed;font-weight:bold;position:absolute;left:0}
+.phase-resources{margin-top:12px;padding-top:12px;border-top:1px solid #333}
+.resource-tag{display:inline-block;background:rgba(124,58,237,0.2);color:#7c3aed;padding:2px 6px;border-radius:12px;font-size:0.75em;margin:2px 4px 2px 0}
+.critical-path{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.critical-path h4{color:#ef4444;margin-bottom:16px}
+.critical-tasks{list-style:none}
+.critical-tasks li{padding:8px 12px;background:#1a1a2e;border-left:4px solid #ef4444;margin:8px 0;border-radius:0 6px 6px 0}
+.critical-tasks li strong{color:#e0e0e0}
+.critical-tasks li span{color:#a0a0b0;font-size:0.9em}
+.risk-indicators{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.risk-indicators h4{color:#f59e0b;margin-bottom:16px}
+.risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.risk-item{background:#1a1a2e;border-left:4px solid #f59e0b;padding:12px;border-radius:0 6px 6px 0}
+.risk-item h5{color:#f59e0b;font-size:0.9em;margin-bottom:4px}
+.risk-item p{color:#a0a0b0;font-size:0.85em}
+.export-section{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.export-section h4{color:#10b981;margin-bottom:12px}
+.export-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.export-option{text-align:center;padding:16px;background:#1a1a2e;border:1px solid #444;border-radius:8px;cursor:pointer;transition:all 0.2s}
+.export-option:hover{border-color:#7c3aed;transform:scale(1.02)}
+.export-option h5{color:#3b82f6;margin-bottom:8px;font-size:0.9em}
+.export-option p{color:#a0a0b0;font-size:0.8em;margin-bottom:12px}
+.templates-section{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin:40px 0}
+.templates-section h3{color:#7c3aed;margin-bottom:20px;text-align:center}
+.template-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.template-card{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;cursor:pointer;transition:all 0.2s}
+.template-card:hover{border-color:#7c3aed;transform:scale(1.01)}
+.template-card h4{color:#3b82f6;margin-bottom:12px}
+.template-card p{color:#a0a0b0;font-size:0.9em;margin-bottom:16px}
+.template-details{list-style:none}
+.template-details li{padding:3px 0;color:#a0a0b0;font-size:0.85em;position:relative;padding-left:16px}
+.template-details li:before{content:"✓";color:#10b981;font-weight:bold;position:absolute;left:0}
+.cta-section{text-align:center;margin-top:50px;padding:40px;background:rgba(124,58,237,0.05);border-radius:16px;border:1px solid #2a2a3e}
+.cta-section h3{margin-bottom:16px;color:#e0e0e0}
+.cta-section p{margin-bottom:24px;color:#a0a0b0}
+.cta-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.cta{display:inline-block;padding:16px 32px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:1.1em;transition:transform .2s}
+.cta:hover{transform:scale(1.05)}
+.cta-secondary{background:#5469d4;font-size:1em}
+.progress-indicator{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.progress-indicator h4{color:#10b981;margin-bottom:16px}
+.progress-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:16px}
+.progress-stat{text-align:center;background:#1a1a2e;padding:12px;border-radius:6px}
+.stat-value{font-size:1.5em;font-weight:800;color:#10b981}
+.stat-label{font-size:0.8em;color:#a0a0b0}
+.progress-bar-container{background:#1a1a2e;border-radius:8px;height:8px;overflow:hidden}
+.progress-bar{background:linear-gradient(90deg,#10b981,#059669);height:100%;border-radius:8px;transition:width 0.3s}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="../index.html"><strong>🤖 AI Strategy Consulting</strong></a>
+  <div><a href="../index.html#services">Services</a><a href="../ai-readiness.html">Assessment</a><a href="../roi-calculator.html">ROI Calculator</a><a href="../index.html#about">About</a></div>
+</div>
+
+<div class="hero">
+  <h1>AI Implementation <span>Timeline Planner</span></h1>
+  <p>Comprehensive phase-by-phase planning tool for AI implementations. Create realistic project timelines with Gantt charts, milestone tracking, resource allocation, and risk assessment to ensure successful AI project delivery.</p>
+</div>
+
+<div class="container">
+  <div class="planner-intro">
+    <h2>📋 Implementation Planning Framework</h2>
+    <p>Plan your AI implementation with confidence using our proven methodology. Break down complex AI projects into manageable phases, identify critical path dependencies, allocate resources effectively, and track progress against key milestones.</p>
+    
+    <div class="planning-features">
+      <div class="feature">
+        <h4>📊 Gantt Chart Visualization</h4>
+        <p>Visual timeline with dependencies and milestones</p>
+      </div>
+      <div class="feature">
+        <h4>🎯 Phase-based Planning</h4>
+        <p>Structured approach with proven implementation phases</p>
+      </div>
+      <div class="feature">
+        <h4>⚡ Critical Path Analysis</h4>
+        <p>Identify bottlenecks and optimize project flow</p>
+      </div>
+      <div class="feature">
+        <h4>📈 Progress Tracking</h4>
+        <p>Monitor milestones and key performance indicators</p>
+      </div>
+      <div class="feature">
+        <h4>⚠️ Risk Assessment</h4>
+        <p>Built-in risk indicators and mitigation strategies</p>
+      </div>
+      <div class="feature">
+        <h4>👥 Resource Planning</h4>
+        <p>Team allocation and skill requirement planning</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- Control Panel -->
+    <div class="control-panel">
+      <div class="panel-section">
+        <div class="panel-title">🎯 Project Setup</div>
+        
+        <div class="form-group">
+          <label for="projectName">Project Name</label>
+          <input type="text" id="projectName" value="AI Customer Service Implementation" placeholder="Enter project name">
+        </div>
+        
+        <div class="form-group">
+          <label>Project Dates</label>
+          <div class="date-range">
+            <input type="date" id="startDate" value="2024-01-01">
+            <input type="date" id="endDate" value="2024-12-31">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="projectType">AI Use Case Type</label>
+          <select id="projectType">
+            <option value="customer-service">Customer Service AI</option>
+            <option value="analytics">Predictive Analytics</option>
+            <option value="automation">Process Automation</option>
+            <option value="ml-platform">ML Platform</option>
+            <option value="computer-vision">Computer Vision</option>
+            <option value="nlp">Natural Language Processing</option>
+            <option value="recommendation">Recommendation Engine</option>
+            <option value="custom">Custom Implementation</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-title">🔧 Complexity Level</div>
+        <div class="complexity-selector">
+          <div class="complexity-option">
+            <input type="radio" id="simple" name="complexity" value="simple" checked>
+            <label for="simple">Simple (3-6 months)</label>
+          </div>
+          <div class="complexity-desc">Basic AI integration, existing data, minimal custom development</div>
+          
+          <div class="complexity-option">
+            <input type="radio" id="moderate" name="complexity" value="moderate">
+            <label for="moderate">Moderate (6-12 months)</label>
+          </div>
+          <div class="complexity-desc">Custom model development, data preparation, system integration</div>
+          
+          <div class="complexity-option">
+            <input type="radio" id="complex" name="complexity" value="complex">
+            <label for="complex">Complex (12+ months)</label>
+          </div>
+          <div class="complexity-desc">Enterprise-wide deployment, multiple models, extensive integration</div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-title">📋 Phase Templates</div>
+        <div class="phase-templates">
+          <div class="template-option selected" data-template="standard">
+            <strong>Standard AI Implementation</strong><br>
+            Foundation → Development → Testing → Deployment → Optimization
+          </div>
+          <div class="template-option" data-template="agile">
+            <strong>Agile AI Development</strong><br>
+            Sprint-based with continuous integration
+          </div>
+          <div class="template-option" data-template="enterprise">
+            <strong>Enterprise Rollout</strong><br>
+            Pilot → Scale → Enterprise deployment
+          </div>
+          <div class="template-option" data-template="research">
+            <strong>Research & Development</strong><br>
+            Exploration → Proof of concept → Productization
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" onclick="generateTimeline()">📊 Generate Timeline</button>
+        <button class="btn btn-secondary" onclick="loadTemplate()">📋 Load Template</button>
+        <button class="btn btn-success" onclick="exportTimeline()">💾 Export Plan</button>
+      </div>
+    </div>
+
+    <!-- Timeline Container -->
+    <div class="timeline-container">
+      <div class="timeline-header">
+        <h3 class="timeline-title">🗓️ AI Implementation Timeline</h3>
+        <div class="timeline-controls">
+          <div class="view-selector">
+            <button class="view-btn active" onclick="switchView('gantt')">Gantt Chart</button>
+            <button class="view-btn" onclick="switchView('phases')">Phase Details</button>
+            <button class="view-btn" onclick="switchView('milestones')">Milestones</button>
+          </div>
+          <select class="timeline-filter" onchange="filterTimeline()">
+            <option value="all">All Phases</option>
+            <option value="current">Current Phase</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Progress Indicator -->
+      <div class="progress-indicator">
+        <h4>📈 Project Progress</h4>
+        <div class="progress-stats">
+          <div class="progress-stat">
+            <div class="stat-value" id="completedTasks">0</div>
+            <div class="stat-label">Tasks Complete</div>
+          </div>
+          <div class="progress-stat">
+            <div class="stat-value" id="activeTasks">5</div>
+            <div class="stat-label">Active Tasks</div>
+          </div>
+          <div class="progress-stat">
+            <div class="stat-value" id="upcomingMilestones">3</div>
+            <div class="stat-label">Upcoming Milestones</div>
+          </div>
+          <div class="progress-stat">
+            <div class="stat-value" id="teamMembers">8</div>
+            <div class="stat-label">Team Members</div>
+          </div>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="overallProgress" style="width: 25%"></div>
+        </div>
+      </div>
+
+      <!-- Gantt Chart View -->
+      <div class="gantt-chart" id="ganttView">
+        <div class="gantt-header">
+          <div class="gantt-labels">Phase / Task</div>
+          <div class="gantt-timeline">
+            <div>Jan</div><div>Feb</div><div>Mar</div><div>Apr</div><div>May</div><div>Jun</div>
+            <div>Jul</div><div>Aug</div><div>Sep</div><div>Oct</div><div>Nov</div><div>Dec</div>
+          </div>
+        </div>
+        
+        <div class="gantt-body" id="ganttBody">
+          <!-- Gantt rows will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Phase Details View -->
+      <div class="phase-details" id="phaseView" style="display:none;">
+        <h4>📋 Implementation Phases</h4>
+        <div class="phases-grid" id="phasesGrid">
+          <!-- Phase cards will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Milestones View -->
+      <div class="phase-details" id="milestonesView" style="display:none;">
+        <h4>🎯 Key Milestones</h4>
+        <div id="milestonesList">
+          <!-- Milestones will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Critical Path -->
+      <div class="critical-path">
+        <h4>⚡ Critical Path Analysis</h4>
+        <p style="color:#a0a0b0;margin-bottom:16px;font-size:0.9em;">
+          Critical tasks that directly impact project completion timeline. Delays in these tasks will delay the entire project.
+        </p>
+        <ul class="critical-tasks" id="criticalTasksList">
+          <li><strong>Data Infrastructure Setup</strong> <span>(Weeks 1-4) - Blocks all ML development</span></li>
+          <li><strong>Model Development</strong> <span>(Weeks 5-12) - Core AI functionality</span></li>
+          <li><strong>System Integration</strong> <span>(Weeks 13-16) - Required for deployment</span></li>
+          <li><strong>User Acceptance Testing</strong> <span>(Weeks 17-20) - Final validation</span></li>
+        </ul>
+      </div>
+
+      <!-- Risk Indicators -->
+      <div class="risk-indicators">
+        <h4>⚠️ Timeline Risk Indicators</h4>
+        <div class="risk-grid" id="riskGrid">
+          <div class="risk-item">
+            <h5>Data Quality Issues</h5>
+            <p>Potential delays in data preparation phase if data quality is poor</p>
+          </div>
+          <div class="risk-item">
+            <h5>Integration Complexity</h5>
+            <p>Legacy system integration may require additional development time</p>
+          </div>
+          <div class="risk-item">
+            <h5>Model Performance</h5>
+            <p>Extended model tuning if initial accuracy targets not met</p>
+          </div>
+          <div class="risk-item">
+            <h5>Change Management</h5>
+            <p>User adoption challenges may extend training and rollout phases</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Export Section -->
+      <div class="export-section">
+        <h4>📥 Export Timeline</h4>
+        <div class="export-options">
+          <div class="export-option" onclick="exportToExcel()">
+            <h5>📊 Excel Project Plan</h5>
+            <p>Detailed project plan with tasks, resources, and dependencies</p>
+            <button class="btn btn-secondary">Download Excel</button>
+          </div>
+          
+          <div class="export-option" onclick="exportToPDF()">
+            <h5>📄 PDF Timeline</h5>
+            <p>Professional timeline document with Gantt charts</p>
+            <button class="btn btn-secondary">Download PDF</button>
+          </div>
+          
+          <div class="export-option" onclick="exportToMSProject()">
+            <h5>📋 MS Project File</h5>
+            <p>Import into Microsoft Project for advanced planning</p>
+            <button class="btn btn-secondary">Download MPP</button>
+          </div>
+          
+          <div class="export-option" onclick="shareTimeline()">
+            <h5>🔗 Share Link</h5>
+            <p>Generate shareable link for stakeholders</p>
+            <button class="btn btn-primary">Generate Link</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Templates Section -->
+  <div class="templates-section">
+    <h3>📋 Implementation Templates</h3>
+    <div class="template-grid">
+      <div class="template-card" onclick="loadProjectTemplate('chatbot')">
+        <h4>🤖 AI Chatbot Implementation</h4>
+        <p>Complete timeline for customer service chatbot deployment</p>
+        <ul class="template-details">
+          <li>6-month implementation cycle</li>
+          <li>NLP model development and training</li>
+          <li>Integration with customer service platform</li>
+          <li>Phased rollout with monitoring</li>
+        </ul>
+      </div>
+      
+      <div class="template-card" onclick="loadProjectTemplate('analytics')">
+        <h4>📊 Predictive Analytics Platform</h4>
+        <p>End-to-end analytics platform with ML models</p>
+        <ul class="template-details">
+          <li>9-month enterprise deployment</li>
+          <li>Data pipeline and infrastructure setup</li>
+          <li>Multiple predictive models</li>
+          <li>Business intelligence integration</li>
+        </ul>
+      </div>
+      
+      <div class="template-card" onclick="loadProjectTemplate('computer-vision')">
+        <h4>👁️ Computer Vision System</h4>
+        <p>Image recognition and processing implementation</p>
+        <ul class="template-details">
+          <li>8-month development timeline</li>
+          <li>Custom model training with labeled data</li>
+          <li>Edge deployment considerations</li>
+          <li>Performance optimization</li>
+        </ul>
+      </div>
+      
+      <div class="template-card" onclick="loadProjectTemplate('automation')">
+        <h4>⚙️ Process Automation Suite</h4>
+        <p>Intelligent automation across business processes</p>
+        <ul class="template-details">
+          <li>12-month enterprise transformation</li>
+          <li>Multiple automation workflows</li>
+          <li>Legacy system integration</li>
+          <li>Change management program</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>🚀 Ready to Execute Your AI Implementation?</h3>
+    <p>Transform your timeline into reality with expert project management support. Our consultants will help you refine your plan, manage risks, and ensure successful delivery on time and within budget.</p>
+    <div class="cta-buttons">
+      <a href="https://buy.stripe.com/eVq8wI8HY4CCg8Wekw0Ny00" class="cta" target="_blank">💡 AI Assessment ($500) →</a>
+      <a href="https://buy.stripe.com/3cI4gse2i1qqe0O1xK0Ny01" class="cta cta-secondary" target="_blank">🎯 Full AI Strategy ($2,000) →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Global variables
+let currentProject = {
+  name: 'AI Customer Service Implementation',
+  startDate: '2024-01-01',
+  endDate: '2024-12-31',
+  complexity: 'simple',
+  type: 'customer-service',
+  template: 'standard'
+};
+
+let phases = [];
+let currentView = 'gantt';
+
+// Phase templates
+const phaseTemplates = {
+  standard: [
+    {
+      name: 'Foundation & Planning',
+      duration: 6,
+      description: 'Project setup, team formation, and infrastructure preparation',
+      tasks: [
+        'Project initiation and stakeholder alignment',
+        'Team assembly and role definition',
+        'Infrastructure and environment setup',
+        'Data audit and preparation planning',
+        'Technology stack selection'
+      ],
+      resources: ['Project Manager', 'Solution Architect', 'Data Engineer', 'Business Analyst'],
+      color: 'phase-foundation'
+    },
+    {
+      name: 'Data & Development',
+      duration: 12,
+      description: 'Data preparation, model development, and initial training',
+      tasks: [
+        'Data collection and cleaning',
+        'Feature engineering and selection',
+        'Model architecture design',
+        'Initial model training and validation',
+        'API and service development'
+      ],
+      resources: ['Data Scientists', 'ML Engineers', 'Backend Developers', 'DevOps Engineer'],
+      color: 'phase-development'
+    },
+    {
+      name: 'Testing & Validation',
+      duration: 6,
+      description: 'Comprehensive testing, validation, and performance optimization',
+      tasks: [
+        'Model performance testing',
+        'Integration testing with existing systems',
+        'User acceptance testing',
+        'Security and compliance validation',
+        'Performance optimization'
+      ],
+      resources: ['QA Engineers', 'Security Specialist', 'Business Users', 'Performance Engineer'],
+      color: 'phase-testing'
+    },
+    {
+      name: 'Deployment & Rollout',
+      duration: 8,
+      description: 'Production deployment and phased rollout to users',
+      tasks: [
+        'Production environment setup',
+        'Phased deployment planning',
+        'User training and documentation',
+        'Go-live support and monitoring',
+        'Initial user feedback collection'
+      ],
+      resources: ['DevOps Engineer', 'Support Team', 'Training Coordinator', 'Business Analyst'],
+      color: 'phase-deployment'
+    },
+    {
+      name: 'Optimization & Scale',
+      duration: 10,
+      description: 'Performance monitoring, optimization, and scaling',
+      tasks: [
+        'Performance monitoring and analysis',
+        'Model retraining and improvement',
+        'System scaling and optimization',
+        'Advanced feature development',
+        'Long-term maintenance planning'
+      ],
+      resources: ['ML Engineers', 'Data Scientists', 'Site Reliability Engineers', 'Product Manager'],
+      color: 'phase-optimization'
+    }
+  ],
+  agile: [
+    {
+      name: 'Sprint 0: Foundation',
+      duration: 3,
+      description: 'Project setup and sprint planning',
+      tasks: ['Environment setup', 'Team onboarding', 'Initial backlog creation'],
+      resources: ['Scrum Master', 'Product Owner', 'Development Team'],
+      color: 'phase-foundation'
+    },
+    {
+      name: 'Sprints 1-4: Core Development',
+      duration: 8,
+      description: 'Core AI functionality development',
+      tasks: ['Data pipeline', 'Model development', 'API creation', 'Testing'],
+      resources: ['Full Development Team'],
+      color: 'phase-development'
+    },
+    {
+      name: 'Sprints 5-6: Integration',
+      duration: 4,
+      description: 'System integration and testing',
+      tasks: ['Integration testing', 'Performance testing', 'Bug fixes'],
+      resources: ['Development Team', 'QA Team'],
+      color: 'phase-testing'
+    },
+    {
+      name: 'Sprint 7: Deployment',
+      duration: 2,
+      description: 'Production deployment',
+      tasks: ['Production deployment', 'Monitoring setup', 'Go-live'],
+      resources: ['DevOps', 'Support Team'],
+      color: 'phase-deployment'
+    }
+  ]
+};
+
+// Milestones data
+const milestones = [
+  { name: 'Project Kickoff', week: 1, critical: true },
+  { name: 'Data Pipeline Complete', week: 8, critical: true },
+  { name: 'First Model Trained', week: 16, critical: true },
+  { name: 'Integration Testing Complete', week: 24, critical: false },
+  { name: 'User Acceptance Sign-off', week: 30, critical: true },
+  { name: 'Production Go-Live', week: 36, critical: true },
+  { name: 'Post-Launch Review', week: 42, critical: false }
+];
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  generateTimeline();
+  setupEventListeners();
+});
+
+function setupEventListeners() {
+  // Template selection
+  document.querySelectorAll('.template-option').forEach(option => {
+    option.addEventListener('click', function() {
+      document.querySelectorAll('.template-option').forEach(opt => opt.classList.remove('selected'));
+      this.classList.add('selected');
+      currentProject.template = this.dataset.template;
+    });
+  });
+  
+  // Complexity selection
+  document.querySelectorAll('input[name="complexity"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      currentProject.complexity = this.value;
+      updateComplexityAdjustments();
+    });
+  });
+}
+
+function generateTimeline() {
+  // Update project data from form
+  currentProject.name = document.getElementById('projectName').value;
+  currentProject.startDate = document.getElementById('startDate').value;
+  currentProject.endDate = document.getElementById('endDate').value;
+  currentProject.type = document.getElementById('projectType').value;
+  
+  // Load appropriate template
+  const selectedTemplate = document.querySelector('.template-option.selected').dataset.template;
+  phases = JSON.parse(JSON.stringify(phaseTemplates[selectedTemplate] || phaseTemplates.standard));
+  
+  // Apply complexity adjustments
+  updateComplexityAdjustments();
+  
+  // Update all views
+  updateGanttChart();
+  updatePhaseDetails();
+  updateMilestones();
+  updateCriticalPath();
+  updateRiskIndicators();
+  
+  // Update progress stats
+  updateProgressStats();
+}
+
+function updateComplexityAdjustments() {
+  const multipliers = {
+    simple: 1.0,
+    moderate: 1.5,
+    complex: 2.2
+  };
+  
+  const multiplier = multipliers[currentProject.complexity];
+  
+  phases.forEach(phase => {
+    phase.adjustedDuration = Math.ceil(phase.duration * multiplier);
+  });
+  
+  // Add complexity-specific tasks
+  if (currentProject.complexity === 'complex') {
+    phases.forEach(phase => {
+      if (phase.name.includes('Development')) {
+        phase.tasks.push('Advanced model architectures', 'Multi-model ensemble development');
+      }
+      if (phase.name.includes('Testing')) {
+        phase.tasks.push('Scalability testing', 'Advanced security testing');
+      }
+    });
+  }
+}
+
+function updateGanttChart() {
+  const ganttBody = document.getElementById('ganttBody');
+  let currentWeek = 0;
+  
+  ganttBody.innerHTML = phases.map((phase, index) => {
+    const duration = phase.adjustedDuration || phase.duration;
+    const startWeek = currentWeek;
+    const widthPercent = (duration / 52) * 100; // Assuming 52 weeks total
+    const leftPercent = (startWeek / 52) * 100;
+    
+    currentWeek += duration;
+    
+    return `
+      <div class="gantt-row">
+        <div class="phase-label">${phase.name}</div>
+        <div class="phase-bar-container">
+          <div class="phase-bar ${phase.color}" 
+               style="width: ${widthPercent}%; left: ${leftPercent}%;">
+            ${duration}w
+          </div>
+          ${generateMilestonesForPhase(startWeek, duration)}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function generateMilestonesForPhase(startWeek, duration) {
+  const phaseMilestones = milestones.filter(m => 
+    m.week >= startWeek && m.week <= startWeek + duration
+  );
+  
+  return phaseMilestones.map(milestone => {
+    const position = ((milestone.week - startWeek) / duration) * 100;
+    return `
+      <div class="milestone" style="left: ${position}%;">
+        <div class="milestone-tooltip">${milestone.name}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function updatePhaseDetails() {
+  const phasesGrid = document.getElementById('phasesGrid');
+  
+  phasesGrid.innerHTML = phases.map((phase, index) => `
+    <div class="phase-card" onclick="selectPhase(${index})">
+      <div class="phase-header">
+        <div class="phase-name">${phase.name}</div>
+        <div class="phase-duration">${phase.adjustedDuration || phase.duration} weeks</div>
+      </div>
+      <div class="phase-description">${phase.description}</div>
+      <ul class="phase-tasks">
+        ${phase.tasks.slice(0, 5).map(task => `<li>${task}</li>`).join('')}
+        ${phase.tasks.length > 5 ? `<li>... and ${phase.tasks.length - 5} more tasks</li>` : ''}
+      </ul>
+      <div class="phase-resources">
+        ${phase.resources.map(resource => `<span class="resource-tag">${resource}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateMilestones() {
+  const milestonesList = document.getElementById('milestonesList');
+  
+  milestonesList.innerHTML = `
+    <div class="phases-grid">
+      ${milestones.map(milestone => `
+        <div class="phase-card ${milestone.critical ? 'active' : ''}">
+          <div class="phase-header">
+            <div class="phase-name">${milestone.name}</div>
+            <div class="phase-duration">Week ${milestone.week}</div>
+          </div>
+          <div class="phase-description">
+            ${milestone.critical ? '🔴 Critical milestone' : '🟡 Standard milestone'}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function updateCriticalPath() {
+  const criticalTasksList = document.getElementById('criticalTasksList');
+  
+  // Update based on selected complexity
+  let criticalTasks = [
+    'Data Infrastructure Setup',
+    'Model Development', 
+    'System Integration',
+    'User Acceptance Testing'
+  ];
+  
+  if (currentProject.complexity === 'complex') {
+    criticalTasks.push('Security Compliance Review', 'Performance Optimization');
+  }
+  
+  criticalTasksList.innerHTML = criticalTasks.map((task, index) => {
+    const week = (index + 1) * 8; // Approximate timing
+    return `<li><strong>${task}</strong> <span>(Week ${week}) - Critical dependency</span></li>`;
+  }).join('');
+}
+
+function updateRiskIndicators() {
+  const risks = {
+    simple: [
+      { title: 'Data Quality Issues', desc: 'Minor delays if data preparation takes longer than expected' },
+      { title: 'Integration Challenges', desc: 'Potential issues with existing system compatibility' }
+    ],
+    moderate: [
+      { title: 'Model Performance', desc: 'Extended tuning period if accuracy targets not initially met' },
+      { title: 'Scalability Concerns', desc: 'Performance issues under production load' },
+      { title: 'Team Capacity', desc: 'Potential resource constraints during peak development' }
+    ],
+    complex: [
+      { title: 'Technical Complexity', desc: 'Advanced architecture may require specialized expertise' },
+      { title: 'Integration Complexity', desc: 'Multiple system dependencies increase risk' },
+      { title: 'Regulatory Compliance', desc: 'Additional validation required for compliance standards' },
+      { title: 'Change Management', desc: 'Significant organizational change may face resistance' }
+    ]
+  };
+  
+  const riskGrid = document.getElementById('riskGrid');
+  const projectRisks = risks[currentProject.complexity] || risks.simple;
+  
+  riskGrid.innerHTML = projectRisks.map(risk => `
+    <div class="risk-item">
+      <h5>${risk.title}</h5>
+      <p>${risk.desc}</p>
+    </div>
+  `).join('');
+}
+
+function updateProgressStats() {
+  // Calculate progress based on current date vs timeline
+  const totalDuration = phases.reduce((sum, phase) => sum + (phase.adjustedDuration || phase.duration), 0);
+  const progress = Math.min(Math.floor(Math.random() * 40), 35); // Simulated progress
+  
+  document.getElementById('completedTasks').textContent = Math.floor(totalDuration * 0.3);
+  document.getElementById('activeTasks').textContent = Math.floor(totalDuration * 0.1);
+  document.getElementById('upcomingMilestones').textContent = milestones.filter(m => !m.completed).length;
+  document.getElementById('teamMembers').textContent = phases[0]?.resources.length || 8;
+  document.getElementById('overallProgress').style.width = progress + '%';
+}
+
+function switchView(view) {
+  currentView = view;
+  
+  // Update button states
+  document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  // Show/hide views
+  document.getElementById('ganttView').style.display = view === 'gantt' ? 'block' : 'none';
+  document.getElementById('phaseView').style.display = view === 'phases' ? 'block' : 'none';
+  document.getElementById('milestonesView').style.display = view === 'milestones' ? 'block' : 'none';
+}
+
+function selectPhase(index) {
+  document.querySelectorAll('.phase-card').forEach(card => card.classList.remove('active'));
+  document.querySelectorAll('.phase-card')[index].classList.add('active');
+}
+
+function filterTimeline() {
+  const filter = event.target.value;
+  // Implement filtering logic
+  console.log('Filter timeline by:', filter);
+}
+
+function loadTemplate() {
+  const templates = {
+    'customer-service': 'Customer Service AI implementation with NLP and integration focus',
+    'analytics': 'Predictive Analytics platform with ML models and BI integration',
+    'automation': 'Process Automation with RPA and AI-powered decision making',
+    'ml-platform': 'Enterprise ML Platform with MLOps and model management'
+  };
+  
+  alert(`Loading template: ${templates[currentProject.type] || 'Standard AI Implementation'}`);
+  generateTimeline();
+}
+
+function loadProjectTemplate(templateType) {
+  const templateSettings = {
+    chatbot: { 
+      name: 'AI Customer Service Chatbot', 
+      type: 'customer-service', 
+      complexity: 'moderate',
+      template: 'standard'
+    },
+    analytics: { 
+      name: 'Predictive Analytics Platform', 
+      type: 'analytics', 
+      complexity: 'complex',
+      template: 'enterprise'
+    },
+    'computer-vision': { 
+      name: 'Computer Vision System', 
+      type: 'computer-vision', 
+      complexity: 'moderate',
+      template: 'standard'
+    },
+    automation: { 
+      name: 'Process Automation Suite', 
+      type: 'automation', 
+      complexity: 'complex',
+      template: 'enterprise'
+    }
+  };
+  
+  const settings = templateSettings[templateType];
+  if (settings) {
+    document.getElementById('projectName').value = settings.name;
+    document.getElementById('projectType').value = settings.type;
+    document.querySelector(`input[value="${settings.complexity}"]`).checked = true;
+    
+    currentProject = { ...currentProject, ...settings };
+    generateTimeline();
+  }
+}
+
+function exportTimeline() {
+  alert('Timeline export would generate a comprehensive project plan with:\n\n• Gantt chart visualization\n• Task breakdown by phase\n• Resource allocation plan\n• Risk mitigation strategies\n• Milestone tracking sheet');
+}
+
+function exportToExcel() {
+  alert('Excel export would create a detailed project plan with:\n\n• Task list with dependencies\n• Resource allocation matrix\n• Timeline with milestones\n• Budget and cost tracking\n• Risk register');
+}
+
+function exportToPDF() {
+  alert('PDF export would generate a professional timeline document with:\n\n• Executive summary\n• Gantt chart visualization\n• Phase breakdown\n• Risk assessment\n• Resource requirements');
+}
+
+function exportToMSProject() {
+  alert('MS Project export would create a .mpp file with:\n\n• Complete task hierarchy\n• Dependencies and constraints\n• Resource assignments\n• Critical path analysis\n• Baseline settings');
+}
+
+function shareTimeline() {
+  const shareUrl = `${window.location.origin}${window.location.pathname}?project=${encodeURIComponent(JSON.stringify(currentProject))}`;
+  navigator.clipboard.writeText(shareUrl).then(() => {
+    alert('Timeline link copied to clipboard!\n\nShare this link with stakeholders to view the current project plan.');
+  });
+}
+
+// Initialize timeline on page load
+generateTimeline();
+</script>
+</body>
+</html>

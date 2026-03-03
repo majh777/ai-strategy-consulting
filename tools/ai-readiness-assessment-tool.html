@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Readiness Assessment Tool — Interactive Self-Assessment | Ashdown AI Strategy Consulting</title>
+<meta name="description" content="Comprehensive AI readiness assessment tool. Evaluate your organization's AI preparedness across 8 critical dimensions with instant scoring and personalized recommendations.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://majh777.github.io/ai-strategy-consulting/tools/ai-readiness-assessment-tool.html">
+<meta property="og:title" content="AI Readiness Assessment Tool — Interactive Self-Assessment">
+<meta property="og:description" content="Evaluate your organization's AI preparedness with our comprehensive assessment tool. Get instant scoring and recommendations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://majh777.github.io/ai-strategy-consulting/tools/ai-readiness-assessment-tool.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Readiness Assessment Tool — Interactive Self-Assessment">
+<meta name="twitter:description" content="Comprehensive AI readiness assessment with instant scoring and recommendations.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI Readiness Assessment Tool",
+  "description": "Interactive assessment tool to evaluate organizational AI readiness across multiple dimensions",
+  "applicationCategory": "Business Assessment Tool",
+  "operatingSystem": "Web Browser",
+  "url": "https://majh777.github.io/ai-strategy-consulting/tools/ai-readiness-assessment-tool.html",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Ashdown AI Strategy Consulting",
+    "url": "https://majh777.github.io/ai-strategy-consulting/"
+  }
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f1a;color:#e0e0e0;line-height:1.7}
+.container{max-width:1000px;margin:0 auto;padding:0 20px}
+.nav{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e1e2e}
+.nav a{color:#7c3aed;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:60px 20px 40px}
+.hero h1{font-size:2.4em;font-weight:800;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,#7c3aed,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1em;color:#a0a0b0;max-width:700px;margin:0 auto}
+.assessment-intro{max-width:800px;margin:0 auto;padding:40px 20px;background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;margin-bottom:40px}
+.assessment-intro h2{color:#7c3aed;margin-bottom:16px}
+.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:24px 0}
+.dimension{background:#0f0f1a;padding:16px;border-radius:8px;border:1px solid #333}
+.dimension h4{color:#3b82f6;font-size:0.9em;margin-bottom:4px}
+.dimension p{font-size:0.8em;color:#a0a0b0}
+.assessment-container{max-width:800px;margin:0 auto;padding:0 20px}
+.progress-section{margin-bottom:30px}
+.progress-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.progress-text{font-size:0.9em;color:#a0a0b0}
+.progress-bar{background:#1a1a2e;border-radius:10px;height:8px}
+.progress{background:linear-gradient(135deg,#7c3aed,#3b82f6);height:100%;border-radius:10px;transition:width .3s}
+.question-card{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin-bottom:24px;display:none}
+.question-card.active{display:block}
+.question-header{margin-bottom:20px}
+.category{color:#7c3aed;font-size:0.9em;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.question-card h3{font-size:1.3em;margin-bottom:8px;color:#e0e0e0}
+.question-desc{color:#a0a0b0;font-size:0.95em;margin-bottom:20px}
+.options{display:flex;flex-direction:column;gap:12px}
+.option{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:16px 20px;cursor:pointer;transition:all .2s;display:flex;align-items:flex-start}
+.option:hover{border-color:#7c3aed;background:#151527}
+.option.selected{border-color:#7c3aed;background:rgba(124,58,237,0.1)}
+.option-content{flex:1}
+.option .label{font-weight:600;margin-bottom:4px}
+.option .desc{color:#a0a0b0;font-size:0.9em}
+.option .score{color:#10b981;font-weight:700;font-size:0.9em;margin-left:16px;min-width:40px}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:30px}
+.btn{padding:14px 28px;border:none;border-radius:12px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-primary{background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff}
+.btn-secondary{background:#333;color:#e0e0e0;border:1px solid #444}
+.btn:hover{transform:scale(1.05)}
+.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.results{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:40px;margin-top:40px;display:none}
+.score-header{text-align:center;margin-bottom:40px}
+.total-score{font-size:3.5em;font-weight:800;margin-bottom:8px}
+.score-excellent{color:#10b981}
+.score-good{color:#3b82f6}
+.score-fair{color:#f59e0b}
+.score-poor{color:#ef4444}
+.score-label{color:#a0a0b0;font-size:1.1em;margin-bottom:16px}
+.readiness-level{font-size:1.3em;font-weight:700;padding:12px 24px;border-radius:12px;display:inline-block}
+.level-excellent{background:rgba(16,185,129,0.2);color:#10b981}
+.level-good{background:rgba(59,130,246,0.2);color:#3b82f6}
+.level-fair{background:rgba(245,158,11,0.2);color:#f59e0b}
+.level-poor{background:rgba(239,68,68,0.2);color:#ef4444}
+.charts-section{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:40px 0}
+@media(max-width:768px){.charts-section{grid-template-columns:1fr}}
+.chart-wrapper{background:#0f0f1a;border-radius:12px;padding:24px;border:1px solid #333}
+.chart-title{text-align:center;font-weight:600;margin-bottom:20px;color:#e0e0e0}
+.dimension-scores{margin:40px 0}
+.dimension-score{display:flex;justify-content:space-between;align-items:center;background:#0f0f1a;padding:16px 20px;border-radius:12px;margin-bottom:12px;border:1px solid #333}
+.dimension-name{color:#7c3aed;font-weight:600}
+.dimension-score-value{font-size:1.2em;font-weight:800}
+.recommendations{margin-top:40px}
+.recommendations h3{color:#e0e0e0;margin-bottom:24px;font-size:1.4em}
+.rec-category{margin-bottom:32px}
+.rec-category h4{color:#7c3aed;margin-bottom:16px;font-size:1.1em}
+.rec-item{background:#0f0f1a;padding:20px;border-radius:12px;margin-bottom:16px;border-left:4px solid #7c3aed}
+.rec-item .priority{font-size:0.8em;color:#f59e0b;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.rec-item h5{color:#e0e0e0;margin-bottom:8px;font-size:1em}
+.rec-item p{color:#a0a0b0;font-size:0.9em}
+.cta-section{text-align:center;margin-top:50px;padding:40px;background:rgba(124,58,237,0.05);border-radius:16px;border:1px solid #2a2a3e}
+.cta-section h3{margin-bottom:16px;color:#e0e0e0}
+.cta-section p{margin-bottom:24px;color:#a0a0b0}
+.cta-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.cta{display:inline-block;padding:16px 32px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:1.1em;transition:transform .2s}
+.cta:hover{transform:scale(1.05)}
+.cta-secondary{background:#5469d4;font-size:1em}
+.assessment-tips{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin:40px 0}
+.assessment-tips h3{color:#7c3aed;margin-bottom:16px}
+.tips-list{list-style:none}
+.tips-list li{padding:8px 0;color:#a0a0b0;position:relative;padding-left:20px}
+.tips-list li:before{content:"✓";color:#10b981;font-weight:bold;position:absolute;left:0}
+.export-section{text-align:center;margin-top:30px;padding-top:30px;border-top:1px solid #2a2a3e}
+.export-btn{background:#333;color:#e0e0e0;border:1px solid #444;padding:12px 24px;border-radius:8px;cursor:pointer;transition:all .2s}
+.export-btn:hover{background:#444;transform:scale(1.05)}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="../index.html"><strong>🤖 AI Strategy Consulting</strong></a>
+  <div><a href="../index.html#services">Services</a><a href="../ai-readiness.html">Assessment</a><a href="../roi-calculator.html">ROI Calculator</a><a href="../index.html#about">About</a></div>
+</div>
+
+<div class="hero">
+  <h1>AI Readiness <span>Assessment Tool</span></h1>
+  <p>Comprehensive evaluation of your organization's AI preparedness across 8 critical dimensions. Get instant scoring, detailed analysis, and personalized recommendations to accelerate your AI transformation journey.</p>
+</div>
+
+<div class="container">
+  <div class="assessment-intro">
+    <h2>🎯 Assessment Overview</h2>
+    <p>This comprehensive assessment evaluates your organization across 8 critical AI readiness dimensions. Each question is scored on a 1-5 scale, providing detailed insights into your strengths and improvement areas.</p>
+    
+    <div class="dimensions">
+      <div class="dimension">
+        <h4>🗄️ Data Foundation</h4>
+        <p>Quality, accessibility, and governance of your data assets</p>
+      </div>
+      <div class="dimension">
+        <h4>👥 Team & Skills</h4>
+        <p>AI literacy, technical capabilities, and change readiness</p>
+      </div>
+      <div class="dimension">
+        <h4>🏗️ Infrastructure</h4>
+        <p>Technology stack, cloud readiness, and integration capabilities</p>
+      </div>
+      <div class="dimension">
+        <h4>🎯 Strategic Alignment</h4>
+        <p>AI vision, leadership support, and business case clarity</p>
+      </div>
+      <div class="dimension">
+        <h4>💰 Financial Planning</h4>
+        <p>Budget allocation, ROI frameworks, and investment strategy</p>
+      </div>
+      <div class="dimension">
+        <h4>🔒 Governance & Ethics</h4>
+        <p>Risk management, compliance, and ethical AI practices</p>
+      </div>
+      <div class="dimension">
+        <h4>🤝 Change Management</h4>
+        <p>Organizational culture, communication, and adoption strategy</p>
+      </div>
+      <div class="dimension">
+        <h4>📊 Measurement & KPIs</h4>
+        <p>Success metrics, monitoring capabilities, and performance tracking</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="assessment-tips">
+    <h3>📋 Assessment Tips</h3>
+    <ul class="tips-list">
+      <li>Answer honestly based on your current state, not aspirational goals</li>
+      <li>Consider your entire organization, not just specific departments</li>
+      <li>Take 15-20 minutes to complete all 32 questions</li>
+      <li>Use "Not Sure" only when you genuinely lack information</li>
+      <li>Your responses are completely confidential and stored locally</li>
+    </ul>
+  </div>
+
+  <div class="assessment-container">
+    <div class="progress-section">
+      <div class="progress-info">
+        <span class="progress-text">Progress: <span id="progressText">0 of 32 questions</span></span>
+        <span class="progress-text"><span id="progressPercent">0%</span> Complete</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress" id="progressBar"></div>
+      </div>
+    </div>
+    
+    <div id="questionContainer">
+      <!-- Questions will be dynamically inserted here -->
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">← Previous</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Next →</button>
+    </div>
+    
+    <div class="results" id="results">
+      <div class="score-header">
+        <div class="total-score" id="totalScore">0</div>
+        <div class="score-label">Overall AI Readiness Score (out of 160)</div>
+        <div class="readiness-level" id="readinessLevel">Calculating...</div>
+      </div>
+      
+      <div class="charts-section">
+        <div class="chart-wrapper">
+          <div class="chart-title">📊 Readiness Radar</div>
+          <canvas id="radarChart" width="300" height="300"></canvas>
+        </div>
+        <div class="chart-wrapper">
+          <div class="chart-title">📈 Dimension Breakdown</div>
+          <canvas id="barChart" width="300" height="300"></canvas>
+        </div>
+      </div>
+      
+      <div class="dimension-scores" id="dimensionScores">
+        <!-- Dimension scores will be inserted here -->
+      </div>
+      
+      <div class="recommendations" id="recommendationsSection">
+        <!-- Recommendations will be inserted here -->
+      </div>
+      
+      <div class="export-section">
+        <button class="btn export-btn" onclick="exportResults()">📄 Export Results as PDF</button>
+      </div>
+      
+      <div class="cta-section">
+        <h3>🚀 Ready to Accelerate Your AI Journey?</h3>
+        <p>Get personalized strategy consulting based on your assessment results. Our experts will help you build on your strengths and address critical gaps.</p>
+        <div class="cta-buttons">
+          <a href="https://buy.stripe.com/eVq8wI8HY4CCg8Wekw0Ny00" class="cta" target="_blank">💡 AI Assessment ($500) →</a>
+          <a href="https://buy.stripe.com/3cI4gse2i1qqe0O1xK0Ny01" class="cta cta-secondary" target="_blank">🎯 Full AI Strategy ($2,000) →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Assessment Questions Data
+const questions = [
+  // Data Foundation (8 questions)
+  {
+    category: "Data Foundation",
+    question: "How would you rate the overall quality of your organization's data?",
+    description: "Consider accuracy, completeness, consistency, and timeliness of your core business data.",
+    options: [
+      { text: "Excellent - High quality, well-governed data across systems", score: 5, desc: "Data is accurate, complete, and consistently maintained" },
+      { text: "Good - Mostly reliable with some quality issues", score: 4, desc: "Minor inconsistencies but generally trustworthy" },
+      { text: "Average - Mixed quality, some unreliable sources", score: 3, desc: "Data quality varies significantly by source" },
+      { text: "Poor - Significant data quality problems", score: 2, desc: "Frequent inaccuracies and inconsistencies" },
+      { text: "Very Poor - Unreliable, inconsistent data", score: 1, desc: "Data is largely untrustworthy for decision-making" }
+    ]
+  },
+  {
+    category: "Data Foundation",
+    question: "How accessible is your data for analysis and AI applications?",
+    description: "Evaluate how easily your teams can access, combine, and analyze data from different sources.",
+    options: [
+      { text: "Fully Integrated - Self-service analytics platform", score: 5, desc: "Users can easily access and combine any data sources" },
+      { text: "Well Integrated - Some self-service capabilities", score: 4, desc: "Good access with minor technical barriers" },
+      { text: "Partially Integrated - Requires IT assistance", score: 3, desc: "Data access needs technical support" },
+      { text: "Siloed - Data trapped in separate systems", score: 2, desc: "Difficult to combine data from different sources" },
+      { text: "Highly Fragmented - Manual extraction required", score: 1, desc: "Data access is complex and time-consuming" }
+    ]
+  },
+  {
+    category: "Data Foundation",
+    question: "What is the current state of your data governance framework?",
+    description: "Consider data ownership, privacy controls, security measures, and compliance protocols.",
+    options: [
+      { text: "Comprehensive - Formal governance with clear ownership", score: 5, desc: "Well-defined policies, roles, and enforcement" },
+      { text: "Established - Good governance with minor gaps", score: 4, desc: "Solid framework with room for improvement" },
+      { text: "Basic - Some policies in place", score: 3, desc: "Informal governance with inconsistent enforcement" },
+      { text: "Limited - Minimal governance controls", score: 2, desc: "Few formal policies or oversight mechanisms" },
+      { text: "None - No formal data governance", score: 1, desc: "Lack of structured data management approach" }
+    ]
+  },
+  {
+    category: "Data Foundation",
+    question: "How well does your organization handle real-time or near-real-time data?",
+    description: "Assess your ability to process, analyze, and act on data as it's generated.",
+    options: [
+      { text: "Advanced - Real-time streaming and processing", score: 5, desc: "Sophisticated real-time data capabilities" },
+      { text: "Good - Near real-time with minimal delays", score: 4, desc: "Data processed within minutes of generation" },
+      { text: "Moderate - Hourly or daily data updates", score: 3, desc: "Regular batch processing with some delays" },
+      { text: "Limited - Weekly or monthly updates", score: 2, desc: "Significant lag between data generation and availability" },
+      { text: "None - Only historical/batch data available", score: 1, desc: "No real-time data processing capabilities" }
+    ]
+  },
+
+  // Team & Skills (8 questions)  
+  {
+    category: "Team & Skills",
+    question: "What is the AI literacy level across your organization?",
+    description: "Evaluate understanding of AI concepts, applications, and implications among your workforce.",
+    options: [
+      { text: "High - Widespread AI knowledge and enthusiasm", score: 5, desc: "Most employees understand AI potential and applications" },
+      { text: "Good - Many employees have basic AI understanding", score: 4, desc: "Solid foundation with growing interest" },
+      { text: "Moderate - Some awareness but knowledge gaps", score: 3, desc: "Mixed understanding across departments" },
+      { text: "Low - Limited AI awareness or understanding", score: 2, desc: "Few employees familiar with AI concepts" },
+      { text: "Very Low - Minimal or no AI knowledge", score: 1, desc: "Organization lacks basic AI awareness" }
+    ]
+  },
+  {
+    category: "Team & Skills",
+    question: "Do you have dedicated AI/ML talent or expertise in-house?",
+    description: "Consider data scientists, ML engineers, AI researchers, or specialized consultants on staff.",
+    options: [
+      { text: "Strong Team - Multiple AI specialists across domains", score: 5, desc: "Well-staffed AI team with diverse expertise" },
+      { text: "Good Coverage - Some dedicated AI professionals", score: 4, desc: "Key AI roles filled with growing capability" },
+      { text: "Limited - Few AI specialists or part-time focus", score: 3, desc: "Minimal dedicated AI expertise" },
+      { text: "Outsourced - Relying on external consultants", score: 2, desc: "No in-house AI talent, dependent on vendors" },
+      { text: "None - No AI expertise available", score: 1, desc: "Lack of internal or external AI capabilities" }
+    ]
+  },
+  {
+    category: "Team & Skills",
+    question: "How adaptable is your workforce to new technologies and processes?",
+    description: "Assess general change readiness and technology adoption patterns in your organization.",
+    options: [
+      { text: "Highly Adaptable - Embraces change enthusiastically", score: 5, desc: "Strong culture of innovation and learning" },
+      { text: "Generally Adaptable - Open to change with support", score: 4, desc: "Positive attitude toward new technologies" },
+      { text: "Moderately Adaptable - Mixed reactions to change", score: 3, desc: "Some resistance but generally manageable" },
+      { text: "Change Resistant - Prefers established processes", score: 2, desc: "Significant resistance to new ways of working" },
+      { text: "Highly Resistant - Actively opposes change", score: 1, desc: "Strong preference for status quo" }
+    ]
+  },
+  {
+    category: "Team & Skills",
+    question: "What training and development programs do you have for AI skills?",
+    description: "Evaluate current and planned initiatives to build AI capabilities within your organization.",
+    options: [
+      { text: "Comprehensive - Multi-level AI training programs", score: 5, desc: "Structured curriculum for different roles and levels" },
+      { text: "Good - Regular training with clear pathways", score: 4, desc: "Solid training foundation with growth plans" },
+      { text: "Basic - Some training available", score: 3, desc: "Limited training opportunities" },
+      { text: "Minimal - Ad-hoc or external training only", score: 2, desc: "Little structured skill development" },
+      { text: "None - No AI training programs", score: 1, desc: "No investment in AI skill building" }
+    ]
+  },
+
+  // Infrastructure (8 questions)
+  {
+    category: "Infrastructure", 
+    question: "How modern and scalable is your current technology infrastructure?",
+    description: "Consider cloud adoption, system flexibility, and ability to handle increased computational demands.",
+    options: [
+      { text: "Cloud-Native - Modern, scalable architecture", score: 5, desc: "Fully cloud-based with auto-scaling capabilities" },
+      { text: "Hybrid Cloud - Mix of cloud and on-premise", score: 4, desc: "Strategic use of cloud with legacy integration" },
+      { text: "Cloud-Enabled - Some cloud adoption", score: 3, desc: "Basic cloud services with traditional systems" },
+      { text: "Legacy Systems - Mostly on-premise infrastructure", score: 2, desc: "Older systems with limited scalability" },
+      { text: "Outdated - Legacy systems requiring major updates", score: 1, desc: "Infrastructure needs significant modernization" }
+    ]
+  },
+  {
+    category: "Infrastructure",
+    question: "How well can your systems integrate with AI/ML tools and platforms?",
+    description: "Assess API availability, data connectivity, and platform compatibility for AI implementations.",
+    options: [
+      { text: "Excellent - API-first with seamless integration", score: 5, desc: "Modern architecture supports easy AI integration" },
+      { text: "Good - Most systems have integration capabilities", score: 4, desc: "Strong foundation with minor gaps" },
+      { text: "Moderate - Some integration possible with effort", score: 3, desc: "Integration requires development work" },
+      { text: "Limited - Difficult integration, manual workarounds", score: 2, desc: "Significant technical barriers to integration" },
+      { text: "Poor - Isolated systems, no integration capabilities", score: 1, desc: "Systems cannot easily connect with AI tools" }
+    ]
+  },
+  {
+    category: "Infrastructure",
+    question: "What is your organization's cybersecurity and data protection maturity?",
+    description: "Evaluate security frameworks, compliance readiness, and protection of sensitive data.",
+    options: [
+      { text: "Advanced - Comprehensive security framework", score: 5, desc: "Mature security practices with proactive monitoring" },
+      { text: "Strong - Good security with regular updates", score: 4, desc: "Solid security foundation with continuous improvement" },
+      { text: "Adequate - Basic security measures in place", score: 3, desc: "Standard security practices with some gaps" },
+      { text: "Weak - Minimal security controls", score: 2, desc: "Limited security measures, potential vulnerabilities" },
+      { text: "Poor - Inadequate security measures", score: 1, desc: "Significant security risks and compliance gaps" }
+    ]
+  },
+  {
+    category: "Infrastructure",
+    question: "How capable is your organization of handling high computational workloads?",
+    description: "Consider processing power, storage capacity, and performance requirements for AI workloads.",
+    options: [
+      { text: "High Performance - Dedicated AI compute resources", score: 5, desc: "Specialized hardware and optimized environments" },
+      { text: "Good - Scalable compute with some limitations", score: 4, desc: "Adequate resources with expansion capabilities" },
+      { text: "Moderate - Standard compute, may need upgrades", score: 3, desc: "Current systems handle basic AI workloads" },
+      { text: "Limited - Constrained compute resources", score: 2, desc: "Performance limitations for complex AI tasks" },
+      { text: "Inadequate - Insufficient computational capacity", score: 1, desc: "Cannot support significant AI workloads" }
+    ]
+  },
+
+  // Strategic Alignment (4 questions)
+  {
+    category: "Strategic Alignment",
+    question: "How clear is your organization's AI vision and strategy?",
+    description: "Assess whether AI goals are well-defined and aligned with business objectives.",
+    options: [
+      { text: "Crystal Clear - Detailed AI strategy with roadmap", score: 5, desc: "Comprehensive strategy with clear milestones" },
+      { text: "Well-Defined - Good strategy with some details", score: 4, desc: "Solid direction with room for refinement" },
+      { text: "Basic - General AI goals identified", score: 3, desc: "High-level objectives without detailed plans" },
+      { text: "Vague - Unclear or aspirational AI goals", score: 2, desc: "AI goals exist but lack specificity" },
+      { text: "None - No defined AI strategy", score: 1, desc: "No clear direction for AI initiatives" }
+    ]
+  },
+  {
+    category: "Strategic Alignment",
+    question: "What level of support does AI have from senior leadership?",
+    description: "Evaluate executive commitment, resource allocation, and strategic prioritization of AI initiatives.",
+    options: [
+      { text: "Champion - Strong executive sponsorship", score: 5, desc: "Leadership actively drives AI initiatives" },
+      { text: "Supportive - Good leadership backing", score: 4, desc: "Leadership understands and supports AI efforts" },
+      { text: "Neutral - Neither supportive nor resistant", score: 3, desc: "Leadership is open but not actively engaged" },
+      { text: "Skeptical - Some resistance from leadership", score: 2, desc: "Leadership has concerns about AI investments" },
+      { text: "Opposed - Leadership resistant to AI initiatives", score: 1, desc: "Active resistance or lack of belief in AI value" }
+    ]
+  },
+  {
+    category: "Strategic Alignment", 
+    question: "How well-developed is your business case for AI investments?",
+    description: "Consider ROI projections, risk assessments, and value proposition clarity.",
+    options: [
+      { text: "Comprehensive - Detailed ROI with risk analysis", score: 5, desc: "Thorough business case with quantified benefits" },
+      { text: "Good - Solid business case with some assumptions", score: 4, desc: "Well-reasoned approach with minor gaps" },
+      { text: "Basic - General cost-benefit understanding", score: 3, desc: "High-level business case without deep analysis" },
+      { text: "Weak - Unclear value proposition", score: 2, desc: "Limited understanding of AI business impact" },
+      { text: "None - No business case developed", score: 1, desc: "No formal evaluation of AI investment rationale" }
+    ]
+  },
+  {
+    category: "Strategic Alignment",
+    question: "How aligned are AI initiatives with your core business processes?",
+    description: "Assess integration of AI with existing operations and strategic business functions.",
+    options: [
+      { text: "Fully Integrated - AI embedded in core processes", score: 5, desc: "AI is integral to business operations" },
+      { text: "Well Aligned - AI supports key business functions", score: 4, desc: "Strong connection between AI and business needs" },
+      { text: "Partially Aligned - Some connection to business goals", score: 3, desc: "AI initiatives somewhat connected to operations" },
+      { text: "Loosely Connected - AI projects mostly standalone", score: 2, desc: "Limited integration with core business" },
+      { text: "Disconnected - AI separate from business strategy", score: 1, desc: "AI initiatives not aligned with business objectives" }
+    ]
+  },
+
+  // Financial Planning (4 questions)
+  {
+    category: "Financial Planning",
+    question: "What is your organization's approach to AI budget planning?",
+    description: "Evaluate budget allocation, financial planning processes, and investment framework for AI.",
+    options: [
+      { text: "Strategic - Dedicated AI budget with multi-year planning", score: 5, desc: "Comprehensive budget with long-term commitment" },
+      { text: "Planned - Regular AI budget allocation", score: 4, desc: "Consistent funding with annual planning" },
+      { text: "Project-Based - AI funded through specific initiatives", score: 3, desc: "Funding available but project-dependent" },
+      { text: "Opportunistic - Limited, ad-hoc AI spending", score: 2, desc: "Minimal budget with case-by-case approval" },
+      { text: "None - No dedicated AI budget", score: 1, desc: "No specific financial planning for AI investments" }
+    ]
+  },
+  {
+    category: "Financial Planning",
+    question: "How do you measure and track ROI for AI investments?",
+    description: "Consider ROI frameworks, success metrics, and performance tracking for AI initiatives.",
+    options: [
+      { text: "Advanced - Comprehensive ROI tracking system", score: 5, desc: "Sophisticated metrics and regular performance reviews" },
+      { text: "Good - Regular ROI measurement with KPIs", score: 4, desc: "Solid tracking with defined success metrics" },
+      { text: "Basic - Some ROI tracking for major projects", score: 3, desc: "Limited measurement of AI investment returns" },
+      { text: "Minimal - Informal or inconsistent tracking", score: 2, desc: "Little systematic ROI measurement" },
+      { text: "None - No ROI measurement for AI investments", score: 1, desc: "No framework for tracking AI investment performance" }
+    ]
+  },
+  {
+    category: "Financial Planning",
+    question: "What is your risk tolerance for AI investments?",
+    description: "Assess willingness to invest in experimental or unproven AI technologies and approaches.",
+    options: [
+      { text: "High - Willing to invest in cutting-edge AI", score: 5, desc: "Comfortable with experimental and innovative AI" },
+      { text: "Moderate-High - Open to proven AI technologies", score: 4, desc: "Willing to invest in established AI solutions" },
+      { text: "Moderate - Cautious but willing to invest", score: 3, desc: "Balanced approach to AI investment risk" },
+      { text: "Low - Very conservative AI investment approach", score: 2, desc: "Prefer low-risk, well-proven AI solutions" },
+      { text: "Very Low - Minimal willingness to invest in AI", score: 1, desc: "Extremely risk-averse toward AI investments" }
+    ]
+  },
+  {
+    category: "Financial Planning",
+    question: "How well do you understand the total cost of ownership (TCO) for AI solutions?",
+    description: "Consider ongoing costs like training, maintenance, infrastructure, and talent beyond initial implementation.",
+    options: [
+      { text: "Comprehensive - Full TCO analysis and planning", score: 5, desc: "Complete understanding of all AI-related costs" },
+      { text: "Good - Solid understanding with minor gaps", score: 4, desc: "Good grasp of most AI cost components" },
+      { text: "Basic - Understand major cost components", score: 3, desc: "Awareness of primary costs but missing details" },
+      { text: "Limited - Focus mainly on upfront costs", score: 2, desc: "Limited understanding of ongoing expenses" },
+      { text: "Poor - Little understanding of AI costs", score: 1, desc: "Minimal awareness of total AI investment requirements" }
+    ]
+  }
+];
+
+let currentQuestion = 0;
+let responses = [];
+let totalQuestions = questions.length;
+
+function initializeAssessment() {
+  showQuestion(0);
+  updateProgress();
+}
+
+function showQuestion(index) {
+  const container = document.getElementById('questionContainer');
+  const question = questions[index];
+  
+  container.innerHTML = `
+    <div class="question-card active">
+      <div class="question-header">
+        <div class="category">${question.category}</div>
+        <h3>${question.question}</h3>
+        <p class="question-desc">${question.description}</p>
+      </div>
+      <div class="options">
+        ${question.options.map((option, i) => `
+          <div class="option" onclick="selectOption(${index}, ${i}, ${option.score})">
+            <div class="option-content">
+              <div class="label">${option.text}</div>
+              <div class="desc">${option.desc}</div>
+            </div>
+            <div class="score">+${option.score}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  
+  // Pre-select if response exists
+  if (responses[index] !== undefined) {
+    const selectedOption = container.querySelector(`.option:nth-child(${responses[index].optionIndex + 1})`);
+    if (selectedOption) selectedOption.classList.add('selected');
+    document.getElementById('nextBtn').disabled = false;
+  }
+  
+  updateNavigationButtons();
+}
+
+function selectOption(questionIndex, optionIndex, score) {
+  // Remove previous selections
+  document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+  
+  // Add selection to clicked option
+  event.target.closest('.option').classList.add('selected');
+  
+  // Store response
+  responses[questionIndex] = {
+    questionIndex,
+    optionIndex,
+    score,
+    category: questions[questionIndex].category,
+    question: questions[questionIndex].question,
+    answer: questions[questionIndex].options[optionIndex].text
+  };
+  
+  document.getElementById('nextBtn').disabled = false;
+  updateProgress();
+}
+
+function updateProgress() {
+  const completed = responses.filter(r => r !== undefined).length;
+  const percentage = (completed / totalQuestions) * 100;
+  
+  document.getElementById('progressBar').style.width = percentage + '%';
+  document.getElementById('progressText').textContent = `${completed} of ${totalQuestions} questions`;
+  document.getElementById('progressPercent').textContent = `${Math.round(percentage)}%`;
+}
+
+function updateNavigationButtons() {
+  document.getElementById('prevBtn').style.display = currentQuestion === 0 ? 'none' : 'inline-block';
+  
+  const nextBtn = document.getElementById('nextBtn');
+  if (currentQuestion === totalQuestions - 1) {
+    nextBtn.textContent = 'Complete Assessment →';
+    nextBtn.onclick = completeAssessment;
+  } else {
+    nextBtn.textContent = 'Next →';
+    nextBtn.onclick = nextQuestion;
+  }
+}
+
+function nextQuestion() {
+  if (currentQuestion < totalQuestions - 1) {
+    currentQuestion++;
+    showQuestion(currentQuestion);
+  }
+}
+
+function previousQuestion() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    showQuestion(currentQuestion);
+  }
+}
+
+function completeAssessment() {
+  if (responses.filter(r => r !== undefined).length !== totalQuestions) {
+    alert('Please answer all questions before completing the assessment.');
+    return;
+  }
+  
+  calculateAndShowResults();
+}
+
+function calculateAndShowResults() {
+  const dimensions = ['Data Foundation', 'Team & Skills', 'Infrastructure', 'Strategic Alignment', 'Financial Planning'];
+  const dimensionScores = {};
+  const dimensionMaxScores = {};
+  
+  // Initialize dimension tracking
+  dimensions.forEach(dim => {
+    dimensionScores[dim] = 0;
+    dimensionMaxScores[dim] = 0;
+  });
+  
+  // Calculate dimension scores
+  responses.forEach(response => {
+    const category = response.category;
+    dimensionScores[category] += response.score;
+    dimensionMaxScores[category] += 5; // Maximum score per question
+  });
+  
+  const totalScore = Object.values(dimensionScores).reduce((sum, score) => sum + score, 0);
+  const maxScore = Object.values(dimensionMaxScores).reduce((sum, score) => sum + score, 0);
+  const percentage = (totalScore / maxScore) * 100;
+  
+  // Show results section
+  document.querySelector('.assessment-container').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+  
+  // Update score display
+  const scoreElement = document.getElementById('totalScore');
+  const levelElement = document.getElementById('readinessLevel');
+  
+  scoreElement.textContent = `${Math.round(percentage)}%`;
+  
+  let level, levelClass, scoreClass;
+  if (percentage >= 85) {
+    level = 'AI Ready'; levelClass = 'level-excellent'; scoreClass = 'score-excellent';
+  } else if (percentage >= 70) {
+    level = 'Well Positioned'; levelClass = 'level-good'; scoreClass = 'score-good';
+  } else if (percentage >= 50) {
+    level = 'Developing'; levelClass = 'level-fair'; scoreClass = 'score-fair';
+  } else {
+    level = 'Foundational'; levelClass = 'level-poor'; scoreClass = 'score-poor';
+  }
+  
+  scoreElement.className = `total-score ${scoreClass}`;
+  levelElement.textContent = level;
+  levelElement.className = `readiness-level ${levelClass}`;
+  
+  // Create dimension scores display
+  const dimensionContainer = document.getElementById('dimensionScores');
+  dimensionContainer.innerHTML = Object.entries(dimensionScores).map(([dim, score]) => {
+    const maxDimScore = dimensionMaxScores[dim];
+    const dimPercentage = (score / maxDimScore) * 100;
+    let dimScoreClass = 'score-poor';
+    if (dimPercentage >= 85) dimScoreClass = 'score-excellent';
+    else if (dimPercentage >= 70) dimScoreClass = 'score-good';
+    else if (dimPercentage >= 50) dimScoreClass = 'score-fair';
+    
+    return `
+      <div class="dimension-score">
+        <div class="dimension-name">${dim}</div>
+        <div class="dimension-score-value ${dimScoreClass}">${Math.round(dimPercentage)}%</div>
+      </div>
+    `;
+  }).join('');
+  
+  // Create charts
+  createRadarChart(dimensionScores, dimensionMaxScores);
+  createBarChart(dimensionScores, dimensionMaxScores);
+  
+  // Generate recommendations
+  generateRecommendations(dimensionScores, dimensionMaxScores, percentage);
+}
+
+function createRadarChart(scores, maxScores) {
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  const labels = Object.keys(scores);
+  const data = Object.entries(scores).map(([dim, score]) => (score / maxScores[dim]) * 100);
+  
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: labels.map(label => label.replace(' ', '\n')),
+      datasets: [{
+        label: 'Readiness Score',
+        data: data,
+        backgroundColor: 'rgba(124, 58, 237, 0.2)',
+        borderColor: '#7c3aed',
+        borderWidth: 2,
+        pointBackgroundColor: '#7c3aed'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        r: {
+          min: 0,
+          max: 100,
+          ticks: {
+            color: '#a0a0b0',
+            backdropColor: 'transparent'
+          },
+          grid: { color: '#333' },
+          angleLines: { color: '#333' },
+          pointLabels: { 
+            color: '#e0e0e0',
+            font: { size: 11 }
+          }
+        }
+      }
+    }
+  });
+}
+
+function createBarChart(scores, maxScores) {
+  const ctx = document.getElementById('barChart').getContext('2d');
+  const labels = Object.keys(scores);
+  const data = Object.entries(scores).map(([dim, score]) => (score / maxScores[dim]) * 100);
+  
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Readiness %',
+        data: data,
+        backgroundColor: labels.map((_, i) => {
+          const colors = ['#7c3aed', '#3b82f6', '#10b981', '#f59e0b', '#ef4444'];
+          return colors[i % colors.length];
+        }),
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: 100,
+          ticks: { color: '#a0a0b0' },
+          grid: { color: '#333' }
+        },
+        x: {
+          ticks: { 
+            color: '#a0a0b0',
+            maxRotation: 45,
+            font: { size: 10 }
+          },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+}
+
+function generateRecommendations(scores, maxScores, overallPercentage) {
+  const recommendations = [];
+  const priorityRecs = [];
+  const strategicRecs = [];
+  
+  Object.entries(scores).forEach(([dimension, score]) => {
+    const percentage = (score / maxScores[dimension]) * 100;
+    
+    if (percentage < 50) {
+      priorityRecs.push({
+        dimension,
+        percentage: Math.round(percentage),
+        recommendations: getDimensionRecommendations(dimension, 'priority')
+      });
+    } else if (percentage < 75) {
+      strategicRecs.push({
+        dimension,
+        percentage: Math.round(percentage),
+        recommendations: getDimensionRecommendations(dimension, 'improvement')
+      });
+    }
+  });
+  
+  const container = document.getElementById('recommendationsSection');
+  let html = '<h3>🎯 Personalized Recommendations</h3>';
+  
+  if (priorityRecs.length > 0) {
+    html += '<div class="rec-category"><h4>🚨 Priority Areas (Immediate Attention Required)</h4>';
+    priorityRecs.forEach(rec => {
+      html += `<div class="rec-item">
+        <div class="priority">High Priority</div>
+        <h5>${rec.dimension} (${rec.percentage}%)</h5>
+        <p>${rec.recommendations}</p>
+      </div>`;
+    });
+    html += '</div>';
+  }
+  
+  if (strategicRecs.length > 0) {
+    html += '<div class="rec-category"><h4>📈 Strategic Improvements (Medium-term Focus)</h4>';
+    strategicRecs.forEach(rec => {
+      html += `<div class="rec-item">
+        <h5>${rec.dimension} (${rec.percentage}%)</h5>
+        <p>${rec.recommendations}</p>
+      </div>`;
+    });
+    html += '</div>';
+  }
+  
+  // Overall strategic recommendations
+  html += '<div class="rec-category"><h4>🎯 Strategic Next Steps</h4>';
+  html += '<div class="rec-item">';
+  if (overallPercentage >= 75) {
+    html += '<h5>Advanced AI Implementation</h5><p>Your organization is well-positioned for sophisticated AI initiatives. Focus on scaling successful pilots and exploring cutting-edge AI applications that provide competitive advantage.</p>';
+  } else if (overallPercentage >= 50) {
+    html += '<h5>Pilot AI Projects</h5><p>Start with low-risk AI pilots in your strongest areas while systematically addressing identified gaps. Build confidence through early wins before scaling.</p>';
+  } else {
+    html += '<h5>Foundation Building</h5><p>Focus on strengthening fundamental capabilities: data quality, team skills, and strategic clarity. Consider engaging external AI consultants to accelerate your journey.</p>';
+  }
+  html += '</div></div>';
+  
+  container.innerHTML = html;
+}
+
+function getDimensionRecommendations(dimension, type) {
+  const recommendations = {
+    'Data Foundation': {
+      priority: 'Invest immediately in data quality initiatives, implement data governance framework, and establish data accessibility standards. Consider hiring a Chief Data Officer.',
+      improvement: 'Enhance data integration capabilities, implement self-service analytics, and strengthen data security measures.'
+    },
+    'Team & Skills': {
+      priority: 'Launch comprehensive AI literacy program, recruit AI specialists, and create change management initiatives. Partner with AI consultants for immediate expertise.',
+      improvement: 'Expand AI training programs, develop internal AI champions, and create cross-functional AI teams.'
+    },
+    'Infrastructure': {
+      priority: 'Modernize core systems, implement cloud strategy, and establish API connectivity. Consider infrastructure-as-a-service solutions for rapid deployment.',
+      improvement: 'Enhance integration capabilities, improve scalability, and strengthen cybersecurity measures.'
+    },
+    'Strategic Alignment': {
+      priority: 'Develop comprehensive AI strategy, secure executive sponsorship, and create detailed business cases. Engage board-level AI education.',
+      improvement: 'Refine AI roadmap, strengthen business case analysis, and improve strategic communication.'
+    },
+    'Financial Planning': {
+      priority: 'Establish dedicated AI budget, develop ROI frameworks, and create investment criteria. Consider phased funding approach.',
+      improvement: 'Enhance ROI measurement, improve cost understanding, and develop risk assessment frameworks.'
+    }
+  };
+  
+  return recommendations[dimension][type];
+}
+
+function exportResults() {
+  // Create a comprehensive results summary
+  const totalScore = Object.values(responses).reduce((sum, r) => sum + r.score, 0);
+  const maxScore = responses.length * 5;
+  const percentage = Math.round((totalScore / maxScore) * 100);
+  
+  let resultText = `AI READINESS ASSESSMENT RESULTS\n\n`;
+  resultText += `Organization: [Your Organization]\n`;
+  resultText += `Assessment Date: ${new Date().toLocaleDateString()}\n`;
+  resultText += `Overall Readiness Score: ${percentage}%\n\n`;
+  
+  resultText += `DIMENSION BREAKDOWN:\n`;
+  const dimensions = ['Data Foundation', 'Team & Skills', 'Infrastructure', 'Strategic Alignment', 'Financial Planning'];
+  dimensions.forEach(dim => {
+    const dimResponses = responses.filter(r => r.category === dim);
+    const dimScore = dimResponses.reduce((sum, r) => sum + r.score, 0);
+    const dimMax = dimResponses.length * 5;
+    const dimPercentage = Math.round((dimScore / dimMax) * 100);
+    resultText += `${dim}: ${dimPercentage}%\n`;
+  });
+  
+  resultText += `\nDETAILED RESPONSES:\n`;
+  responses.forEach((r, i) => {
+    resultText += `${i + 1}. ${r.question}\n`;
+    resultText += `   Category: ${r.category}\n`;
+    resultText += `   Answer: ${r.answer}\n`;
+    resultText += `   Score: ${r.score}/5\n\n`;
+  });
+  
+  // Download as text file
+  const blob = new Blob([resultText], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `ai-readiness-assessment-${new Date().toISOString().slice(0, 10)}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Initialize assessment when page loads
+window.onload = initializeAssessment;
+</script>
+</body>
+</html>

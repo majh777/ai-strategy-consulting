@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Maturity Model — 5-Level Framework for AI Transformation | Ashdown AI Strategy Consulting</title>
+<meta name="description" content="Comprehensive AI maturity model with 5 distinct levels. Assess your organization's AI maturity, understand progression pathways, and plan your transformation journey.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://majh777.github.io/ai-strategy-consulting/tools/ai-maturity-model.html">
+<meta property="og:title" content="AI Maturity Model — 5-Level Framework for AI Transformation">
+<meta property="og:description" content="Comprehensive AI maturity framework to assess and plan your organization's AI transformation journey.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://majh777.github.io/ai-strategy-consulting/tools/ai-maturity-model.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Maturity Model — 5-Level Framework for AI Transformation">
+<meta name="twitter:description" content="5-level AI maturity framework with assessment and planning tools.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI Maturity Model",
+  "description": "Interactive 5-level AI maturity framework for organizational assessment and planning",
+  "applicationCategory": "Business Assessment Framework",
+  "operatingSystem": "Web Browser",
+  "url": "https://majh777.github.io/ai-strategy-consulting/tools/ai-maturity-model.html",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Ashdown AI Strategy Consulting",
+    "url": "https://majh777.github.io/ai-strategy-consulting/"
+  }
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f1a;color:#e0e0e0;line-height:1.7}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.nav{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e1e2e}
+.nav a{color:#7c3aed;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:60px 20px 40px}
+.hero h1{font-size:2.4em;font-weight:800;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,#7c3aed,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1em;color:#a0a0b0;max-width:700px;margin:0 auto}
+.framework-intro{max-width:800px;margin:0 auto;padding:40px 20px;background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;margin-bottom:40px}
+.framework-intro h2{color:#7c3aed;margin-bottom:16px}
+.framework-benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:24px 0}
+.benefit{background:#0f0f1a;padding:16px;border-radius:8px;border:1px solid #333}
+.benefit h4{color:#3b82f6;font-size:0.9em;margin-bottom:4px}
+.benefit p{font-size:0.8em;color:#a0a0b0}
+.maturity-overview{margin:40px 0}
+.maturity-visual{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin-bottom:30px}
+.maturity-visual h3{color:#7c3aed;text-align:center;margin-bottom:30px}
+.maturity-levels{display:flex;justify-content:space-between;align-items:center;margin:30px 0;position:relative}
+@media(max-width:768px){.maturity-levels{flex-direction:column;gap:20px}}
+.maturity-level{text-align:center;position:relative;flex:1;max-width:180px}
+.level-circle{width:80px;height:80px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1em;cursor:pointer;transition:all 0.3s;border:3px solid}
+.level-1{background:rgba(239,68,68,0.2);border-color:#ef4444;color:#ef4444}
+.level-2{background:rgba(245,158,11,0.2);border-color:#f59e0b;color:#f59e0b}
+.level-3{background:rgba(59,130,246,0.2);border-color:#3b82f6;color:#3b82f6}
+.level-4{background:rgba(16,185,129,0.2);border-color:#10b981;color:#10b981}
+.level-5{background:rgba(124,58,237,0.2);border-color:#7c3aed;color:#7c3aed}
+.level-circle:hover{transform:scale(1.1);box-shadow:0 0 20px rgba(124,58,237,0.3)}
+.level-name{font-weight:600;color:#e0e0e0;margin-bottom:4px}
+.level-subtitle{font-size:0.8em;color:#a0a0b0}
+.connection-line{position:absolute;top:40px;left:90px;right:90px;height:2px;background:linear-gradient(90deg,#ef4444,#f59e0b,#3b82f6,#10b981,#7c3aed);z-index:-1}
+@media(max-width:768px){.connection-line{display:none}}
+.level-details{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin-bottom:30px}
+.level-header{display:flex;align-items:center;margin-bottom:20px;gap:16px}
+.level-number{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2em}
+.level-info h3{margin:0;font-size:1.4em}
+.level-info p{margin:4px 0 0;color:#a0a0b0;font-size:0.9em}
+.characteristics{margin:30px 0}
+.characteristics h4{color:#3b82f6;margin-bottom:16px}
+.char-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.characteristic{background:#0f0f1a;padding:16px;border-radius:8px;border:1px solid #333}
+.char-title{font-weight:600;color:#e0e0e0;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.char-desc{color:#a0a0b0;font-size:0.9em}
+.progression-path{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.progression-path h4{color:#10b981;margin-bottom:12px}
+.progression-steps{list-style:none}
+.progression-steps li{padding:8px 0;color:#a0a0b0;position:relative;padding-left:20px}
+.progression-steps li:before{content:"→";color:#10b981;font-weight:bold;position:absolute;left:0}
+.key-enablers{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.key-enablers h4{color:#7c3aed;margin-bottom:12px}
+.enabler-tags{display:flex;flex-wrap:wrap;gap:8px}
+.enabler-tag{background:rgba(124,58,237,0.2);color:#7c3aed;padding:4px 12px;border-radius:16px;font-size:0.85em;border:1px solid #7c3aed}
+.timeline{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.timeline h4{color:#f59e0b;margin-bottom:12px}
+.timeline p{color:#a0a0b0;font-size:0.9em}
+.assessment-section{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin:40px 0}
+.assessment-section h3{color:#7c3aed;margin-bottom:20px;text-align:center}
+.quick-assessment{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:24px;margin:20px 0}
+.assessment-question{margin:20px 0}
+.assessment-question h4{color:#e0e0e0;margin-bottom:12px}
+.assessment-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.assessment-option{background:#1a1a2e;border:1px solid #444;border-radius:8px;padding:12px;cursor:pointer;transition:all 0.2s;text-align:center}
+.assessment-option:hover{border-color:#7c3aed;background:#151527}
+.assessment-option.selected{border-color:#7c3aed;background:rgba(124,58,237,0.1)}
+.assessment-result{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:24px;margin:20px 0;display:none}
+.result-level{text-align:center;margin-bottom:20px}
+.result-circle{width:100px;height:100px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.5em;border:4px solid}
+.result-text{font-size:1.2em;color:#e0e0e0;margin-bottom:8px}
+.result-desc{color:#a0a0b0}
+.next-steps{margin:20px 0}
+.next-steps h4{color:#10b981;margin-bottom:12px}
+.step-item{background:#1a1a2e;padding:16px;border-radius:8px;margin:8px 0;border-left:4px solid #10b981}
+.step-item h5{color:#e0e0e0;margin-bottom:4px}
+.step-item p{color:#a0a0b0;font-size:0.9em}
+.comparison-table{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin:40px 0}
+.comparison-table h3{color:#7c3aed;margin-bottom:20px;text-align:center}
+.table-container{overflow-x:auto}
+.maturity-table{width:100%;border-collapse:collapse;margin:20px 0}
+.maturity-table th{background:#0f0f1a;color:#7c3aed;padding:12px;text-align:left;border:1px solid #333;font-weight:600}
+.maturity-table td{padding:12px;border:1px solid #333;color:#e0e0e0;vertical-align:top}
+.maturity-table tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.dimension-icon{margin-right:8px}
+.level-indicator{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.planning-tools{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin:40px 0}
+.planning-tools h3{color:#7c3aed;margin-bottom:20px;text-align:center}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.tool-card{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px}
+.tool-card h4{color:#3b82f6;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.tool-card p{color:#a0a0b0;font-size:0.9em;margin-bottom:16px}
+.tool-features{list-style:none}
+.tool-features li{padding:4px 0;color:#a0a0b0;font-size:0.85em;position:relative;padding-left:16px}
+.tool-features li:before{content:"✓";color:#10b981;font-weight:bold;position:absolute;left:0}
+.cta-section{text-align:center;margin-top:50px;padding:40px;background:rgba(124,58,237,0.05);border-radius:16px;border:1px solid #2a2a3e}
+.cta-section h3{margin-bottom:16px;color:#e0e0e0}
+.cta-section p{margin-bottom:24px;color:#a0a0b0}
+.cta-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.cta{display:inline-block;padding:16px 32px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:1.1em;transition:transform .2s}
+.cta:hover{transform:scale(1.05)}
+.cta-secondary{background:#5469d4;font-size:1em}
+.btn{padding:12px 24px;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;font-size:0.9em}
+.btn-primary{background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff}
+.btn-secondary{background:#333;color:#e0e0e0;border:1px solid #444}
+.btn:hover{transform:scale(1.05)}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="../index.html"><strong>🤖 AI Strategy Consulting</strong></a>
+  <div><a href="../index.html#services">Services</a><a href="../ai-readiness.html">Assessment</a><a href="../roi-calculator.html">ROI Calculator</a><a href="../index.html#about">About</a></div>
+</div>
+
+<div class="hero">
+  <h1>AI Maturity <span>Model</span></h1>
+  <p>Comprehensive 5-level framework to assess your organization's AI maturity, understand your current position, and plan your transformation journey with clear progression pathways and actionable next steps.</p>
+</div>
+
+<div class="container">
+  <div class="framework-intro">
+    <h2>🎯 Framework Overview</h2>
+    <p>Our AI Maturity Model provides a structured approach to understanding and advancing your organization's AI capabilities. Built from hundreds of implementations across industries, this framework identifies five distinct maturity levels with clear characteristics, requirements, and progression paths.</p>
+    
+    <div class="framework-benefits">
+      <div class="benefit">
+        <h4>🎯 Clear Positioning</h4>
+        <p>Understand exactly where your organization stands in its AI journey</p>
+      </div>
+      <div class="benefit">
+        <h4>🗺️ Roadmap Planning</h4>
+        <p>Get specific guidance on how to progress to the next maturity level</p>
+      </div>
+      <div class="benefit">
+        <h4>📊 Benchmarking</h4>
+        <p>Compare your progress against industry standards and best practices</p>
+      </div>
+      <div class="benefit">
+        <h4>⚡ Quick Assessment</h4>
+        <p>Rapid evaluation tool to determine your current maturity level</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="maturity-overview">
+    <div class="maturity-visual">
+      <h3>AI Maturity Progression</h3>
+      <div class="maturity-levels">
+        <div class="connection-line"></div>
+        
+        <div class="maturity-level" onclick="showLevel(1)">
+          <div class="level-circle level-1">1</div>
+          <div class="level-name">Reactive</div>
+          <div class="level-subtitle">Ad-hoc AI usage</div>
+        </div>
+        
+        <div class="maturity-level" onclick="showLevel(2)">
+          <div class="level-circle level-2">2</div>
+          <div class="level-name">Exploring</div>
+          <div class="level-subtitle">Pilot projects</div>
+        </div>
+        
+        <div class="maturity-level" onclick="showLevel(3)">
+          <div class="level-circle level-3">3</div>
+          <div class="level-name">Developing</div>
+          <div class="level-subtitle">Scaled implementations</div>
+        </div>
+        
+        <div class="maturity-level" onclick="showLevel(4)">
+          <div class="level-circle level-4">4</div>
+          <div class="level-name">Advanced</div>
+          <div class="level-subtitle">AI-driven operations</div>
+        </div>
+        
+        <div class="maturity-level" onclick="showLevel(5)">
+          <div class="level-circle level-5">5</div>
+          <div class="level-name">Optimizing</div>
+          <div class="level-subtitle">AI-first organization</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Level 1: Reactive -->
+  <div class="level-details" id="level-1">
+    <div class="level-header">
+      <div class="level-number level-1">1</div>
+      <div class="level-info">
+        <h3>Reactive AI Maturity</h3>
+        <p>Organizations respond to AI trends without systematic approach</p>
+      </div>
+    </div>
+
+    <div class="characteristics">
+      <h4>📋 Key Characteristics</h4>
+      <div class="char-grid">
+        <div class="characteristic">
+          <div class="char-title">🎯 Strategy</div>
+          <div class="char-desc">No formal AI strategy; reactive to market pressure</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">👥 Team</div>
+          <div class="char-desc">Limited AI awareness; no dedicated expertise</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">🗄️ Data</div>
+          <div class="char-desc">Fragmented data with quality issues</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">🏗️ Technology</div>
+          <div class="char-desc">Legacy systems; minimal automation</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">📊 Governance</div>
+          <div class="char-desc">No AI governance framework</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">💰 Investment</div>
+          <div class="char-desc">Minimal, opportunistic AI spending</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progression-path">
+      <h4>🚀 Path to Level 2</h4>
+      <ul class="progression-steps">
+        <li>Conduct AI awareness training for leadership team</li>
+        <li>Identify 2-3 high-impact AI use cases</li>
+        <li>Assess current data quality and accessibility</li>
+        <li>Develop basic AI governance principles</li>
+        <li>Allocate budget for AI exploration</li>
+        <li>Hire or train initial AI talent</li>
+      </ul>
+    </div>
+
+    <div class="key-enablers">
+      <h4>🔑 Key Enablers</h4>
+      <div class="enabler-tags">
+        <span class="enabler-tag">Executive Sponsorship</span>
+        <span class="enabler-tag">AI Education</span>
+        <span class="enabler-tag">Data Audit</span>
+        <span class="enabler-tag">Use Case Identification</span>
+        <span class="enabler-tag">Budget Allocation</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <h4>⏱️ Typical Timeline</h4>
+      <p>6-12 months to establish foundation and move to Exploring level</p>
+    </div>
+  </div>
+
+  <!-- Level 2: Exploring -->
+  <div class="level-details" id="level-2" style="display:none;">
+    <div class="level-header">
+      <div class="level-number level-2">2</div>
+      <div class="level-info">
+        <h3>Exploring AI Maturity</h3>
+        <p>Organizations run pilot projects and build foundational capabilities</p>
+      </div>
+    </div>
+
+    <div class="characteristics">
+      <h4>📋 Key Characteristics</h4>
+      <div class="char-grid">
+        <div class="characteristic">
+          <div class="char-title">🎯 Strategy</div>
+          <div class="char-desc">Basic AI strategy with identified use cases</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">👥 Team</div>
+          <div class="char-desc">Small AI team or external consultants</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">🗄️ Data</div>
+          <div class="char-desc">Data consolidation efforts underway</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">🏗️ Technology</div>
+          <div class="char-desc">Cloud adoption; basic AI tools implemented</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">📊 Governance</div>
+          <div class="char-desc">Basic governance for pilot projects</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">💰 Investment</div>
+          <div class="char-desc">Dedicated pilot project budget</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progression-path">
+      <h4>🚀 Path to Level 3</h4>
+      <ul class="progression-steps">
+        <li>Scale successful pilot projects</li>
+        <li>Establish center of excellence</li>
+        <li>Implement enterprise data platform</li>
+        <li>Develop AI ethics guidelines</li>
+        <li>Build internal AI capabilities</li>
+        <li>Create AI success metrics</li>
+      </ul>
+    </div>
+
+    <div class="key-enablers">
+      <h4>🔑 Key Enablers</h4>
+      <div class="enabler-tags">
+        <span class="enabler-tag">Pilot Success</span>
+        <span class="enabler-tag">Data Platform</span>
+        <span class="enabler-tag">Change Management</span>
+        <span class="enabler-tag">Skill Development</span>
+        <span class="enabler-tag">Governance Framework</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <h4>⏱️ Typical Timeline</h4>
+      <p>9-18 months to scale pilots and advance to Developing level</p>
+    </div>
+  </div>
+
+  <!-- Level 3: Developing -->
+  <div class="level-details" id="level-3" style="display:none;">
+    <div class="level-header">
+      <div class="level-number level-3">3</div>
+      <div class="level-info">
+        <h3>Developing AI Maturity</h3>
+        <p>Organizations systematically implement AI across business functions</p>
+      </div>
+    </div>
+
+    <div class="characteristics">
+      <h4>📋 Key Characteristics</h4>
+      <div class="char-grid">
+        <div class="characteristic">
+          <div class="char-title">🎯 Strategy</div>
+          <div class="char-desc">Comprehensive AI strategy with roadmap</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">👥 Team</div>
+          <div class="char-desc">AI center of excellence established</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">🗄️ Data</div>
+          <div class="char-desc">Enterprise data platform operational</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">🏗️ Technology</div>
+          <div class="char-desc">MLOps platform; automated workflows</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">📊 Governance</div>
+          <div class="char-desc">AI governance framework implemented</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">💰 Investment</div>
+          <div class="char-desc">Significant AI investment with ROI tracking</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progression-path">
+      <h4>🚀 Path to Level 4</h4>
+      <ul class="progression-steps">
+        <li>Optimize AI operations and processes</li>
+        <li>Implement advanced analytics capabilities</li>
+        <li>Build predictive and prescriptive models</li>
+        <li>Develop AI product offerings</li>
+        <li>Create data-driven decision culture</li>
+        <li>Establish AI innovation labs</li>
+      </ul>
+    </div>
+
+    <div class="key-enablers">
+      <h4>🔑 Key Enablers</h4>
+      <div class="enabler-tags">
+        <span class="enabler-tag">MLOps Platform</span>
+        <span class="enabler-tag">Data Excellence</span>
+        <span class="enabler-tag">Cultural Change</span>
+        <span class="enabler-tag">Innovation Labs</span>
+        <span class="enabler-tag">Continuous Learning</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <h4>⏱️ Typical Timeline</h4>
+      <p>12-24 months to optimize operations and reach Advanced level</p>
+    </div>
+  </div>
+
+  <!-- Level 4: Advanced -->
+  <div class="level-details" id="level-4" style="display:none;">
+    <div class="level-header">
+      <div class="level-number level-4">4</div>
+      <div class="level-info">
+        <h3>Advanced AI Maturity</h3>
+        <p>Organizations leverage AI for competitive advantage and innovation</p>
+      </div>
+    </div>
+
+    <div class="characteristics">
+      <h4>📋 Key Characteristics</h4>
+      <div class="char-grid">
+        <div class="characteristic">
+          <div class="char-title">🎯 Strategy</div>
+          <div class="char-desc">AI integral to business strategy</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">👥 Team</div>
+          <div class="char-desc">AI-literate workforce; embedded expertise</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">🗄️ Data</div>
+          <div class="char-desc">Real-time data ecosystem</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">🏗️ Technology</div>
+          <div class="char-desc">Advanced AI platforms; self-service analytics</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">📊 Governance</div>
+          <div class="char-desc">Mature governance with risk management</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">💰 Investment</div>
+          <div class="char-desc">Strategic AI investment with clear returns</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progression-path">
+      <h4>🚀 Path to Level 5</h4>
+      <ul class="progression-steps">
+        <li>Implement autonomous AI systems</li>
+        <li>Develop AI-native products and services</li>
+        <li>Create external AI ecosystem partnerships</li>
+        <li>Establish thought leadership position</li>
+        <li>Build next-generation AI capabilities</li>
+        <li>Drive industry AI standards</li>
+      </ul>
+    </div>
+
+    <div class="key-enablers">
+      <h4>🔑 Key Enablers</h4>
+      <div class="enabler-tags">
+        <span class="enabler-tag">Autonomous Systems</span>
+        <span class="enabler-tag">AI Products</span>
+        <span class="enabler-tag">Ecosystem Partnerships</span>
+        <span class="enabler-tag">Thought Leadership</span>
+        <span class="enabler-tag">Innovation Culture</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <h4>⏱️ Typical Timeline</h4>
+      <p>18-36 months to transform into AI-first organization</p>
+    </div>
+  </div>
+
+  <!-- Level 5: Optimizing -->
+  <div class="level-details" id="level-5" style="display:none;">
+    <div class="level-header">
+      <div class="level-number level-5">5</div>
+      <div class="level-info">
+        <h3>Optimizing AI Maturity</h3>
+        <p>AI-first organizations that continuously evolve and innovate</p>
+      </div>
+    </div>
+
+    <div class="characteristics">
+      <h4>📋 Key Characteristics</h4>
+      <div class="char-grid">
+        <div class="characteristic">
+          <div class="char-title">🎯 Strategy</div>
+          <div class="char-desc">AI-first organizational DNA</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">👥 Team</div>
+          <div class="char-desc">AI expertise across all levels</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">🗄️ Data</div>
+          <div class="char-desc">Intelligent data fabric with AI optimization</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">🏗️ Technology</div>
+          <div class="char-desc">Autonomous, self-optimizing systems</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">📊 Governance</div>
+          <div class="char-desc">AI-powered governance and compliance</div>
+        </div>
+        <div class="characteristic">
+          <div class="char-title">💰 Investment</div>
+          <div class="char-desc">AI drives revenue and cost optimization</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progression-path">
+      <h4>🚀 Continuous Evolution</h4>
+      <ul class="progression-steps">
+        <li>Pioneer next-generation AI technologies</li>
+        <li>Influence industry AI evolution</li>
+        <li>Create AI-powered business models</li>
+        <li>Build strategic AI partnerships</li>
+        <li>Drive AI education and adoption</li>
+        <li>Shape regulatory and ethical standards</li>
+      </ul>
+    </div>
+
+    <div class="key-enablers">
+      <h4>🔑 Key Enablers</h4>
+      <div class="enabler-tags">
+        <span class="enabler-tag">Technology Pioneer</span>
+        <span class="enabler-tag">Market Leadership</span>
+        <span class="enabler-tag">AI Business Models</span>
+        <span class="enabler-tag">Strategic Ecosystem</span>
+        <span class="enabler-tag">Continuous Innovation</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <h4>⏱️ Typical Timeline</h4>
+      <p>Continuous evolution and optimization cycle</p>
+    </div>
+  </div>
+
+  <!-- Quick Assessment -->
+  <div class="assessment-section">
+    <h3>🎯 Quick Maturity Assessment</h3>
+    <p>Answer these 5 questions to get an estimate of your current AI maturity level:</p>
+    
+    <div class="quick-assessment">
+      <div class="assessment-question">
+        <h4>1. How would you describe your organization's AI strategy?</h4>
+        <div class="assessment-options">
+          <div class="assessment-option" data-level="1" onclick="selectAnswer(1, 1)">No formal strategy</div>
+          <div class="assessment-option" data-level="2" onclick="selectAnswer(1, 2)">Basic strategy exists</div>
+          <div class="assessment-option" data-level="3" onclick="selectAnswer(1, 3)">Comprehensive strategy</div>
+          <div class="assessment-option" data-level="4" onclick="selectAnswer(1, 4)">AI integral to business</div>
+          <div class="assessment-option" data-level="5" onclick="selectAnswer(1, 5)">AI-first organization</div>
+        </div>
+      </div>
+
+      <div class="assessment-question">
+        <h4>2. What is your current AI implementation status?</h4>
+        <div class="assessment-options">
+          <div class="assessment-option" data-level="1" onclick="selectAnswer(2, 1)">No AI implementations</div>
+          <div class="assessment-option" data-level="2" onclick="selectAnswer(2, 2)">Pilot projects running</div>
+          <div class="assessment-option" data-level="3" onclick="selectAnswer(2, 3)">Multiple AI solutions</div>
+          <div class="assessment-option" data-level="4" onclick="selectAnswer(2, 4)">AI across operations</div>
+          <div class="assessment-option" data-level="5" onclick="selectAnswer(2, 5)">Autonomous AI systems</div>
+        </div>
+      </div>
+
+      <div class="assessment-question">
+        <h4>3. How mature is your data infrastructure?</h4>
+        <div class="assessment-options">
+          <div class="assessment-option" data-level="1" onclick="selectAnswer(3, 1)">Fragmented data</div>
+          <div class="assessment-option" data-level="2" onclick="selectAnswer(3, 2)">Basic data management</div>
+          <div class="assessment-option" data-level="3" onclick="selectAnswer(3, 3)">Enterprise data platform</div>
+          <div class="assessment-option" data-level="4" onclick="selectAnswer(3, 4)">Real-time data ecosystem</div>
+          <div class="assessment-option" data-level="5" onclick="selectAnswer(3, 5)">Intelligent data fabric</div>
+        </div>
+      </div>
+
+      <div class="assessment-question">
+        <h4>4. What is your AI team structure?</h4>
+        <div class="assessment-options">
+          <div class="assessment-option" data-level="1" onclick="selectAnswer(4, 1)">No AI expertise</div>
+          <div class="assessment-option" data-level="2" onclick="selectAnswer(4, 2)">External consultants</div>
+          <div class="assessment-option" data-level="3" onclick="selectAnswer(4, 3)">AI center of excellence</div>
+          <div class="assessment-option" data-level="4" onclick="selectAnswer(4, 4)">Embedded AI teams</div>
+          <div class="assessment-option" data-level="5" onclick="selectAnswer(4, 5)">AI-literate organization</div>
+        </div>
+      </div>
+
+      <div class="assessment-question">
+        <h4>5. How do you measure AI success?</h4>
+        <div class="assessment-options">
+          <div class="assessment-option" data-level="1" onclick="selectAnswer(5, 1)">No measurement</div>
+          <div class="assessment-option" data-level="2" onclick="selectAnswer(5, 2)">Basic project metrics</div>
+          <div class="assessment-option" data-level="3" onclick="selectAnswer(5, 3)">ROI tracking</div>
+          <div class="assessment-option" data-level="4" onclick="selectAnswer(5, 4)">Strategic KPIs</div>
+          <div class="assessment-option" data-level="5" onclick="selectAnswer(5, 5)">Continuous optimization</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="assessment-result" id="assessmentResult">
+      <div class="result-level">
+        <div class="result-circle" id="resultCircle">?</div>
+        <div class="result-text" id="resultText">Your AI Maturity Level</div>
+        <div class="result-desc" id="resultDesc">Complete the assessment above</div>
+      </div>
+
+      <div class="next-steps" id="nextSteps">
+        <!-- Next steps will be populated based on results -->
+      </div>
+
+      <div style="text-align:center;margin-top:20px;">
+        <button class="btn btn-primary" onclick="resetAssessment()">Retake Assessment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="comparison-table">
+    <h3>📊 Maturity Level Comparison</h3>
+    <div class="table-container">
+      <table class="maturity-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th><span class="level-indicator level-1"></span>Reactive</th>
+            <th><span class="level-indicator level-2"></span>Exploring</th>
+            <th><span class="level-indicator level-3"></span>Developing</th>
+            <th><span class="level-indicator level-4"></span>Advanced</th>
+            <th><span class="level-indicator level-5"></span>Optimizing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="dimension-icon">🎯</span><strong>Strategy</strong></td>
+            <td>No formal AI strategy</td>
+            <td>Basic use cases identified</td>
+            <td>Comprehensive roadmap</td>
+            <td>AI integral to business</td>
+            <td>AI-first DNA</td>
+          </tr>
+          <tr>
+            <td><span class="dimension-icon">👥</span><strong>People & Skills</strong></td>
+            <td>Limited AI awareness</td>
+            <td>Small AI team</td>
+            <td>Center of excellence</td>
+            <td>AI-literate workforce</td>
+            <td>AI expertise everywhere</td>
+          </tr>
+          <tr>
+            <td><span class="dimension-icon">🗄️</span><strong>Data & Analytics</strong></td>
+            <td>Fragmented data</td>
+            <td>Data consolidation</td>
+            <td>Enterprise platform</td>
+            <td>Real-time ecosystem</td>
+            <td>Intelligent fabric</td>
+          </tr>
+          <tr>
+            <td><span class="dimension-icon">🏗️</span><strong>Technology</strong></td>
+            <td>Legacy systems</td>
+            <td>Basic AI tools</td>
+            <td>MLOps platform</td>
+            <td>Advanced platforms</td>
+            <td>Autonomous systems</td>
+          </tr>
+          <tr>
+            <td><span class="dimension-icon">📊</span><strong>Governance</strong></td>
+            <td>No AI governance</td>
+            <td>Pilot governance</td>
+            <td>Framework implemented</td>
+            <td>Mature risk management</td>
+            <td>AI-powered governance</td>
+          </tr>
+          <tr>
+            <td><span class="dimension-icon">💰</span><strong>Investment</strong></td>
+            <td>Minimal spending</td>
+            <td>Pilot budgets</td>
+            <td>Significant investment</td>
+            <td>Strategic allocation</td>
+            <td>AI drives value</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Planning Tools -->
+  <div class="planning-tools">
+    <h3>🛠️ Maturity Planning Tools</h3>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h4>📋 Readiness Assessment</h4>
+        <p>Comprehensive evaluation across all maturity dimensions</p>
+        <ul class="tool-features">
+          <li>32-question detailed assessment</li>
+          <li>Dimension-specific scoring</li>
+          <li>Gap analysis and recommendations</li>
+          <li>Benchmark comparisons</li>
+        </ul>
+      </div>
+
+      <div class="tool-card">
+        <h4>🗺️ Progression Roadmap</h4>
+        <p>Step-by-step guidance for advancing to the next level</p>
+        <ul class="tool-features">
+          <li>Level-specific action plans</li>
+          <li>Timeline and milestone planning</li>
+          <li>Resource requirement estimates</li>
+          <li>Risk mitigation strategies</li>
+        </ul>
+      </div>
+
+      <div class="tool-card">
+        <h4>💰 Investment Calculator</h4>
+        <p>ROI modeling and budget planning for maturity advancement</p>
+        <ul class="tool-features">
+          <li>Level-based investment requirements</li>
+          <li>Benefit realization timelines</li>
+          <li>Scenario analysis</li>
+          <li>Financial justification support</li>
+        </ul>
+      </div>
+
+      <div class="tool-card">
+        <h4>📊 Progress Tracking</h4>
+        <p>Monitor and measure advancement through maturity levels</p>
+        <ul class="tool-features">
+          <li>KPI frameworks by level</li>
+          <li>Progress visualization</li>
+          <li>Milestone tracking</li>
+          <li>Continuous assessment</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>🚀 Ready to Accelerate Your AI Maturity?</h3>
+    <p>Get expert guidance on advancing through the maturity levels with a customized roadmap, specific action plans, and comprehensive support for your AI transformation journey.</p>
+    <div class="cta-buttons">
+      <a href="https://buy.stripe.com/eVq8wI8HY4CCg8Wekw0Ny00" class="cta" target="_blank">💡 AI Assessment ($500) →</a>
+      <a href="https://buy.stripe.com/3cI4gse2i1qqe0O1xK0Ny01" class="cta cta-secondary" target="_blank">🎯 Full AI Strategy ($2,000) →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+let assessmentAnswers = {};
+let currentLevel = 1;
+
+function showLevel(level) {
+  // Hide all level details
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById(`level-${i}`).style.display = 'none';
+  }
+  
+  // Show selected level
+  document.getElementById(`level-${level}`).style.display = 'block';
+  currentLevel = level;
+  
+  // Scroll to level details
+  document.getElementById(`level-${level}`).scrollIntoView({ 
+    behavior: 'smooth', 
+    block: 'start' 
+  });
+}
+
+function selectAnswer(questionNum, level) {
+  // Remove previous selections for this question
+  const questionDiv = event.target.closest('.assessment-question');
+  questionDiv.querySelectorAll('.assessment-option').forEach(opt => {
+    opt.classList.remove('selected');
+  });
+  
+  // Add selection to clicked option
+  event.target.classList.add('selected');
+  
+  // Store answer
+  assessmentAnswers[questionNum] = level;
+  
+  // Check if all questions answered
+  if (Object.keys(assessmentAnswers).length === 5) {
+    calculateMaturityLevel();
+  }
+}
+
+function calculateMaturityLevel() {
+  const answers = Object.values(assessmentAnswers);
+  const averageLevel = Math.round(answers.reduce((sum, level) => sum + level, 0) / answers.length);
+  
+  showAssessmentResult(averageLevel);
+}
+
+function showAssessmentResult(level) {
+  const resultDiv = document.getElementById('assessmentResult');
+  const resultCircle = document.getElementById('resultCircle');
+  const resultText = document.getElementById('resultText');
+  const resultDesc = document.getElementById('resultDesc');
+  const nextSteps = document.getElementById('nextSteps');
+  
+  const levelInfo = {
+    1: {
+      name: 'Reactive',
+      description: 'Your organization is in the early stages of AI adoption',
+      color: 'level-1',
+      steps: [
+        { title: 'Develop AI Awareness', desc: 'Educate leadership and key stakeholders about AI potential' },
+        { title: 'Assess Current State', desc: 'Conduct comprehensive audit of data, technology, and skills' },
+        { title: 'Define Initial Strategy', desc: 'Create basic AI roadmap with 2-3 priority use cases' }
+      ]
+    },
+    2: {
+      name: 'Exploring', 
+      description: 'Your organization is actively exploring AI through pilots',
+      color: 'level-2',
+      steps: [
+        { title: 'Scale Successful Pilots', desc: 'Move proven concepts to broader implementation' },
+        { title: 'Build Data Foundation', desc: 'Implement enterprise data platform and governance' },
+        { title: 'Develop AI Capabilities', desc: 'Hire talent and establish center of excellence' }
+      ]
+    },
+    3: {
+      name: 'Developing',
+      description: 'Your organization is systematically implementing AI',
+      color: 'level-3', 
+      steps: [
+        { title: 'Optimize Operations', desc: 'Streamline AI development and deployment processes' },
+        { title: 'Expand Use Cases', desc: 'Identify and implement AI across more business functions' },
+        { title: 'Measure Impact', desc: 'Establish comprehensive ROI and performance tracking' }
+      ]
+    },
+    4: {
+      name: 'Advanced',
+      description: 'Your organization leverages AI for competitive advantage',
+      color: 'level-4',
+      steps: [
+        { title: 'Build AI Products', desc: 'Create AI-native products and services' },
+        { title: 'Automate Processes', desc: 'Implement autonomous AI systems' },
+        { title: 'Drive Innovation', desc: 'Establish AI innovation labs and partnerships' }
+      ]
+    },
+    5: {
+      name: 'Optimizing',
+      description: 'Your organization is an AI-first leader',
+      color: 'level-5',
+      steps: [
+        { title: 'Pioneer Technologies', desc: 'Lead development of next-generation AI' },
+        { title: 'Shape Industry', desc: 'Influence standards and best practices' },
+        { title: 'Ecosystem Leadership', desc: 'Build strategic AI partnerships and platforms' }
+      ]
+    }
+  };
+  
+  const info = levelInfo[level];
+  
+  resultCircle.textContent = level;
+  resultCircle.className = `result-circle ${info.color}`;
+  resultText.textContent = `Level ${level}: ${info.name}`;
+  resultDesc.textContent = info.description;
+  
+  // Populate next steps
+  nextSteps.innerHTML = '<h4>🎯 Recommended Next Steps</h4>' +
+    info.steps.map(step => `
+      <div class="step-item">
+        <h5>${step.title}</h5>
+        <p>${step.desc}</p>
+      </div>
+    `).join('');
+  
+  resultDiv.style.display = 'block';
+  resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetAssessment() {
+  assessmentAnswers = {};
+  
+  // Clear all selections
+  document.querySelectorAll('.assessment-option').forEach(opt => {
+    opt.classList.remove('selected');
+  });
+  
+  // Hide results
+  document.getElementById('assessmentResult').style.display = 'none';
+  
+  // Scroll back to assessment
+  document.querySelector('.assessment-section').scrollIntoView({ 
+    behavior: 'smooth', 
+    block: 'start' 
+  });
+}
+
+// Initialize by showing level 1
+document.addEventListener('DOMContentLoaded', function() {
+  showLevel(1);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Use Case Prioritization Matrix — Strategic Framework for AI Opportunities | Ashdown AI Strategy Consulting</title>
+<meta name="description" content="Systematic framework to evaluate and prioritize AI use cases. Interactive matrix tool to rank opportunities based on impact, feasibility, and strategic alignment.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://majh777.github.io/ai-strategy-consulting/tools/ai-use-case-prioritization-matrix.html">
+<meta property="og:title" content="AI Use Case Prioritization Matrix — Strategic Framework for AI Opportunities">
+<meta property="og:description" content="Interactive framework to evaluate and prioritize AI use cases based on impact and feasibility.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://majh777.github.io/ai-strategy-consulting/tools/ai-use-case-prioritization-matrix.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Use Case Prioritization Matrix — Strategic Framework">
+<meta name="twitter:description" content="Systematic framework to evaluate and prioritize AI opportunities.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI Use Case Prioritization Matrix",
+  "description": "Interactive framework tool to systematically evaluate and prioritize AI use cases based on multiple criteria",
+  "applicationCategory": "Strategic Planning Tool",
+  "operatingSystem": "Web Browser",
+  "url": "https://majh777.github.io/ai-strategy-consulting/tools/ai-use-case-prioritization-matrix.html",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Ashdown AI Strategy Consulting",
+    "url": "https://majh777.github.io/ai-strategy-consulting/"
+  }
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f1a;color:#e0e0e0;line-height:1.7}
+.container{max-width:1400px;margin:0 auto;padding:0 20px}
+.nav{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e1e2e}
+.nav a{color:#7c3aed;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:60px 20px 40px}
+.hero h1{font-size:2.4em;font-weight:800;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,#7c3aed,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1em;color:#a0a0b0;max-width:700px;margin:0 auto}
+.framework-intro{max-width:800px;margin:0 auto;padding:40px 20px;background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;margin-bottom:40px}
+.framework-intro h2{color:#7c3aed;margin-bottom:16px}
+.evaluation-criteria{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:24px 0}
+.criterion{background:#0f0f1a;padding:16px;border-radius:8px;border:1px solid #333}
+.criterion h4{color:#3b82f6;font-size:0.9em;margin-bottom:4px}
+.criterion p{font-size:0.8em;color:#a0a0b0}
+.main-layout{display:grid;grid-template-columns:350px 1fr;gap:30px;margin:40px 0}
+@media(max-width:1000px){.main-layout{grid-template-columns:1fr;gap:20px}}
+.use-case-input{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;height:fit-content;position:sticky;top:20px}
+@media(max-width:1000px){.use-case-input{position:static}}
+.input-section h3{color:#7c3aed;margin-bottom:20px;font-size:1.2em}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;color:#a0a0b0;font-size:0.9em;margin-bottom:6px}
+.form-group input, .form-group select, .form-group textarea{width:100%;background:#0f0f1a;border:1px solid #444;border-radius:8px;padding:10px 12px;color:#e0e0e0;font-size:0.9em;font-family:inherit}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus{outline:none;border-color:#7c3aed}
+.form-group textarea{resize:vertical;height:80px}
+.criteria-scoring{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:16px;margin:16px 0}
+.criteria-scoring h4{color:#3b82f6;margin-bottom:12px;font-size:1em}
+.score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.score-item{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+.score-label{font-size:0.85em;color:#a0a0b0}
+.score-input{width:50px;background:#1a1a2e;border:1px solid #444;border-radius:4px;padding:4px 8px;color:#e0e0e0;text-align:center}
+.score-slider{width:100%;height:6px;border-radius:3px;background:#333;outline:none;-webkit-appearance:none;margin:8px 0}
+.score-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#7c3aed;cursor:pointer}
+.score-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#7c3aed;cursor:pointer;border:none}
+.add-use-case-btn{width:100%;padding:14px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;transition:transform .2s}
+.add-use-case-btn:hover{transform:scale(1.02)}
+.matrix-container{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px}
+.matrix-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+.matrix-header h3{color:#7c3aed;margin:0}
+.matrix-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.filter-select{background:#0f0f1a;border:1px solid #444;border-radius:6px;padding:6px 12px;color:#e0e0e0;font-size:0.85em}
+.view-toggle{display:flex;background:#0f0f1a;border-radius:6px;overflow:hidden}
+.view-btn{padding:6px 12px;background:transparent;border:none;color:#a0a0b0;cursor:pointer;font-size:0.85em;transition:all .2s}
+.view-btn.active{background:#7c3aed;color:#fff}
+.matrix-view{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.matrix-grid{position:relative;width:100%;height:500px;background:linear-gradient(rgba(124,58,237,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,0.1) 1px,transparent 1px);background-size:50px 50px}
+.matrix-axes{position:absolute;top:0;left:0;right:0;bottom:0}
+.axis-label{position:absolute;font-size:0.9em;font-weight:600;color:#a0a0b0}
+.x-axis-label{bottom:-25px;left:50%;transform:translateX(-50%)}
+.y-axis-label{left:-80px;top:50%;transform:translateY(-50%) rotate(-90deg)}
+.quadrant-labels{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+.quadrant-label{position:absolute;font-size:0.8em;color:#666;font-weight:500}
+.q1{top:10px;right:10px}
+.q2{top:10px;left:10px}
+.q3{bottom:10px;left:10px}
+.q4{bottom:10px;right:10px}
+.use-case-dot{position:absolute;width:16px;height:16px;border-radius:50%;cursor:pointer;transform:translate(-50%,-50%);transition:all .3s;z-index:10}
+.use-case-dot:hover{transform:translate(-50%,-50%) scale(1.3)}
+.use-case-priority-1{background:#10b981;box-shadow:0 0 20px rgba(16,185,129,0.4)}
+.use-case-priority-2{background:#3b82f6;box-shadow:0 0 20px rgba(59,130,246,0.4)}
+.use-case-priority-3{background:#f59e0b;box-shadow:0 0 20px rgba(245,158,11,0.4)}
+.use-case-priority-4{background:#ef4444;box-shadow:0 0 20px rgba(239,68,68,0.4)}
+.use-case-list{display:none}
+.use-case-list.active{display:block}
+.use-case-item{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:12px 0;position:relative}
+.use-case-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.use-case-title{color:#e0e0e0;font-weight:600;font-size:1.1em;margin:0}
+.priority-badge{padding:4px 12px;border-radius:16px;font-size:0.8em;font-weight:600}
+.priority-high{background:rgba(16,185,129,0.2);color:#10b981;border:1px solid #10b981}
+.priority-medium{background:rgba(59,130,246,0.2);color:#3b82f6;border:1px solid #3b82f6}
+.priority-low{background:rgba(245,158,11,0.2);color:#f59e0b;border:1px solid #f59e0b}
+.priority-defer{background:rgba(239,68,68,0.2);color:#ef4444;border:1px solid #ef4444}
+.use-case-desc{color:#a0a0b0;font-size:0.9em;margin:8px 0}
+.use-case-scores{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.score-display{text-align:center}
+.score-value{font-size:1.2em;font-weight:700;color:#e0e0e0}
+.score-name{font-size:0.8em;color:#a0a0b0}
+.use-case-actions{display:flex;gap:8px;margin-top:16px}
+.action-btn{padding:6px 12px;border:none;border-radius:6px;font-size:0.8em;cursor:pointer;transition:all .2s}
+.edit-btn{background:#333;color:#e0e0e0}
+.delete-btn{background:#ef4444;color:#fff}
+.action-btn:hover{transform:scale(1.05)}
+.analytics-section{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin:40px 0}
+.analytics-section h3{color:#7c3aed;margin-bottom:20px;text-align:center}
+.analytics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.analytics-chart{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px}
+.chart-title{text-align:center;font-weight:600;margin-bottom:16px;color:#e0e0e0;font-size:1em}
+.insights-panel{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;grid-column:span 2}
+@media(max-width:900px){.insights-panel{grid-column:span 1}}
+.insights-panel h4{color:#3b82f6;margin-bottom:12px}
+.insight-item{background:#1a1a2e;padding:12px 16px;border-radius:8px;margin:8px 0;border-left:4px solid #7c3aed}
+.insight-item p{color:#a0a0b0;font-size:0.9em;margin:0}
+.export-section{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.export-section h4{color:#10b981;margin-bottom:12px}
+.export-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:10px 20px;border:none;border-radius:6px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;font-size:0.9em}
+.btn-primary{background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff}
+.btn-secondary{background:#333;color:#e0e0e0;border:1px solid #444}
+.btn:hover{transform:scale(1.05)}
+.templates-section{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin:40px 0}
+.templates-section h3{color:#7c3aed;margin-bottom:20px;text-align:center}
+.template-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.template-card{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:16px;cursor:pointer;transition:all .2s}
+.template-card:hover{border-color:#7c3aed;transform:scale(1.02)}
+.template-card h4{color:#3b82f6;margin-bottom:8px;font-size:1em}
+.template-card p{color:#a0a0b0;font-size:0.85em;margin-bottom:12px}
+.template-use-cases{list-style:none}
+.template-use-cases li{font-size:0.8em;color:#666;padding:2px 0;position:relative;padding-left:12px}
+.template-use-cases li:before{content:"•";color:#7c3aed;font-weight:bold;position:absolute;left:0}
+.cta-section{text-align:center;margin-top:50px;padding:40px;background:rgba(124,58,237,0.05);border-radius:16px;border:1px solid #2a2a3e}
+.cta-section h3{margin-bottom:16px;color:#e0e0e0}
+.cta-section p{margin-bottom:24px;color:#a0a0b0}
+.cta-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.cta{display:inline-block;padding:16px 32px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:1.1em;transition:transform .2s}
+.cta:hover{transform:scale(1.05)}
+.cta-secondary{background:#5469d4;font-size:1em}
+.tooltip{position:relative;cursor:help}
+.tooltip:hover::after{content:attr(data-tooltip);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#333;color:#e0e0e0;padding:8px 12px;border-radius:6px;font-size:0.8em;white-space:nowrap;z-index:1000}
+.help-section{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin:40px 0}
+.help-section h3{color:#7c3aed;margin-bottom:20px}
+.help-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.help-card{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px}
+.help-card h4{color:#3b82f6;margin-bottom:12px}
+.help-card ul{color:#a0a0b0;font-size:0.9em}
+.help-card li{margin:4px 0}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="../index.html"><strong>🤖 AI Strategy Consulting</strong></a>
+  <div><a href="../index.html#services">Services</a><a href="../ai-readiness.html">Assessment</a><a href="../roi-calculator.html">ROI Calculator</a><a href="../index.html#about">About</a></div>
+</div>
+
+<div class="hero">
+  <h1>AI Use Case <span>Prioritization Matrix</span></h1>
+  <p>Strategic framework to systematically evaluate and prioritize AI opportunities. Score use cases across multiple dimensions to build a data-driven implementation roadmap that maximizes impact and minimizes risk.</p>
+</div>
+
+<div class="container">
+  <div class="framework-intro">
+    <h2>🎯 Strategic Prioritization Framework</h2>
+    <p>Make informed decisions about which AI initiatives to pursue first. Our comprehensive framework evaluates use cases across six critical dimensions, helping you identify quick wins, strategic investments, and initiatives to defer.</p>
+    
+    <div class="evaluation-criteria">
+      <div class="criterion">
+        <h4>💰 Business Impact</h4>
+        <p>Revenue potential, cost savings, and strategic value</p>
+      </div>
+      <div class="criterion">
+        <h4>⚡ Implementation Feasibility</h4>
+        <p>Technical complexity, resource requirements, and timeline</p>
+      </div>
+      <div class="criterion">
+        <h4>🗄️ Data Readiness</h4>
+        <p>Data availability, quality, and accessibility</p>
+      </div>
+      <div class="criterion">
+        <h4>🔧 Technical Readiness</h4>
+        <p>Infrastructure, skills, and technology maturity</p>
+      </div>
+      <div class="criterion">
+        <h4>⚖️ Risk Level</h4>
+        <p>Regulatory, ethical, and operational risks</p>
+      </div>
+      <div class="criterion">
+        <h4>🎯 Strategic Alignment</h4>
+        <p>Alignment with business goals and priorities</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- Use Case Input Panel -->
+    <div class="use-case-input">
+      <div class="input-section">
+        <h3>➕ Add Use Case</h3>
+        
+        <form id="useCaseForm">
+          <div class="form-group">
+            <label for="useCaseName">Use Case Name *</label>
+            <input type="text" id="useCaseName" placeholder="e.g., Customer Service Chatbot" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="useCaseDescription">Description</label>
+            <textarea id="useCaseDescription" placeholder="Brief description of the AI implementation..."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="useCaseCategory">Category</label>
+            <select id="useCaseCategory">
+              <option value="automation">Process Automation</option>
+              <option value="analytics">Analytics & Insights</option>
+              <option value="customer">Customer Experience</option>
+              <option value="operations">Operations Optimization</option>
+              <option value="product">Product Innovation</option>
+              <option value="security">Security & Risk</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="criteria-scoring">
+            <h4>📊 Evaluation Scores (1-5 scale)</h4>
+            
+            <div class="score-item">
+              <span class="score-label tooltip" data-tooltip="Potential revenue impact and cost savings">💰 Business Impact</span>
+              <input type="range" class="score-slider" id="businessImpact" min="1" max="5" value="3" oninput="updateScoreDisplay('businessImpact')">
+              <input type="number" class="score-input" id="businessImpactValue" min="1" max="5" value="3" onchange="updateSlider('businessImpact')">
+            </div>
+            
+            <div class="score-item">
+              <span class="score-label tooltip" data-tooltip="Technical complexity and resource requirements">⚡ Implementation Feasibility</span>
+              <input type="range" class="score-slider" id="feasibility" min="1" max="5" value="3" oninput="updateScoreDisplay('feasibility')">
+              <input type="number" class="score-input" id="feasibilityValue" min="1" max="5" value="3" onchange="updateSlider('feasibility')">
+            </div>
+            
+            <div class="score-item">
+              <span class="score-label tooltip" data-tooltip="Data availability, quality, and accessibility">🗄️ Data Readiness</span>
+              <input type="range" class="score-slider" id="dataReadiness" min="1" max="5" value="3" oninput="updateScoreDisplay('dataReadiness')">
+              <input type="number" class="score-input" id="dataReadinessValue" min="1" max="5" value="3" onchange="updateSlider('dataReadiness')">
+            </div>
+            
+            <div class="score-item">
+              <span class="score-label tooltip" data-tooltip="Infrastructure, skills, and technology maturity">🔧 Technical Readiness</span>
+              <input type="range" class="score-slider" id="technicalReadiness" min="1" max="5" value="3" oninput="updateScoreDisplay('technicalReadiness')">
+              <input type="number" class="score-input" id="technicalReadinessValue" min="1" max="5" value="3" onchange="updateSlider('technicalReadiness')">
+            </div>
+            
+            <div class="score-item">
+              <span class="score-label tooltip" data-tooltip="Lower score = higher risk (inverted for calculations)">⚖️ Risk Level</span>
+              <input type="range" class="score-slider" id="riskLevel" min="1" max="5" value="3" oninput="updateScoreDisplay('riskLevel')">
+              <input type="number" class="score-input" id="riskLevelValue" min="1" max="5" value="3" onchange="updateSlider('riskLevel')">
+            </div>
+            
+            <div class="score-item">
+              <span class="score-label tooltip" data-tooltip="Alignment with business goals and strategy">🎯 Strategic Alignment</span>
+              <input type="range" class="score-slider" id="strategicAlignment" min="1" max="5" value="3" oninput="updateScoreDisplay('strategicAlignment')">
+              <input type="number" class="score-input" id="strategicAlignmentValue" min="1" max="5" value="3" onchange="updateSlider('strategicAlignment')">
+            </div>
+          </div>
+          
+          <button type="submit" class="add-use-case-btn">Add Use Case</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Matrix Visualization -->
+    <div class="matrix-container">
+      <div class="matrix-header">
+        <h3>📊 Prioritization Matrix</h3>
+        <div class="matrix-controls">
+          <select class="filter-select" id="categoryFilter" onchange="filterUseCases()">
+            <option value="all">All Categories</option>
+            <option value="automation">Process Automation</option>
+            <option value="analytics">Analytics & Insights</option>
+            <option value="customer">Customer Experience</option>
+            <option value="operations">Operations Optimization</option>
+            <option value="product">Product Innovation</option>
+            <option value="security">Security & Risk</option>
+            <option value="other">Other</option>
+          </select>
+          
+          <div class="view-toggle">
+            <button class="view-btn active" onclick="switchView('matrix')" id="matrixViewBtn">Matrix</button>
+            <button class="view-btn" onclick="switchView('list')" id="listViewBtn">List</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Matrix View -->
+      <div class="matrix-view" id="matrixView">
+        <div class="matrix-grid">
+          <div class="matrix-axes">
+            <div class="axis-label x-axis-label">Implementation Feasibility →</div>
+            <div class="axis-label y-axis-label">Business Impact →</div>
+          </div>
+          
+          <div class="quadrant-labels">
+            <div class="quadrant-label q1">High Impact<br>High Feasibility<br><strong>Quick Wins</strong></div>
+            <div class="quadrant-label q2">High Impact<br>Low Feasibility<br><strong>Strategic Projects</strong></div>
+            <div class="quadrant-label q3">Low Impact<br>Low Feasibility<br><strong>Avoid</strong></div>
+            <div class="quadrant-label q4">Low Impact<br>High Feasibility<br><strong>Fill-ins</strong></div>
+          </div>
+          
+          <div id="useCaseDots">
+            <!-- Use case dots will be inserted here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- List View -->
+      <div class="use-case-list" id="listView">
+        <div id="useCaseList">
+          <!-- Use case items will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Export Section -->
+      <div class="export-section">
+        <h4>📥 Export & Share</h4>
+        <div class="export-buttons">
+          <button class="btn btn-secondary" onclick="exportToPDF()">📄 Export PDF Report</button>
+          <button class="btn btn-secondary" onclick="exportToExcel()">📊 Export to Excel</button>
+          <button class="btn btn-primary" onclick="saveScenario()">💾 Save Scenario</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Analytics Section -->
+  <div class="analytics-section">
+    <h3>📈 Portfolio Analytics</h3>
+    <div class="analytics-grid">
+      <div class="analytics-chart">
+        <div class="chart-title">Use Case Distribution by Priority</div>
+        <canvas id="priorityChart" width="300" height="200"></canvas>
+      </div>
+      
+      <div class="analytics-chart">
+        <div class="chart-title">Use Case Distribution by Category</div>
+        <canvas id="categoryChart" width="300" height="200"></canvas>
+      </div>
+      
+      <div class="insights-panel">
+        <h4>🔍 AI Portfolio Insights</h4>
+        <div id="portfolioInsights">
+          <div class="insight-item">
+            <p>Add some use cases to see AI portfolio insights and recommendations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Templates Section -->
+  <div class="templates-section">
+    <h3>📋 Industry Use Case Templates</h3>
+    <div class="template-grid">
+      <div class="template-card" onclick="loadTemplate('retail')">
+        <h4>🛍️ Retail & E-commerce</h4>
+        <p>Common AI applications for retail organizations</p>
+        <ul class="template-use-cases">
+          <li>Personalized Product Recommendations</li>
+          <li>Dynamic Pricing Optimization</li>
+          <li>Inventory Management</li>
+          <li>Customer Sentiment Analysis</li>
+          <li>Fraud Detection</li>
+        </ul>
+      </div>
+      
+      <div class="template-card" onclick="loadTemplate('finance')">
+        <h4>🏦 Financial Services</h4>
+        <p>AI use cases for banking and financial institutions</p>
+        <ul class="template-use-cases">
+          <li>Credit Risk Assessment</li>
+          <li>Algorithmic Trading</li>
+          <li>Anti-Money Laundering</li>
+          <li>Robo-Advisory Services</li>
+          <li>Customer Service Automation</li>
+        </ul>
+      </div>
+      
+      <div class="template-card" onclick="loadTemplate('healthcare')">
+        <h4>🏥 Healthcare</h4>
+        <p>Medical and healthcare AI implementations</p>
+        <ul class="template-use-cases">
+          <li>Medical Image Analysis</li>
+          <li>Drug Discovery</li>
+          <li>Predictive Diagnostics</li>
+          <li>Treatment Optimization</li>
+          <li>Administrative Automation</li>
+        </ul>
+      </div>
+      
+      <div class="template-card" onclick="loadTemplate('manufacturing')">
+        <h4>🏭 Manufacturing</h4>
+        <p>Industrial AI and smart manufacturing</p>
+        <ul class="template-use-cases">
+          <li>Predictive Maintenance</li>
+          <li>Quality Control</li>
+          <li>Supply Chain Optimization</li>
+          <li>Production Planning</li>
+          <li>Safety Monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Section -->
+  <div class="help-section">
+    <h3>❓ How to Use the Prioritization Matrix</h3>
+    <div class="help-grid">
+      <div class="help-card">
+        <h4>📝 Step 1: Define Use Cases</h4>
+        <ul>
+          <li>Brainstorm potential AI applications</li>
+          <li>Be specific about the business problem</li>
+          <li>Include technical requirements</li>
+          <li>Consider stakeholder impact</li>
+        </ul>
+      </div>
+      
+      <div class="help-card">
+        <h4>📊 Step 2: Score Each Criteria</h4>
+        <ul>
+          <li><strong>1-2:</strong> Low/Poor - Minimal benefit or high difficulty</li>
+          <li><strong>3:</strong> Medium/Average - Moderate benefit and effort</li>
+          <li><strong>4-5:</strong> High/Excellent - Maximum impact or ease</li>
+          <li>Be realistic and consistent in scoring</li>
+        </ul>
+      </div>
+      
+      <div class="help-card">
+        <h4>🎯 Step 3: Analyze Results</h4>
+        <ul>
+          <li><strong>Quick Wins:</strong> High impact, high feasibility - Start here</li>
+          <li><strong>Strategic:</strong> High impact, low feasibility - Long-term goals</li>
+          <li><strong>Fill-ins:</strong> Low impact, high feasibility - Gap fillers</li>
+          <li><strong>Avoid:</strong> Low impact, low feasibility - Deprioritize</li>
+        </ul>
+      </div>
+      
+      <div class="help-card">
+        <h4>🚀 Step 4: Build Roadmap</h4>
+        <ul>
+          <li>Prioritize quick wins for immediate value</li>
+          <li>Plan strategic projects for future phases</li>
+          <li>Consider resource allocation and dependencies</li>
+          <li>Review and update regularly</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>🚀 Ready to Execute Your AI Roadmap?</h3>
+    <p>Transform your prioritized use cases into a comprehensive AI strategy with detailed implementation plans, resource requirements, and timeline. Our experts will help you execute your highest-priority initiatives.</p>
+    <div class="cta-buttons">
+      <a href="https://buy.stripe.com/eVq8wI8HY4CCg8Wekw0Ny00" class="cta" target="_blank">💡 AI Assessment ($500) →</a>
+      <a href="https://buy.stripe.com/3cI4gse2i1qqe0O1xK0Ny01" class="cta cta-secondary" target="_blank">🎯 Full AI Strategy ($2,000) →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Global variables
+let useCases = [];
+let priorityChart = null;
+let categoryChart = null;
+
+// Industry templates
+const industryTemplates = {
+  retail: [
+    { name: 'Personalized Product Recommendations', category: 'customer', description: 'AI-powered product recommendations based on user behavior and preferences', scores: { businessImpact: 4, feasibility: 4, dataReadiness: 3, technicalReadiness: 4, riskLevel: 4, strategicAlignment: 4 } },
+    { name: 'Dynamic Pricing Optimization', category: 'operations', description: 'Real-time price optimization based on demand, competition, and inventory', scores: { businessImpact: 5, feasibility: 3, dataReadiness: 4, technicalReadiness: 3, riskLevel: 3, strategicAlignment: 4 } },
+    { name: 'Inventory Management AI', category: 'operations', description: 'Predictive analytics for optimal inventory levels and demand forecasting', scores: { businessImpact: 4, feasibility: 3, dataReadiness: 3, technicalReadiness: 3, riskLevel: 4, strategicAlignment: 4 } },
+    { name: 'Customer Sentiment Analysis', category: 'analytics', description: 'Social media and review sentiment analysis for brand monitoring', scores: { businessImpact: 3, feasibility: 4, dataReadiness: 4, technicalReadiness: 4, riskLevel: 4, strategicAlignment: 3 } },
+    { name: 'Fraud Detection System', category: 'security', description: 'Real-time fraud detection for online transactions', scores: { businessImpact: 4, feasibility: 3, dataReadiness: 3, technicalReadiness: 3, riskLevel: 3, strategicAlignment: 4 } }
+  ],
+  finance: [
+    { name: 'Credit Risk Assessment', category: 'analytics', description: 'AI-powered credit scoring and risk evaluation', scores: { businessImpact: 5, feasibility: 3, dataReadiness: 4, technicalReadiness: 3, riskLevel: 2, strategicAlignment: 5 } },
+    { name: 'Algorithmic Trading', category: 'automation', description: 'Automated trading strategies based on market analysis', scores: { businessImpact: 5, feasibility: 2, dataReadiness: 4, technicalReadiness: 2, riskLevel: 2, strategicAlignment: 4 } },
+    { name: 'Anti-Money Laundering', category: 'security', description: 'Automated AML compliance and suspicious activity detection', scores: { businessImpact: 4, feasibility: 3, dataReadiness: 3, technicalReadiness: 3, riskLevel: 2, strategicAlignment: 5 } },
+    { name: 'Robo-Advisory Services', category: 'product', description: 'Automated investment advice and portfolio management', scores: { businessImpact: 4, feasibility: 3, dataReadiness: 4, technicalReadiness: 3, riskLevel: 3, strategicAlignment: 4 } },
+    { name: 'Customer Service Automation', category: 'customer', description: 'AI chatbots and automated customer support', scores: { businessImpact: 3, feasibility: 4, dataReadiness: 4, technicalReadiness: 4, riskLevel: 4, strategicAlignment: 3 } }
+  ],
+  healthcare: [
+    { name: 'Medical Image Analysis', category: 'analytics', description: 'AI-assisted radiology and medical imaging interpretation', scores: { businessImpact: 5, feasibility: 2, dataReadiness: 3, technicalReadiness: 2, riskLevel: 2, strategicAlignment: 5 } },
+    { name: 'Drug Discovery AI', category: 'product', description: 'Accelerated pharmaceutical research and development', scores: { businessImpact: 5, feasibility: 1, dataReadiness: 2, technicalReadiness: 2, riskLevel: 2, strategicAlignment: 5 } },
+    { name: 'Predictive Diagnostics', category: 'analytics', description: 'Early disease detection and risk prediction', scores: { businessImpact: 5, feasibility: 2, dataReadiness: 2, technicalReadiness: 2, riskLevel: 1, strategicAlignment: 5 } },
+    { name: 'Treatment Optimization', category: 'analytics', description: 'Personalized treatment plans and outcome prediction', scores: { businessImpact: 4, feasibility: 2, dataReadiness: 3, technicalReadiness: 2, riskLevel: 2, strategicAlignment: 4 } },
+    { name: 'Administrative Automation', category: 'automation', description: 'Automated scheduling, billing, and administrative tasks', scores: { businessImpact: 3, feasibility: 4, dataReadiness: 4, technicalReadiness: 4, riskLevel: 4, strategicAlignment: 3 } }
+  ],
+  manufacturing: [
+    { name: 'Predictive Maintenance', category: 'operations', description: 'AI-powered equipment failure prediction and maintenance scheduling', scores: { businessImpact: 4, feasibility: 3, dataReadiness: 3, technicalReadiness: 3, riskLevel: 4, strategicAlignment: 4 } },
+    { name: 'Quality Control AI', category: 'operations', description: 'Automated defect detection and quality assurance', scores: { businessImpact: 4, feasibility: 3, dataReadiness: 4, technicalReadiness: 3, riskLevel: 4, strategicAlignment: 4 } },
+    { name: 'Supply Chain Optimization', category: 'operations', description: 'AI-driven supply chain planning and optimization', scores: { businessImpact: 4, feasibility: 3, dataReadiness: 3, technicalReadiness: 3, riskLevel: 3, strategicAlignment: 4 } },
+    { name: 'Production Planning AI', category: 'automation', description: 'Intelligent production scheduling and resource allocation', scores: { businessImpact: 4, feasibility: 3, dataReadiness: 3, technicalReadiness: 3, riskLevel: 4, strategicAlignment: 4 } },
+    { name: 'Safety Monitoring System', category: 'security', description: 'AI-powered workplace safety and hazard detection', scores: { businessImpact: 3, feasibility: 3, dataReadiness: 3, technicalReadiness: 3, riskLevel: 3, strategicAlignment: 3 } }
+  ]
+};
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('useCaseForm').addEventListener('submit', addUseCase);
+  updateCharts();
+});
+
+function updateScoreDisplay(criterion) {
+  const slider = document.getElementById(criterion);
+  const input = document.getElementById(criterion + 'Value');
+  input.value = slider.value;
+}
+
+function updateSlider(criterion) {
+  const slider = document.getElementById(criterion);
+  const input = document.getElementById(criterion + 'Value');
+  slider.value = input.value;
+}
+
+function addUseCase(event) {
+  event.preventDefault();
+  
+  const formData = new FormData(event.target);
+  const useCase = {
+    id: Date.now(),
+    name: document.getElementById('useCaseName').value,
+    description: document.getElementById('useCaseDescription').value,
+    category: document.getElementById('useCaseCategory').value,
+    scores: {
+      businessImpact: parseInt(document.getElementById('businessImpact').value),
+      feasibility: parseInt(document.getElementById('feasibility').value),
+      dataReadiness: parseInt(document.getElementById('dataReadiness').value),
+      technicalReadiness: parseInt(document.getElementById('technicalReadiness').value),
+      riskLevel: parseInt(document.getElementById('riskLevel').value),
+      strategicAlignment: parseInt(document.getElementById('strategicAlignment').value)
+    }
+  };
+  
+  // Calculate priority
+  useCase.priority = calculatePriority(useCase.scores);
+  
+  useCases.push(useCase);
+  
+  // Reset form
+  event.target.reset();
+  resetSliders();
+  
+  // Update displays
+  updateMatrix();
+  updateList();
+  updateCharts();
+  updateInsights();
+}
+
+function resetSliders() {
+  const sliders = ['businessImpact', 'feasibility', 'dataReadiness', 'technicalReadiness', 'riskLevel', 'strategicAlignment'];
+  sliders.forEach(slider => {
+    document.getElementById(slider).value = 3;
+    document.getElementById(slider + 'Value').value = 3;
+  });
+}
+
+function calculatePriority(scores) {
+  // Weighted scoring algorithm
+  const weights = {
+    businessImpact: 0.25,
+    feasibility: 0.25,
+    dataReadiness: 0.15,
+    technicalReadiness: 0.15,
+    riskLevel: 0.1, // Inverted - higher risk = lower score
+    strategicAlignment: 0.1
+  };
+  
+  const weightedScore = 
+    scores.businessImpact * weights.businessImpact +
+    scores.feasibility * weights.feasibility +
+    scores.dataReadiness * weights.dataReadiness +
+    scores.technicalReadiness * weights.technicalReadiness +
+    (6 - scores.riskLevel) * weights.riskLevel + // Invert risk score
+    scores.strategicAlignment * weights.strategicAlignment;
+  
+  // Classify priority based on weighted score
+  if (weightedScore >= 4.0) return 1; // High Priority
+  if (weightedScore >= 3.5) return 2; // Medium Priority  
+  if (weightedScore >= 2.5) return 3; // Low Priority
+  return 4; // Defer
+}
+
+function updateMatrix() {
+  const container = document.getElementById('useCaseDots');
+  container.innerHTML = '';
+  
+  useCases.forEach(useCase => {
+    const dot = document.createElement('div');
+    dot.className = `use-case-dot use-case-priority-${useCase.priority}`;
+    
+    // Position based on feasibility (x) and business impact (y)
+    const x = (useCase.scores.feasibility / 5) * 100;
+    const y = 100 - (useCase.scores.businessImpact / 5) * 100; // Invert Y axis
+    
+    dot.style.left = x + '%';
+    dot.style.top = y + '%';
+    
+    dot.title = `${useCase.name}\nImpact: ${useCase.scores.businessImpact}\nFeasibility: ${useCase.scores.feasibility}`;
+    dot.onclick = () => editUseCase(useCase.id);
+    
+    container.appendChild(dot);
+  });
+}
+
+function updateList() {
+  const container = document.getElementById('useCaseList');
+  const sortedUseCases = [...useCases].sort((a, b) => a.priority - b.priority);
+  
+  container.innerHTML = sortedUseCases.map(useCase => {
+    const priorityLabels = ['', 'High Priority', 'Medium Priority', 'Low Priority', 'Defer'];
+    const priorityClasses = ['', 'priority-high', 'priority-medium', 'priority-low', 'priority-defer'];
+    
+    return `
+      <div class="use-case-item">
+        <div class="use-case-header">
+          <h4 class="use-case-title">${useCase.name}</h4>
+          <span class="priority-badge ${priorityClasses[useCase.priority]}">${priorityLabels[useCase.priority]}</span>
+        </div>
+        <div class="use-case-desc">${useCase.description || 'No description provided'}</div>
+        <div class="use-case-scores">
+          <div class="score-display">
+            <div class="score-value">${useCase.scores.businessImpact}</div>
+            <div class="score-name">Business Impact</div>
+          </div>
+          <div class="score-display">
+            <div class="score-value">${useCase.scores.feasibility}</div>
+            <div class="score-name">Feasibility</div>
+          </div>
+          <div class="score-display">
+            <div class="score-value">${useCase.scores.dataReadiness}</div>
+            <div class="score-name">Data Readiness</div>
+          </div>
+          <div class="score-display">
+            <div class="score-value">${useCase.scores.technicalReadiness}</div>
+            <div class="score-name">Tech Readiness</div>
+          </div>
+          <div class="score-display">
+            <div class="score-value">${6 - useCase.scores.riskLevel}</div>
+            <div class="score-name">Risk Score</div>
+          </div>
+          <div class="score-display">
+            <div class="score-value">${useCase.scores.strategicAlignment}</div>
+            <div class="score-name">Strategic Fit</div>
+          </div>
+        </div>
+        <div class="use-case-actions">
+          <button class="action-btn edit-btn" onclick="editUseCase(${useCase.id})">Edit</button>
+          <button class="action-btn delete-btn" onclick="deleteUseCase(${useCase.id})">Delete</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function updateCharts() {
+  updatePriorityChart();
+  updateCategoryChart();
+}
+
+function updatePriorityChart() {
+  const ctx = document.getElementById('priorityChart').getContext('2d');
+  
+  if (priorityChart) {
+    priorityChart.destroy();
+  }
+  
+  const priorityCounts = [0, 0, 0, 0, 0]; // Index 0 unused, 1-4 for priorities
+  useCases.forEach(useCase => {
+    priorityCounts[useCase.priority]++;
+  });
+  
+  priorityChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['High Priority', 'Medium Priority', 'Low Priority', 'Defer'],
+      datasets: [{
+        data: priorityCounts.slice(1),
+        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ef4444'],
+        borderWidth: 2,
+        borderColor: '#1a1a2e'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: { color: '#e0e0e0' }
+        }
+      }
+    }
+  });
+}
+
+function updateCategoryChart() {
+  const ctx = document.getElementById('categoryChart').getContext('2d');
+  
+  if (categoryChart) {
+    categoryChart.destroy();
+  }
+  
+  const categories = {};
+  useCases.forEach(useCase => {
+    categories[useCase.category] = (categories[useCase.category] || 0) + 1;
+  });
+  
+  const labels = Object.keys(categories);
+  const data = Object.values(categories);
+  
+  categoryChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels.map(cat => cat.charAt(0).toUpperCase() + cat.slice(1)),
+      datasets: [{
+        data: data,
+        backgroundColor: '#7c3aed',
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: '#a0a0b0' },
+          grid: { color: '#333' }
+        },
+        x: {
+          ticks: { color: '#a0a0b0' },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+}
+
+function updateInsights() {
+  const container = document.getElementById('portfolioInsights');
+  
+  if (useCases.length === 0) {
+    container.innerHTML = '<div class="insight-item"><p>Add some use cases to see AI portfolio insights and recommendations.</p></div>';
+    return;
+  }
+  
+  const insights = [];
+  
+  // Priority distribution analysis
+  const priorityCounts = [0, 0, 0, 0, 0];
+  useCases.forEach(useCase => priorityCounts[useCase.priority]++);
+  
+  if (priorityCounts[1] > 0) {
+    insights.push(`You have ${priorityCounts[1]} high-priority use cases ready for immediate implementation.`);
+  }
+  
+  if (priorityCounts[1] === 0 && priorityCounts[2] > 0) {
+    insights.push('Consider focusing on medium-priority use cases while building foundational capabilities.');
+  }
+  
+  if (priorityCounts[4] > priorityCounts[1] + priorityCounts[2]) {
+    insights.push('Many use cases are marked for deferral. Review scoring criteria or consider foundational improvements.');
+  }
+  
+  // Category analysis
+  const categories = {};
+  useCases.forEach(useCase => {
+    categories[useCase.category] = (categories[useCase.category] || 0) + 1;
+  });
+  
+  const topCategory = Object.entries(categories).reduce((max, entry) => 
+    entry[1] > max[1] ? entry : max, ['', 0])[0];
+  
+  if (topCategory) {
+    insights.push(`${topCategory.charAt(0).toUpperCase() + topCategory.slice(1)} is your most popular category with ${categories[topCategory]} use cases.`);
+  }
+  
+  // Risk analysis
+  const avgRisk = useCases.reduce((sum, uc) => sum + uc.scores.riskLevel, 0) / useCases.length;
+  if (avgRisk > 3) {
+    insights.push('Your portfolio has relatively high risk. Consider starting with lower-risk initiatives.');
+  }
+  
+  container.innerHTML = insights.map(insight => 
+    `<div class="insight-item"><p>${insight}</p></div>`
+  ).join('') || '<div class="insight-item"><p>Add more use cases to generate insights.</p></div>';
+}
+
+function switchView(view) {
+  document.getElementById('matrixView').style.display = view === 'matrix' ? 'block' : 'none';
+  document.getElementById('listView').className = `use-case-list ${view === 'list' ? 'active' : ''}`;
+  
+  document.getElementById('matrixViewBtn').className = `view-btn ${view === 'matrix' ? 'active' : ''}`;
+  document.getElementById('listViewBtn').className = `view-btn ${view === 'list' ? 'active' : ''}`;
+}
+
+function filterUseCases() {
+  const filter = document.getElementById('categoryFilter').value;
+  // Implement filtering logic
+  updateMatrix();
+  updateList();
+}
+
+function editUseCase(id) {
+  const useCase = useCases.find(uc => uc.id === id);
+  if (useCase) {
+    // Populate form with existing data
+    document.getElementById('useCaseName').value = useCase.name;
+    document.getElementById('useCaseDescription').value = useCase.description;
+    document.getElementById('useCaseCategory').value = useCase.category;
+    
+    Object.entries(useCase.scores).forEach(([key, value]) => {
+      document.getElementById(key).value = value;
+      document.getElementById(key + 'Value').value = value;
+    });
+    
+    // Remove existing use case
+    deleteUseCase(id);
+  }
+}
+
+function deleteUseCase(id) {
+  useCases = useCases.filter(uc => uc.id !== id);
+  updateMatrix();
+  updateList();
+  updateCharts();
+  updateInsights();
+}
+
+function loadTemplate(industry) {
+  const template = industryTemplates[industry];
+  if (template) {
+    template.forEach(useCase => {
+      const newUseCase = {
+        id: Date.now() + Math.random(),
+        name: useCase.name,
+        description: useCase.description,
+        category: useCase.category,
+        scores: useCase.scores
+      };
+      newUseCase.priority = calculatePriority(newUseCase.scores);
+      useCases.push(newUseCase);
+    });
+    
+    updateMatrix();
+    updateList();
+    updateCharts();
+    updateInsights();
+  }
+}
+
+function exportToPDF() {
+  alert('PDF export would generate a comprehensive prioritization report with matrix visualization, use case details, and implementation recommendations.');
+}
+
+function exportToExcel() {
+  alert('Excel export would create a detailed spreadsheet with all use cases, scores, priority rankings, and analysis data.');
+}
+
+function saveScenario() {
+  const scenario = {
+    timestamp: new Date().toISOString(),
+    useCases: useCases
+  };
+  
+  localStorage.setItem('aiUseCaseScenario_' + Date.now(), JSON.stringify(scenario));
+  alert('Scenario saved successfully! You can reload these use cases later.');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Data Audit Checklist — Comprehensive Data Readiness Assessment | Ashdown AI Strategy Consulting</title>
+<meta name="description" content="Complete AI data audit checklist with step-by-step assessment framework. Evaluate data quality, accessibility, governance, and AI readiness across your organization.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://majh777.github.io/ai-strategy-consulting/tools/ai-data-audit-checklist.html">
+<meta property="og:title" content="AI Data Audit Checklist — Comprehensive Data Readiness Assessment">
+<meta property="og:description" content="Step-by-step framework to assess data readiness for AI initiatives.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://majh777.github.io/ai-strategy-consulting/tools/ai-data-audit-checklist.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Data Audit Checklist — Data Readiness Assessment">
+<meta name="twitter:description" content="Comprehensive framework for auditing data readiness for AI projects.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI Data Audit Checklist",
+  "description": "Comprehensive framework for auditing data readiness and quality for AI implementations",
+  "applicationCategory": "Data Assessment Tool",
+  "operatingSystem": "Web Browser",
+  "url": "https://majh777.github.io/ai-strategy-consulting/tools/ai-data-audit-checklist.html",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Ashdown AI Strategy Consulting",
+    "url": "https://majh777.github.io/ai-strategy-consulting/"
+  }
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f1a;color:#e0e0e0;line-height:1.7}
+.container{max-width:1400px;margin:0 auto;padding:0 20px}
+.nav{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e1e2e}
+.nav a{color:#7c3aed;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:60px 20px 40px}
+.hero h1{font-size:2.4em;font-weight:800;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,#7c3aed,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1em;color:#a0a0b0;max-width:700px;margin:0 auto}
+.audit-intro{max-width:800px;margin:0 auto;padding:40px 20px;background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;margin-bottom:40px}
+.audit-intro h2{color:#7c3aed;margin-bottom:16px}
+.audit-dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:24px 0}
+.dimension{background:#0f0f1a;padding:16px;border-radius:8px;border:1px solid #333}
+.dimension h4{color:#3b82f6;font-size:0.9em;margin-bottom:4px}
+.dimension p{font-size:0.8em;color:#a0a0b0}
+.main-layout{display:grid;grid-template-columns:300px 1fr;gap:30px;margin:40px 0}
+@media(max-width:1200px){.main-layout{grid-template-columns:1fr;gap:20px}}
+.audit-controls{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:20px;height:fit-content;position:sticky;top:20px}
+@media(max-width:1200px){.audit-controls{position:static}}
+.control-section{margin-bottom:24px}
+.control-title{color:#7c3aed;font-weight:600;margin-bottom:12px;font-size:1em}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;color:#a0a0b0;font-size:0.9em;margin-bottom:6px}
+.form-group input, .form-group select{width:100%;background:#0f0f1a;border:1px solid #444;border-radius:6px;padding:8px 10px;color:#e0e0e0;font-size:0.9em}
+.form-group input:focus, .form-group select:focus{outline:none;border-color:#7c3aed}
+.audit-progress{background:#0f0f1a;border:1px solid #333;border-radius:8px;padding:16px;margin:16px 0}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.progress-title{color:#10b981;font-weight:600;font-size:0.9em}
+.progress-percentage{color:#10b981;font-weight:700;font-size:1.1em}
+.progress-bar{background:#333;border-radius:10px;height:8px;overflow:hidden}
+.progress-fill{background:linear-gradient(90deg,#10b981,#059669);height:100%;border-radius:10px;transition:width 0.3s}
+.audit-scores{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.score-item{text-align:center;background:#0f0f1a;padding:12px;border-radius:6px}
+.score-value{font-size:1.3em;font-weight:700}
+.score-excellent{color:#10b981}
+.score-good{color:#3b82f6}
+.score-fair{color:#f59e0b}
+.score-poor{color:#ef4444}
+.score-label{font-size:0.8em;color:#a0a0b0}
+.action-buttons{display:flex;flex-direction:column;gap:8px}
+.btn{padding:10px 16px;border:none;border-radius:6px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;font-size:0.9em;text-align:center}
+.btn-primary{background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff}
+.btn-secondary{background:#333;color:#e0e0e0;border:1px solid #444}
+.btn-success{background:#10b981;color:#fff}
+.btn:hover{transform:scale(1.02)}
+.checklist-container{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px}
+.checklist-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap}
+.checklist-title{color:#7c3aed;font-size:1.3em;margin:0}
+.checklist-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.category-filter{background:#0f0f1a;border:1px solid #444;border-radius:6px;padding:6px 10px;color:#e0e0e0;font-size:0.85em}
+.view-toggle{display:flex;background:#0f0f1a;border-radius:6px;overflow:hidden}
+.view-btn{padding:6px 12px;background:transparent;border:none;color:#a0a0b0;cursor:pointer;font-size:0.85em;transition:all .2s}
+.view-btn.active{background:#7c3aed;color:#fff}
+.audit-category{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.category-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;cursor:pointer}
+.category-title{color:#3b82f6;font-weight:600;font-size:1.1em;display:flex;align-items:center}
+.category-icon{margin-right:8px;font-size:1.2em}
+.category-score{display:flex;align-items:center;gap:8px}
+.score-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8em;color:#fff}
+.score-circle.excellent{background:#10b981}
+.score-circle.good{background:#3b82f6}
+.score-circle.fair{background:#f59e0b}
+.score-circle.poor{background:#ef4444}
+.score-circle.pending{background:#6b7280;color:#d1d5db}
+.category-toggle{color:#7c3aed;font-size:1.2em}
+.checklist-items{display:none}
+.checklist-items.expanded{display:block}
+.checklist-item{display:flex;align-items:flex-start;padding:12px;margin:8px 0;background:#1a1a2e;border-radius:8px;border-left:4px solid #333;cursor:pointer;transition:all 0.2s}
+.checklist-item:hover{background:#151527;border-left-color:#7c3aed}
+.checklist-item.completed{border-left-color:#10b981;background:rgba(16,185,129,0.05)}
+.checklist-item.failed{border-left-color:#ef4444;background:rgba(239,68,68,0.05)}
+.item-checkbox{margin-right:12px;margin-top:2px}
+.checkbox{width:18px;height:18px;border:2px solid #444;border-radius:4px;cursor:pointer;position:relative;transition:all 0.2s}
+.checkbox.checked{border-color:#10b981;background:#10b981}
+.checkbox.checked:after{content:"✓";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-weight:bold;font-size:12px}
+.checkbox.failed{border-color:#ef4444;background:#ef4444}
+.checkbox.failed:after{content:"✗";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-weight:bold;font-size:12px}
+.item-content{flex:1}
+.item-title{color:#e0e0e0;font-weight:600;font-size:0.95em;margin-bottom:4px}
+.item-description{color:#a0a0b0;font-size:0.85em;margin-bottom:8px}
+.item-details{display:none;margin-top:8px;padding-top:8px;border-top:1px solid #333}
+.item-details.expanded{display:block}
+.detail-section{margin-bottom:12px}
+.detail-title{color:#7c3aed;font-weight:600;font-size:0.85em;margin-bottom:4px}
+.detail-content{color:#a0a0b0;font-size:0.8em}
+.data-sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:20px 0}
+.data-source{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:16px}
+.source-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.source-name{color:#e0e0e0;font-weight:600}
+.source-status{padding:2px 8px;border-radius:10px;font-size:0.8em;font-weight:600}
+.status-ready{background:rgba(16,185,129,0.2);color:#10b981}
+.status-needs-work{background:rgba(245,158,11,0.2);color:#f59e0b}
+.status-not-ready{background:rgba(239,68,68,0.2);color:#ef4444}
+.source-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.source-metric{text-align:center;background:#1a1a2e;padding:6px;border-radius:4px}
+.metric-value{font-weight:700;color:#e0e0e0;font-size:0.9em}
+.metric-label{color:#a0a0b0;font-size:0.7em}
+.recommendations-panel{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.recommendations-panel h4{color:#10b981;margin-bottom:16px}
+.recommendation-item{background:#1a1a2e;padding:12px 16px;border-left:4px solid #10b981;margin:8px 0;border-radius:0 6px 6px 0}
+.recommendation-item .priority{color:#f59e0b;font-weight:600;font-size:0.8em;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.recommendation-item h5{color:#e0e0e0;margin-bottom:4px;font-size:0.9em}
+.recommendation-item p{color:#a0a0b0;font-size:0.85em;margin:0}
+.data-inventory{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.data-inventory h4{color:#3b82f6;margin-bottom:16px}
+.inventory-table{width:100%;border-collapse:collapse}
+.inventory-table th{background:#1a1a2e;color:#7c3aed;padding:10px;text-align:left;border:1px solid #333;font-weight:600;font-size:0.85em}
+.inventory-table td{padding:10px;border:1px solid #333;color:#e0e0e0;font-size:0.85em}
+.inventory-table tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.quality-excellent{color:#10b981;font-weight:700}
+.quality-good{color:#3b82f6;font-weight:700}
+.quality-fair{color:#f59e0b;font-weight:700}
+.quality-poor{color:#ef4444;font-weight:700}
+.gap-analysis{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.gap-analysis h4{color:#f59e0b;margin-bottom:16px}
+.gap-categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.gap-category{background:#1a1a2e;padding:16px;border-radius:8px;border-left:4px solid #f59e0b}
+.gap-category h5{color:#f59e0b;margin-bottom:8px;font-size:0.95em}
+.gap-list{list-style:none}
+.gap-list li{padding:3px 0;color:#a0a0b0;font-size:0.85em;position:relative;padding-left:16px}
+.gap-list li:before{content:"⚠️";position:absolute;left:0}
+.export-section{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.export-section h4{color:#10b981;margin-bottom:12px}
+.export-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.export-option{text-align:center;padding:16px;background:#1a1a2e;border:1px solid #444;border-radius:8px;cursor:pointer;transition:all 0.2s}
+.export-option:hover{border-color:#7c3aed;transform:scale(1.02)}
+.export-option h5{color:#3b82f6;margin-bottom:8px;font-size:0.9em}
+.export-option p{color:#a0a0b0;font-size:0.8em;margin-bottom:12px}
+.best-practices{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:16px;padding:30px;margin:40px 0}
+.best-practices h3{color:#7c3aed;margin-bottom:20px;text-align:center}
+.practices-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.practice-card{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px}
+.practice-card h4{color:#3b82f6;margin-bottom:12px}
+.practice-list{list-style:none}
+.practice-list li{padding:4px 0;color:#a0a0b0;font-size:0.9em;position:relative;padding-left:16px}
+.practice-list li:before{content:"💡";position:absolute;left:0}
+.cta-section{text-align:center;margin-top:50px;padding:40px;background:rgba(124,58,237,0.05);border-radius:16px;border:1px solid #2a2a3e}
+.cta-section h3{margin-bottom:16px;color:#e0e0e0}
+.cta-section p{margin-bottom:24px;color:#a0a0b0}
+.cta-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.cta{display:inline-block;padding:16px 32px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:1.1em;transition:transform .2s}
+.cta:hover{transform:scale(1.05)}
+.cta-secondary{background:#5469d4;font-size:1em}
+.summary-dashboard{background:#0f0f1a;border:1px solid #333;border-radius:12px;padding:20px;margin:20px 0}
+.summary-dashboard h4{color:#7c3aed;margin-bottom:16px}
+.dashboard-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:20px}
+.dashboard-metric{text-align:center;background:#1a1a2e;padding:16px;border-radius:8px}
+.dashboard-value{font-size:1.5em;font-weight:800;margin-bottom:4px}
+.dashboard-label{color:#a0a0b0;font-size:0.85em}
+.readiness-chart{background:#1a1a2e;padding:20px;border-radius:8px;margin-top:16px}
+.chart-title{text-align:center;color:#e0e0e0;font-weight:600;margin-bottom:16px}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="../index.html"><strong>🤖 AI Strategy Consulting</strong></a>
+  <div><a href="../index.html#services">Services</a><a href="../ai-readiness.html">Assessment</a><a href="../roi-calculator.html">ROI Calculator</a><a href="../index.html#about">About</a></div>
+</div>
+
+<div class="hero">
+  <h1>AI Data <span>Audit Checklist</span></h1>
+  <p>Comprehensive data readiness assessment framework for AI initiatives. Systematically evaluate data quality, accessibility, governance, and AI-readiness across your organization with actionable recommendations.</p>
+</div>
+
+<div class="container">
+  <div class="audit-intro">
+    <h2>🗄️ Data Audit Framework</h2>
+    <p>Successful AI implementations depend on high-quality, accessible, and well-governed data. Our comprehensive audit framework evaluates your data landscape across 8 critical dimensions, identifying strengths, gaps, and improvement opportunities to ensure AI project success.</p>
+    
+    <div class="audit-dimensions">
+      <div class="dimension">
+        <h4>📊 Data Quality</h4>
+        <p>Accuracy, completeness, consistency, and timeliness</p>
+      </div>
+      <div class="dimension">
+        <h4>🔄 Data Accessibility</h4>
+        <p>Availability, discoverability, and ease of access</p>
+      </div>
+      <div class="dimension">
+        <h4>🏗️ Data Architecture</h4>
+        <p>Storage, integration, and infrastructure design</p>
+      </div>
+      <div class="dimension">
+        <h4>🛡️ Data Governance</h4>
+        <p>Policies, ownership, and compliance frameworks</p>
+      </div>
+      <div class="dimension">
+        <h4>🔒 Data Security</h4>
+        <p>Privacy, protection, and access controls</p>
+      </div>
+      <div class="dimension">
+        <h4>⚡ Data Processing</h4>
+        <p>ETL capabilities, real-time processing, scalability</p>
+      </div>
+      <div class="dimension">
+        <h4>🤖 AI Readiness</h4>
+        <p>ML-specific requirements and preparation</p>
+      </div>
+      <div class="dimension">
+        <h4>📋 Data Lineage</h4>
+        <p>Traceability, provenance, and impact analysis</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- Audit Controls -->
+    <div class="audit-controls">
+      <div class="control-section">
+        <div class="control-title">🎯 Audit Parameters</div>
+        
+        <div class="form-group">
+          <label for="auditScope">Audit Scope</label>
+          <select id="auditScope" onchange="updateAuditScope()">
+            <option value="organization">Organization-wide</option>
+            <option value="department">Department/Business Unit</option>
+            <option value="project">Specific AI Project</option>
+            <option value="system">Individual Data System</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="orgSize">Organization Size</label>
+          <select id="orgSize">
+            <option value="startup">Startup (&lt;50 employees)</option>
+            <option value="small">Small (50-200)</option>
+            <option value="medium" selected>Medium (200-1000)</option>
+            <option value="large">Large (1000-5000)</option>
+            <option value="enterprise">Enterprise (5000+)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="dataMaturity">Data Maturity Level</label>
+          <select id="dataMaturity">
+            <option value="basic">Basic - Manual processes</option>
+            <option value="developing" selected>Developing - Some automation</option>
+            <option value="advanced">Advanced - Data-driven</option>
+            <option value="optimized">Optimized - Self-service</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="audit-progress">
+        <div class="progress-header">
+          <div class="progress-title">Audit Progress</div>
+          <div class="progress-percentage" id="progressPercentage">0%</div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="audit-scores">
+        <div class="score-item">
+          <div class="score-value score-fair" id="overallScore">--</div>
+          <div class="score-label">Overall Score</div>
+        </div>
+        <div class="score-item">
+          <div class="score-value score-good" id="readinessScore">--</div>
+          <div class="score-label">AI Readiness</div>
+        </div>
+        <div class="score-item">
+          <div class="score-value score-excellent" id="completedItems">0</div>
+          <div class="score-label">Items Complete</div>
+        </div>
+        <div class="score-item">
+          <div class="score-value score-poor" id="criticalIssues">0</div>
+          <div class="score-label">Critical Issues</div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" onclick="startAudit()">🚀 Start Audit</button>
+        <button class="btn btn-secondary" onclick="loadTemplate()">📋 Load Template</button>
+        <button class="btn btn-success" onclick="generateReport()">📊 Generate Report</button>
+      </div>
+    </div>
+
+    <!-- Checklist Container -->
+    <div class="checklist-container">
+      <div class="checklist-header">
+        <h3 class="checklist-title">📋 Data Audit Checklist</h3>
+        <div class="checklist-controls">
+          <select class="category-filter" id="categoryFilter" onchange="filterCategories()">
+            <option value="all">All Categories</option>
+            <option value="quality">Data Quality</option>
+            <option value="access">Data Access</option>
+            <option value="architecture">Architecture</option>
+            <option value="governance">Governance</option>
+            <option value="security">Security</option>
+            <option value="processing">Processing</option>
+            <option value="ai-ready">AI Readiness</option>
+            <option value="lineage">Data Lineage</option>
+          </select>
+          
+          <div class="view-toggle">
+            <button class="view-btn active" onclick="switchView('checklist')">Checklist</button>
+            <button class="view-btn" onclick="switchView('summary')">Summary</button>
+            <button class="view-btn" onclick="switchView('gaps')">Gap Analysis</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Quality Category -->
+      <div class="audit-category" data-category="quality">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title">
+            <span class="category-icon">📊</span>
+            Data Quality Assessment
+          </div>
+          <div class="category-score">
+            <div class="score-circle pending" id="quality-score">--</div>
+            <div class="category-toggle">+</div>
+          </div>
+        </div>
+        
+        <div class="checklist-items">
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Data Accuracy Assessment</div>
+              <div class="item-description">Evaluate the accuracy and correctness of data across critical datasets</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Sample key datasets and validate against source systems<br>• Check for logical inconsistencies and outliers<br>• Compare with external reference data where available<br>• Measure error rates in business-critical fields</div>
+                </div>
+                <div class="detail-section">
+                  <div class="detail-title">Success Criteria:</div>
+                  <div class="detail-content">• >95% accuracy in critical business fields<br>• Documented validation processes<br>• Regular accuracy monitoring in place</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Data Completeness Analysis</div>
+              <div class="item-description">Assess missing values and incomplete records across datasets</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Calculate missing value percentages by field<br>• Identify patterns in missing data<br>• Assess impact on ML model training<br>• Review data collection processes</div>
+                </div>
+                <div class="detail-section">
+                  <div class="detail-title">Success Criteria:</div>
+                  <div class="detail-content">• <5% missing values in critical fields<br>• Clear handling strategy for missing data<br>• Sufficient complete records for ML training</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Data Consistency Validation</div>
+              <div class="item-description">Check for consistency across systems and data formats</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Compare same data across different systems<br>• Validate format consistency and standards<br>• Check referential integrity<br>• Assess naming conventions and schemas</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Data Freshness & Timeliness</div>
+              <div class="item-description">Evaluate data currency and update frequency for AI requirements</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Map data update cycles and lag times<br>• Assess real-time vs batch processing needs<br>• Validate timestamp accuracy<br>• Review data retention policies</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Access Category -->
+      <div class="audit-category" data-category="access">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title">
+            <span class="category-icon">🔄</span>
+            Data Accessibility & Discovery
+          </div>
+          <div class="category-score">
+            <div class="score-circle pending" id="access-score">--</div>
+            <div class="category-toggle">+</div>
+          </div>
+        </div>
+        
+        <div class="checklist-items">
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Data Catalog & Discovery</div>
+              <div class="item-description">Assess data discoverability and cataloging systems</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Inventory all data sources and repositories<br>• Evaluate metadata quality and completeness<br>• Test data discovery capabilities<br>• Assess search and filtering functionality</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Data Access Methods & APIs</div>
+              <div class="item-description">Evaluate programmatic access and integration capabilities</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Review available APIs and connectivity options<br>• Test data access performance and reliability<br>• Assess authentication and authorization<br>• Evaluate real-time vs batch access capabilities</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Self-Service Data Access</div>
+              <div class="item-description">Assess business user data access capabilities</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Evaluate self-service analytics platforms<br>• Test user interface accessibility<br>• Assess training and documentation quality<br>• Review approval workflows for data access</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Architecture Category -->
+      <div class="audit-category" data-category="architecture">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title">
+            <span class="category-icon">🏗️</span>
+            Data Architecture & Infrastructure
+          </div>
+          <div class="category-score">
+            <div class="score-circle pending" id="architecture-score">--</div>
+            <div class="category-toggle">+</div>
+          </div>
+        </div>
+        
+        <div class="checklist-items">
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Data Storage Architecture</div>
+              <div class="item-description">Evaluate storage systems and data lake/warehouse design</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Review current storage architecture<br>• Assess scalability and performance<br>• Evaluate cloud vs on-premise strategy<br>• Check data partitioning and optimization</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Data Integration Capabilities</div>
+              <div class="item-description">Assess ETL/ELT processes and data pipeline architecture</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Map current ETL/ELT processes<br>• Evaluate integration platform capabilities<br>• Test data transformation and validation<br>• Assess error handling and monitoring</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Readiness Category -->
+      <div class="audit-category" data-category="ai-ready">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title">
+            <span class="category-icon">🤖</span>
+            AI & ML Readiness
+          </div>
+          <div class="category-score">
+            <div class="score-circle pending" id="ai-ready-score">--</div>
+            <div class="category-toggle">+</div>
+          </div>
+        </div>
+        
+        <div class="checklist-items">
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Labeled Training Data Availability</div>
+              <div class="item-description">Assess availability and quality of labeled datasets for supervised learning</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Inventory existing labeled datasets<br>• Assess label quality and consistency<br>• Evaluate data volume for ML training<br>• Review labeling processes and tools</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Feature Engineering Readiness</div>
+              <div class="item-description">Evaluate data structure and format for ML feature creation</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Review data types and formats<br>• Assess feature derivation possibilities<br>• Evaluate categorical vs numerical data<br>• Check for feature engineering tools/platforms</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-item" onclick="toggleItemDetails(this)">
+            <div class="item-checkbox">
+              <div class="checkbox" onclick="toggleCheckbox(this, event)"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">Data Volume & Diversity</div>
+              <div class="item-description">Assess data volume sufficiency and diversity for AI training</div>
+              <div class="item-details">
+                <div class="detail-section">
+                  <div class="detail-title">How to Assess:</div>
+                  <div class="detail-content">• Calculate dataset sizes for ML requirements<br>• Assess data diversity and representation<br>• Evaluate class balance and distribution<br>• Check for bias in data collection</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Sources Overview -->
+      <div class="data-sources" id="dataSourcesView" style="display:none;">
+        <div class="data-source">
+          <div class="source-header">
+            <div class="source-name">Customer Database</div>
+            <div class="source-status status-ready">Ready</div>
+          </div>
+          <div class="source-metrics">
+            <div class="source-metric">
+              <div class="metric-value">95%</div>
+              <div class="metric-label">Quality</div>
+            </div>
+            <div class="source-metric">
+              <div class="metric-value">2.1M</div>
+              <div class="metric-label">Records</div>
+            </div>
+            <div class="source-metric">
+              <div class="metric-value">Daily</div>
+              <div class="metric-label">Updates</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-source">
+          <div class="source-header">
+            <div class="source-name">Transaction System</div>
+            <div class="source-status status-needs-work">Needs Work</div>
+          </div>
+          <div class="source-metrics">
+            <div class="source-metric">
+              <div class="metric-value">78%</div>
+              <div class="metric-label">Quality</div>
+            </div>
+            <div class="source-metric">
+              <div class="metric-value">15.3M</div>
+              <div class="metric-label">Records</div>
+            </div>
+            <div class="source-metric">
+              <div class="metric-value">Real-time</div>
+              <div class="metric-label">Updates</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-source">
+          <div class="source-header">
+            <div class="source-name">Legacy ERP</div>
+            <div class="source-status status-not-ready">Not Ready</div>
+          </div>
+          <div class="source-metrics">
+            <div class="source-metric">
+              <div class="metric-value">45%</div>
+              <div class="metric-label">Quality</div>
+            </div>
+            <div class="source-metric">
+              <div class="metric-value">890K</div>
+              <div class="metric-label">Records</div>
+            </div>
+            <div class="source-metric">
+              <div class="metric-value">Weekly</div>
+              <div class="metric-label">Updates</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Dashboard -->
+      <div class="summary-dashboard" id="summaryView" style="display:none;">
+        <h4>📊 Data Audit Summary</h4>
+        <div class="dashboard-metrics">
+          <div class="dashboard-metric">
+            <div class="dashboard-value score-fair">72%</div>
+            <div class="dashboard-label">Overall Data Score</div>
+          </div>
+          <div class="dashboard-metric">
+            <div class="dashboard-value score-good">85%</div>
+            <div class="dashboard-label">Data Quality</div>
+          </div>
+          <div class="dashboard-metric">
+            <div class="dashboard-value score-fair">68%</div>
+            <div class="dashboard-label">AI Readiness</div>
+          </div>
+          <div class="dashboard-metric">
+            <div class="dashboard-value score-poor">45%</div>
+            <div class="dashboard-label">Governance</div>
+          </div>
+        </div>
+        
+        <div class="readiness-chart">
+          <div class="chart-title">Data Readiness by Category</div>
+          <canvas id="readinessChart" width="400" height="250"></canvas>
+        </div>
+      </div>
+
+      <!-- Gap Analysis -->
+      <div class="gap-analysis" id="gapAnalysisView" style="display:none;">
+        <h4>⚠️ Critical Data Gaps</h4>
+        <div class="gap-categories">
+          <div class="gap-category">
+            <h5>Data Quality Issues</h5>
+            <ul class="gap-list">
+              <li>Inconsistent customer ID formats</li>
+              <li>High missing value rates (>15%)</li>
+              <li>Outdated reference data</li>
+              <li>No data validation processes</li>
+            </ul>
+          </div>
+          
+          <div class="gap-category">
+            <h5>Access & Integration</h5>
+            <ul class="gap-list">
+              <li>No central data catalog</li>
+              <li>Limited API availability</li>
+              <li>Manual data extraction processes</li>
+              <li>Siloed system access</li>
+            </ul>
+          </div>
+          
+          <div class="gap-category">
+            <h5>AI Readiness</h5>
+            <ul class="gap-list">
+              <li>Insufficient labeled training data</li>
+              <li>No feature engineering capabilities</li>
+              <li>Limited historical data depth</li>
+              <li>No ML-specific data pipelines</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="recommendations-panel">
+        <h4>💡 Recommended Actions</h4>
+        <div class="recommendation-item">
+          <div class="priority">High Priority</div>
+          <h5>Implement Data Quality Framework</h5>
+          <p>Establish automated data quality monitoring and validation processes to improve accuracy and completeness.</p>
+        </div>
+        
+        <div class="recommendation-item">
+          <div class="priority">Medium Priority</div>
+          <h5>Deploy Data Catalog Solution</h5>
+          <p>Implement enterprise data catalog to improve discoverability and metadata management.</p>
+        </div>
+        
+        <div class="recommendation-item">
+          <div class="priority">High Priority</div>
+          <h5>Create AI-Ready Data Pipelines</h5>
+          <p>Build dedicated pipelines for ML feature engineering and model training data preparation.</p>
+        </div>
+      </div>
+
+      <!-- Export Section -->
+      <div class="export-section">
+        <h4>📥 Export Audit Results</h4>
+        <div class="export-grid">
+          <div class="export-option" onclick="exportAuditReport()">
+            <h5>📄 Comprehensive Report</h5>
+            <p>Full audit report with findings and recommendations</p>
+            <button class="btn btn-secondary">Download PDF</button>
+          </div>
+          
+          <div class="export-option" onclick="exportChecklist()">
+            <h5>✅ Checklist Export</h5>
+            <p>Interactive checklist for ongoing tracking</p>
+            <button class="btn btn-secondary">Download Excel</button>
+          </div>
+          
+          <div class="export-option" onclick="exportActionPlan()">
+            <h5>📋 Action Plan</h5>
+            <p>Prioritized remediation roadmap</p>
+            <button class="btn btn-secondary">Download</button>
+          </div>
+          
+          <div class="export-option" onclick="saveAuditState()">
+            <h5>💾 Save Progress</h5>
+            <p>Save current audit state</p>
+            <button class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Best Practices -->
+  <div class="best-practices">
+    <h3>💡 Data Audit Best Practices</h3>
+    <div class="practices-grid">
+      <div class="practice-card">
+        <h4>🎯 Systematic Approach</h4>
+        <ul class="practice-list">
+          <li>Follow a structured audit methodology</li>
+          <li>Document all findings and evidence</li>
+          <li>Involve business stakeholders throughout</li>
+          <li>Prioritize issues by business impact</li>
+          <li>Create actionable remediation plans</li>
+        </ul>
+      </div>
+      
+      <div class="practice-card">
+        <h4>📊 Quality Assessment</h4>
+        <ul class="practice-list">
+          <li>Use statistical sampling for large datasets</li>
+          <li>Automate quality checks where possible</li>
+          <li>Establish baseline quality metrics</li>
+          <li>Monitor trends over time</li>
+          <li>Validate against business rules</li>
+        </ul>
+      </div>
+      
+      <div class="practice-card">
+        <h4>🔄 Continuous Improvement</h4>
+        <ul class="practice-list">
+          <li>Schedule regular audit reviews</li>
+          <li>Track remediation progress</li>
+          <li>Update procedures based on findings</li>
+          <li>Share lessons learned across teams</li>
+          <li>Integrate with data governance</li>
+        </ul>
+      </div>
+      
+      <div class="practice-card">
+        <h4>🤖 AI-Specific Considerations</h4>
+        <ul class="practice-list">
+          <li>Assess data bias and representativeness</li>
+          <li>Evaluate feature engineering potential</li>
+          <li>Check for sufficient training data volume</li>
+          <li>Validate data labeling quality</li>
+          <li>Consider model interpretability needs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>🚀 Ready to Optimize Your Data for AI?</h3>
+    <p>Get expert guidance on data preparation, quality improvement, and AI readiness. Our consultants will help you implement the recommendations from your audit and build a robust data foundation for AI success.</p>
+    <div class="cta-buttons">
+      <a href="https://buy.stripe.com/eVq8wI8HY4CCg8Wekw0Ny00" class="cta" target="_blank">💡 AI Assessment ($500) →</a>
+      <a href="https://buy.stripe.com/3cI4gse2i1qqe0O1xK0Ny01" class="cta cta-secondary" target="_blank">🎯 Full AI Strategy ($2,000) →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Global variables
+let auditProgress = 0;
+let totalItems = 0;
+let completedItems = 0;
+let criticalIssues = 0;
+let categoryScores = {};
+let readinessChart = null;
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  initializeAudit();
+  updateProgress();
+});
+
+function initializeAudit() {
+  // Count total audit items
+  totalItems = document.querySelectorAll('.checklist-item').length;
+  updateMetrics();
+  
+  // Expand first category by default
+  const firstCategory = document.querySelector('.category-header');
+  if (firstCategory) {
+    toggleCategory(firstCategory);
+  }
+}
+
+function toggleCategory(headerElement) {
+  const itemsContainer = headerElement.nextElementSibling;
+  const toggle = headerElement.querySelector('.category-toggle');
+  
+  if (itemsContainer.classList.contains('expanded')) {
+    itemsContainer.classList.remove('expanded');
+    toggle.textContent = '+';
+  } else {
+    itemsContainer.classList.add('expanded');
+    toggle.textContent = '-';
+  }
+}
+
+function toggleItemDetails(itemElement) {
+  const details = itemElement.querySelector('.item-details');
+  if (details.classList.contains('expanded')) {
+    details.classList.remove('expanded');
+  } else {
+    // Close other expanded details
+    document.querySelectorAll('.item-details.expanded').forEach(detail => {
+      detail.classList.remove('expanded');
+    });
+    details.classList.add('expanded');
+  }
+}
+
+function toggleCheckbox(checkboxElement, event) {
+  event.stopPropagation();
+  
+  const item = checkboxElement.closest('.checklist-item');
+  
+  if (checkboxElement.classList.contains('checked')) {
+    // Uncheck
+    checkboxElement.classList.remove('checked');
+    item.classList.remove('completed');
+    completedItems--;
+  } else if (checkboxElement.classList.contains('failed')) {
+    // Change from failed to checked
+    checkboxElement.classList.remove('failed');
+    checkboxElement.classList.add('checked');
+    item.classList.remove('failed');
+    item.classList.add('completed');
+    completedItems++;
+    criticalIssues--;
+  } else {
+    // Check
+    checkboxElement.classList.add('checked');
+    item.classList.add('completed');
+    completedItems++;
+  }
+  
+  updateProgress();
+  updateCategoryScore(item);
+}
+
+function updateProgress() {
+  const progressPercentage = Math.round((completedItems / totalItems) * 100);
+  
+  document.getElementById('progressPercentage').textContent = progressPercentage + '%';
+  document.getElementById('progressFill').style.width = progressPercentage + '%';
+  
+  updateMetrics();
+}
+
+function updateMetrics() {
+  document.getElementById('completedItems').textContent = completedItems;
+  document.getElementById('criticalIssues').textContent = criticalIssues;
+  
+  // Calculate overall score
+  const overallScore = Math.round(((completedItems - criticalIssues) / totalItems) * 100);
+  document.getElementById('overallScore').textContent = overallScore + '%';
+  
+  // Update score colors
+  updateScoreColors('overallScore', overallScore);
+  
+  // Calculate AI readiness score (weighted towards AI-specific items)
+  const aiReadinessScore = Math.max(0, overallScore - 10); // Slightly lower for AI readiness
+  document.getElementById('readinessScore').textContent = aiReadinessScore + '%';
+  updateScoreColors('readinessScore', aiReadinessScore);
+}
+
+function updateScoreColors(elementId, score) {
+  const element = document.getElementById(elementId);
+  element.className = element.className.replace(/score-(excellent|good|fair|poor)/g, '');
+  
+  if (score >= 90) {
+    element.classList.add('score-excellent');
+  } else if (score >= 75) {
+    element.classList.add('score-good');
+  } else if (score >= 60) {
+    element.classList.add('score-fair');
+  } else {
+    element.classList.add('score-poor');
+  }
+}
+
+function updateCategoryScore(item) {
+  const category = item.closest('.audit-category');
+  const categoryName = category.dataset.category;
+  const categoryItems = category.querySelectorAll('.checklist-item');
+  const completedCategoryItems = category.querySelectorAll('.checklist-item.completed').length;
+  
+  const categoryScore = Math.round((completedCategoryItems / categoryItems.length) * 100);
+  categoryScores[categoryName] = categoryScore;
+  
+  // Update category score display
+  const scoreCircle = category.querySelector('.score-circle');
+  scoreCircle.textContent = categoryScore + '%';
+  scoreCircle.className = 'score-circle ' + getScoreClass(categoryScore);
+}
+
+function getScoreClass(score) {
+  if (score >= 90) return 'excellent';
+  if (score >= 75) return 'good';
+  if (score >= 60) return 'fair';
+  return 'poor';
+}
+
+function switchView(view) {
+  // Update button states
+  document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  // Show/hide views
+  const checklistCategories = document.querySelectorAll('.audit-category');
+  const dataSourcesView = document.getElementById('dataSourcesView');
+  const summaryView = document.getElementById('summaryView');
+  const gapAnalysisView = document.getElementById('gapAnalysisView');
+  
+  // Hide all views
+  checklistCategories.forEach(cat => cat.style.display = 'none');
+  dataSourcesView.style.display = 'none';
+  summaryView.style.display = 'none';
+  gapAnalysisView.style.display = 'none';
+  
+  // Show selected view
+  if (view === 'checklist') {
+    checklistCategories.forEach(cat => cat.style.display = 'block');
+  } else if (view === 'summary') {
+    summaryView.style.display = 'block';
+    updateSummaryChart();
+  } else if (view === 'gaps') {
+    gapAnalysisView.style.display = 'block';
+  }
+}
+
+function updateSummaryChart() {
+  const ctx = document.getElementById('readinessChart').getContext('2d');
+  
+  if (readinessChart) {
+    readinessChart.destroy();
+  }
+  
+  const categories = ['Quality', 'Access', 'Architecture', 'Governance', 'Security', 'Processing', 'AI Ready', 'Lineage'];
+  const scores = [85, 72, 68, 45, 78, 62, 68, 55]; // Sample scores
+  
+  readinessChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: categories,
+      datasets: [{
+        label: 'Current Score',
+        data: scores,
+        backgroundColor: 'rgba(124, 58, 237, 0.2)',
+        borderColor: '#7c3aed',
+        borderWidth: 2,
+        pointBackgroundColor: '#7c3aed'
+      }, {
+        label: 'AI Ready Target',
+        data: [90, 85, 80, 80, 90, 85, 95, 75],
+        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+        borderColor: '#10b981',
+        borderWidth: 2,
+        pointBackgroundColor: '#10b981'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: { color: '#e0e0e0' }
+        }
+      },
+      scales: {
+        r: {
+          min: 0,
+          max: 100,
+          ticks: {
+            color: '#a0a0b0',
+            backdropColor: 'transparent'
+          },
+          grid: { color: '#333' },
+          angleLines: { color: '#333' },
+          pointLabels: { color: '#e0e0e0' }
+        }
+      }
+    }
+  });
+}
+
+function filterCategories() {
+  const filter = document.getElementById('categoryFilter').value;
+  const categories = document.querySelectorAll('.audit-category');
+  
+  categories.forEach(category => {
+    if (filter === 'all' || category.dataset.category === filter) {
+      category.style.display = 'block';
+    } else {
+      category.style.display = 'none';
+    }
+  });
+}
+
+function startAudit() {
+  // Initialize audit with current parameters
+  const scope = document.getElementById('auditScope').value;
+  const orgSize = document.getElementById('orgSize').value;
+  const maturity = document.getElementById('dataMaturity').value;
+  
+  alert(`Starting ${scope} data audit for ${orgSize} organization with ${maturity} data maturity.\n\nClick on each checklist item to expand details and mark completion status.`);
+  
+  // Expand first category
+  const firstCategory = document.querySelector('.category-header');
+  if (firstCategory && !firstCategory.nextElementSibling.classList.contains('expanded')) {
+    toggleCategory(firstCategory);
+  }
+}
+
+function loadTemplate() {
+  const templates = {
+    startup: 'Startup template focuses on basic data quality and essential governance',
+    small: 'Small business template emphasizes practical data management approaches',
+    medium: 'Medium enterprise template includes advanced analytics and integration',
+    large: 'Large organization template covers comprehensive governance and security',
+    enterprise: 'Enterprise template includes full regulatory compliance and advanced AI readiness'
+  };
+  
+  const orgSize = document.getElementById('orgSize').value;
+  alert(`Loading ${orgSize} template:\n\n${templates[orgSize]}`);
+  
+  // Would load appropriate checklist items based on org size
+  updateAuditScope();
+}
+
+function updateAuditScope() {
+  // Update audit based on current selections
+  console.log('Updating audit scope based on form selections');
+}
+
+function generateReport() {
+  if (completedItems === 0) {
+    alert('Please complete some audit items before generating a report.');
+    return;
+  }
+  
+  alert(`Generating comprehensive data audit report:\n\n• Executive Summary\n• Category-by-category findings\n• Critical issues and risks\n• Prioritized remediation plan\n• AI readiness assessment\n• Resource requirements\n• Timeline recommendations`);
+}
+
+function exportAuditReport() {
+  alert('Audit report export would include:\n\n• Complete findings summary\n• Category scores and analysis\n• Critical issue identification\n• Remediation roadmap\n• Resource requirements\n• Risk assessment\n• Compliance status');
+}
+
+function exportChecklist() {
+  alert('Checklist export would provide:\n\n• Interactive Excel checklist\n• Progress tracking formulas\n• Category scoring\n• Status indicators\n• Action item tracking');
+}
+
+function exportActionPlan() {
+  alert('Action plan export would generate:\n\n• Prioritized task list\n• Resource allocation\n• Timeline and milestones\n• Success criteria\n• Risk mitigation\n• Budget estimates');
+}
+
+function saveAuditState() {
+  const auditState = {
+    timestamp: new Date().toISOString(),
+    scope: document.getElementById('auditScope').value,
+    orgSize: document.getElementById('orgSize').value,
+    maturity: document.getElementById('dataMaturity').value,
+    progress: {
+      completed: completedItems,
+      total: totalItems,
+      critical: criticalIssues
+    },
+    // Would include individual item states
+  };
+  
+  localStorage.setItem('dataAuditState_' + Date.now(), JSON.stringify(auditState));
+  alert('Audit progress saved successfully! You can resume this audit later.');
+}
+
+// Initialize the audit
+initializeAudit();
+</script>
+</body>
+</html>
