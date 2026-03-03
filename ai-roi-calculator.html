@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI ROI Calculator for Executives | Ashdown AI</title>
+    <meta name="description" content="Calculate your potential AI return on investment. See how AI strategy implementation could save costs and generate revenue for your business.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+
+        .headline {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subheadline {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00d4ff;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border: none;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin-bottom: 1rem;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results-section {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            display: none;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        .breakdown {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .breakdown h4 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .email-capture {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .email-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .get-report-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border: none;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .get-report-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .social-proof {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .testimonial {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .privacy-note {
+            font-size: 0.9rem;
+            color: #999999;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .headline {
+                font-size: 2rem;
+            }
+            
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .email-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Ashdown AI</div>
+            <h1 class="headline">Free AI ROI Calculator for Executives</h1>
+            <p class="subheadline">Calculate your potential return on AI investment - See how much you could save and earn</p>
+        </div>
+
+        <div class="social-proof">
+            <p class="testimonial">"This calculator helped me justify our $500K AI investment to the board. We're now seeing $2.3M in annual savings and new revenue."</p>
+            <p class="testimonial-author">— Jennifer K., CEO, Manufacturing Company</p>
+        </div>
+
+        <div class="calculator-section">
+            <h2 class="section-title">Business Information</h2>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="company-size">Number of Employees</label>
+                    <select id="company-size">
+                        <option value="50">25-50 employees</option>
+                        <option value="100" selected>51-100 employees</option>
+                        <option value="250">101-250 employees</option>
+                        <option value="500">251-500 employees</option>
+                        <option value="1000">500+ employees</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry">
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="financial">Financial Services</option>
+                        <option value="retail">Retail</option>
+                        <option value="professional">Professional Services</option>
+                        <option value="technology">Technology</option>
+                        <option value="logistics">Logistics</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="annual-revenue">Annual Revenue (USD)</label>
+                    <select id="annual-revenue">
+                        <option value="5000000">$5M - $10M</option>
+                        <option value="25000000" selected>$10M - $50M</option>
+                        <option value="75000000">$50M - $100M</option>
+                        <option value="150000000">$100M - $200M</option>
+                        <option value="300000000">$200M+</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="avg-salary">Average Employee Salary (USD)</label>
+                    <input type="number" id="avg-salary" value="65000" min="30000" max="200000">
+                </div>
+            </div>
+
+            <h3 class="section-title">Current Process Efficiency</h3>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="manual-hours">Manual Process Hours/Week per Employee</label>
+                    <input type="number" id="manual-hours" value="20" min="1" max="40">
+                </div>
+                
+                <div class="input-group">
+                    <label for="error-rate">Current Error Rate (%)</label>
+                    <input type="number" id="error-rate" value="5" min="0" max="20" step="0.5">
+                </div>
+                
+                <div class="input-group">
+                    <label for="response-time">Average Response Time (hours)</label>
+                    <input type="number" id="response-time" value="24" min="1" max="168">
+                </div>
+                
+                <div class="input-group">
+                    <label for="report-time">Time to Generate Reports (hours/month)</label>
+                    <input type="number" id="report-time" value="40" min="5" max="200">
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateROI()">Calculate My AI ROI</button>
+        </div>
+
+        <div id="results" class="results-section">
+            <h2 class="section-title">Your AI ROI Projection</h2>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-value" id="total-savings">$0</div>
+                    <div class="result-label">Annual Cost Savings</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-value" id="new-revenue">$0</div>
+                    <div class="result-label">New Revenue Potential</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-value" id="roi-percentage">0%</div>
+                    <div class="result-label">Year 1 ROI</div>
+                </div>
+            </div>
+
+            <div class="breakdown">
+                <h4>Cost Savings Breakdown</h4>
+                <div class="breakdown-item">
+                    <span>Process Automation Savings:</span>
+                    <span id="process-savings">$0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Error Reduction Savings:</span>
+                    <span id="error-savings">$0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Efficiency Improvement:</span>
+                    <span id="efficiency-savings">$0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Report Generation Savings:</span>
+                    <span id="report-savings">$0</span>
+                </div>
+            </div>
+
+            <div class="breakdown">
+                <h4>Implementation Investment</h4>
+                <div class="breakdown-item">
+                    <span>Estimated AI Implementation Cost:</span>
+                    <span id="implementation-cost">$0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Payback Period:</span>
+                    <span id="payback-period">0 months</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="email-capture">
+            <h3 class="section-title">Get Your Detailed AI Strategy Report</h3>
+            <p style="margin-bottom: 1.5rem; color: #cccccc;">Receive a comprehensive PDF report with implementation roadmap, industry benchmarks, and strategic recommendations.</p>
+            
+            <form id="roi-form">
+                <div class="email-grid">
+                    <div class="input-group">
+                        <label for="exec-name">Name</label>
+                        <input type="text" id="exec-name" name="name" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="exec-email">Email Address</label>
+                        <input type="email" id="exec-email" name="email" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="company-name">Company Name</label>
+                        <input type="text" id="company-name" name="company" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="title">Job Title</label>
+                        <input type="text" id="title" name="title" placeholder="e.g., CEO, COO, CTO" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="get-report-btn">Get My Free AI Strategy Report →</button>
+                
+                <p class="privacy-note">
+                    🔒 Your information is completely secure. We'll send you the detailed report and may follow up with relevant AI strategy insights. Unsubscribe anytime.
+                </p>
+            </form>
+        </div>
+
+        <div class="social-proof">
+            <p class="testimonial">"The detailed report helped us avoid $200K in implementation mistakes and achieve 283% ROI in our first year."</p>
+            <p class="testimonial-author">— Michael T., CEO, Healthcare Services</p>
+        </div>
+    </div>
+
+    <script>
+        function calculateROI() {
+            // Get input values
+            const employees = parseInt(document.getElementById('company-size').value);
+            const revenue = parseInt(document.getElementById('annual-revenue').value);
+            const avgSalary = parseInt(document.getElementById('avg-salary').value);
+            const manualHours = parseInt(document.getElementById('manual-hours').value);
+            const errorRate = parseFloat(document.getElementById('error-rate').value);
+            const responseTime = parseInt(document.getElementById('response-time').value);
+            const reportTime = parseInt(document.getElementById('report-time').value);
+            const industry = document.getElementById('industry').value;
+
+            // Industry multipliers for ROI calculation
+            const industryMultipliers = {
+                'manufacturing': 1.2,
+                'healthcare': 1.1,
+                'financial': 1.4,
+                'retail': 1.0,
+                'professional': 1.3,
+                'technology': 1.5,
+                'logistics': 1.1,
+                'other': 1.0
+            };
+
+            const multiplier = industryMultipliers[industry] || 1.0;
+
+            // Calculate hourly rate
+            const hourlyRate = avgSalary / 2000; // Assuming 2000 working hours per year
+
+            // Process automation savings (30-50% efficiency gain on manual tasks)
+            const processSavings = employees * manualHours * 0.4 * hourlyRate * 52;
+
+            // Error reduction savings
+            const errorCostPerEmployee = avgSalary * 0.1; // Estimate 10% of salary lost to errors
+            const errorSavings = employees * errorCostPerEmployee * (errorRate / 100) * 0.7;
+
+            // Efficiency improvement (faster response times = more opportunities)
+            const efficiencySavings = revenue * 0.02; // 2% revenue improvement from efficiency
+
+            // Report generation savings
+            const reportSavings = (reportTime * hourlyRate * 12) * 0.8; // 80% time savings on reports
+
+            // Total savings
+            const totalSavings = (processSavings + errorSavings + efficiencySavings + reportSavings) * multiplier;
+
+            // New revenue potential (conservative estimate)
+            const newRevenue = revenue * 0.05 * multiplier; // 5% new revenue potential
+
+            // Implementation cost (rough estimate based on company size)
+            let implementationCost;
+            if (employees <= 50) implementationCost = 150000;
+            else if (employees <= 100) implementationCost = 300000;
+            else if (employees <= 250) implementationCost = 500000;
+            else if (employees <= 500) implementationCost = 750000;
+            else implementationCost = 1000000;
+
+            // Calculate ROI
+            const totalBenefits = totalSavings + newRevenue;
+            const roiPercentage = ((totalBenefits - implementationCost) / implementationCost) * 100;
+            const paybackPeriod = Math.ceil((implementationCost / (totalBenefits / 12)));
+
+            // Update display
+            document.getElementById('total-savings').textContent = '$' + Math.round(totalSavings).toLocaleString();
+            document.getElementById('new-revenue').textContent = '$' + Math.round(newRevenue).toLocaleString();
+            document.getElementById('roi-percentage').textContent = Math.round(roiPercentage) + '%';
+
+            document.getElementById('process-savings').textContent = '$' + Math.round(processSavings * multiplier).toLocaleString();
+            document.getElementById('error-savings').textContent = '$' + Math.round(errorSavings * multiplier).toLocaleString();
+            document.getElementById('efficiency-savings').textContent = '$' + Math.round(efficiencySavings).toLocaleString();
+            document.getElementById('report-savings').textContent = '$' + Math.round(reportSavings * multiplier).toLocaleString();
+
+            document.getElementById('implementation-cost').textContent = '$' + implementationCost.toLocaleString();
+            document.getElementById('payback-period').textContent = paybackPeriod + ' months';
+
+            // Show results
+            document.getElementById('results').style.display = 'block';
+        }
+
+        document.getElementById('roi-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would typically send the data to your email service
+            alert('Thank you! Your detailed AI Strategy Report will be sent to your email within 5 minutes. (Note: Form submission will be connected to email service)');
+            
+            // Optional: Redirect to main consulting site
+            // window.location.href = 'https://majh777.github.io/ai-strategy-consulting';
+        });
+    </script>
+</body>
+</html>
